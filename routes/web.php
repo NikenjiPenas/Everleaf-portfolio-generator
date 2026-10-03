@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PortfolioController;
 
-Route::view('/', 'home')->name('home');
+Route::view('/', 'welcome')->name('welcome');
+Route::view('/home', 'home')->name('home');
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+Route::view('/signed-out', 'auth.signed-out')->name('auth.signed-out');
 Route::get('/p/{slug}', [PortfolioController::class, 'publicPage'])->name('portfolios.public');
 Route::get('/template-demo/{template}', [PortfolioController::class, 'demoPreview'])
     ->where('template', 'modern|minimal|creative')->name('templates.demo');
@@ -30,4 +32,5 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/portfolios/{portfolio}/edit', [PortfolioController::class, 'edit'])->whereNumber('portfolio')->name('portfolios.edit');
     Route::put('/portfolios/{portfolio}', [PortfolioController::class, 'update'])->whereNumber('portfolio')->name('portfolios.update');
     Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->whereNumber('portfolio')->name('portfolios.destroy');
+    Route::post('/portfolios/{portfolio}/restore', [PortfolioController::class, 'restore'])->whereNumber('portfolio')->name('portfolios.restore');
 });

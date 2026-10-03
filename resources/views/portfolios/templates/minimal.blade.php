@@ -14,11 +14,22 @@
     </style>
     <link rel="stylesheet" href="{{ asset('css/everleaf-cursors.css') }}">
     <link rel="stylesheet" href="{{ asset('css/everleaf-theme-toggle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portfolio-navigation.css') }}">
     <script src="{{ asset('js/everleaf-theme-toggle.js') }}" defer></script>
+    <script src="{{ asset('js/portfolio-section-navigation.js') }}" defer></script>
 </head>
 <body class="site-template-minimal {{ ($embedded ?? false) ? 'embedded-preview' : '' }} {{ ($demo ?? false) ? 'demo-preview' : '' }}">
 @include('portfolios.templates._toolbar')
 <main class="wrap">
+    <nav class="portfolio-section-nav" aria-label="Portfolio sections">
+        <a href="#home">Home</a>
+        @if($portfolio->about_me)<a href="#about">About</a>@endif
+        @if($portfolio->skillEntries->isNotEmpty())<a href="#skills">Skills</a>@endif
+        @if($portfolio->projects->isNotEmpty())<a href="#projects">Projects</a>@endif
+        @if($portfolio->educationEntries->isNotEmpty())<a href="#education">Education</a>@endif
+        @if($portfolio->workExperiences->isNotEmpty())<a href="#experience">Experience</a>@endif
+        @if($portfolio->email || $portfolio->contact_number || $portfolio->address || $portfolio->socialLinks->isNotEmpty())<a href="#contact">Contact</a>@endif
+    </nav>
     <section class="intro" id="home"><div><p class="kicker">Portfolio · Simple style</p><h1>{{ $portfolio->full_name }}</h1><p>{{ $portfolio->about_me ?: 'A little about me and the work I care about.' }}</p>@if($portfolio->email)<a class="contact-cta" href="mailto:{{ $portfolio->email }}">Get in touch ↗</a>@endif</div>
         @if($portfolio->profile_photo_path)<img class="portrait" src="{{ asset('storage/'.$portfolio->profile_photo_path) }}" alt="Profile photo of {{ $portfolio->full_name }}">@else<div class="portrait initials" aria-hidden="true">{{ strtoupper(substr($portfolio->full_name, 0, 1)) }}</div>@endif
     </section>

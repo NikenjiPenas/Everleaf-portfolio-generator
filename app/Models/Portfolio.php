@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Portfolio extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'user_id',
         'slug',
@@ -33,7 +36,7 @@ class Portfolio extends Model
         $slug = $base;
         $suffix = 2;
 
-        while (static::query()
+        while (static::withTrashed()
             ->where('slug', $slug)
             ->when($ignoreId !== null, fn ($query) => $query->whereKeyNot($ignoreId))
             ->exists()) {

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#102016">
-    <title>EverLeaf Portfolio Generator · Grow your story</title>
+    <title>EverLeaf Portfolio Generator &middot; Grow your story</title>
     <style>
         :root{color-scheme:dark;--forest:#102016;--forest-deep:#09140e;--leaf:#b8cb8e;--moss:#829d61;--cream:#f5f1df;--soft:#d5ddc9;--glass:rgba(12,27,17,.76);--line:rgba(224,236,204,.23)}
         *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px}body{margin:0;background:var(--forest-deep);color:var(--cream);font:15px/1.6 Inter,"Segoe UI",Arial,sans-serif}a{color:inherit}
@@ -37,6 +37,14 @@
         .features-band{border-block:1px solid #c8df9866;box-shadow:inset 0 1px 22px #b8d98712,inset 0 -1px 22px #b8d98712}.features{gap:13px}.features .feature,.features .feature:last-child{position:relative;overflow:hidden;padding:17px 20px;border:1px solid #c7df8e65;border-radius:15px;background:linear-gradient(145deg,#203527e8,#102018e8);box-shadow:inset 0 1px #f4f8e41c,0 0 17px #b7d98512;transition:transform .18s,border-color .18s,box-shadow .18s}.features .feature:hover{transform:translateY(-3px);border-color:#d7eba1c7;box-shadow:inset 0 1px #f4f8e433,0 0 24px #b7d98538,0 9px 22px #0005}.template-card{border-color:#c7df8e65;box-shadow:inset 0 1px #f4f8e41c,0 0 20px #b7d98516,0 16px 38px #0005}.template-card:hover{border-color:#d7eba1d9;box-shadow:inset 0 1px #f4f8e433,0 0 27px #b7d98542,0 19px 42px #0007}.about-inner{grid-template-columns:minmax(240px,.78fr) minmax(0,1.22fr);gap:32px;padding:30px 34px;border-color:#c7df8e78;box-shadow:inset 0 1px #f4f8e426,0 0 23px #b7d9851e,0 16px 38px #0004;transition:border-color .18s,box-shadow .18s}.about-heading{padding-right:28px;border-right:1px solid #c7df8e55}.about-kicker{margin:0 0 8px!important;color:#c5dc94!important;font-size:10px!important;font-weight:800;letter-spacing:.19em;text-transform:uppercase}.about-inner h2{max-width:350px;margin:0;font-size:clamp(25px,3vw,34px);line-height:1.2;text-wrap:balance}.about-copy{display:grid;gap:10px}.about-inner .about-copy p{margin:0;color:#e0e8d7;font-size:14px;line-height:1.8}.about-inner:hover{border-color:#d7eba1c9;box-shadow:inset 0 1px #f4f8e44a,0 0 29px #b7d9853d,0 18px 42px #0006}.contact-section{border-top-color:#c7df8e65;box-shadow:inset 0 1px 22px #b8d98714}.contact-section .contact-link{border-color:#c7df8e78;box-shadow:inset 0 1px #f4f8e422,0 0 15px #b7d9851b,0 10px 24px #0005}.contact-section .contact-link:hover,.contact-section .contact-link:focus-visible{border-color:#e0efaed9;box-shadow:inset 0 1px #ffffff50,0 0 23px #b7d98556,0 12px 27px #0007}.contact-section .contact-link:focus-visible,.template-actions a:focus-visible{outline:2px solid #e2efb2;outline-offset:3px}
         @media(max-width:700px){.features{gap:9px}.features .feature,.features .feature:last-child{padding:13px 11px}.about-inner{grid-template-columns:1fr;gap:17px;padding:22px 20px}.about-heading{padding:0 0 15px;border-right:0;border-bottom:1px solid #c7df8e55}.about-inner h2{max-width:100%;font-size:25px}.about-inner .about-copy p{font-size:13px}}
         @media(prefers-reduced-motion:reduce){.features .feature,.about-inner,.template-card{transition:none}.features .feature:hover,.template-card:hover{transform:none}}
+        /* Keep the glass navigation reachable on every screen size and align section links below it. */
+        .site-header{position:sticky;top:0;z-index:100;border-bottom-color:#dbe8cc44;background:rgba(8,22,14,.92);box-shadow:0 12px 30px #0004,inset 0 -1px #e7f0d30d;transition:background .22s ease,border-color .22s ease,box-shadow .22s ease}
+        .templates-section,.about-section,.contact-section{scroll-margin-top:0}
+        .nav a,.site-header .account-actions a,.button,.template-actions a,.contact-link{cursor:pointer}
+        .button:focus-visible,.site-header .account-actions a:focus-visible{outline:2px solid #e2efb2;outline-offset:3px;box-shadow:0 0 22px #c4df8d66}
+        .template-card:focus-within{border-color:#d7eba1d9;box-shadow:inset 0 1px #f4f8e433,0 0 27px #b7d98542,0 19px 42px #0007}
+        @media(max-width:700px){html{scroll-padding-top:132px}.site-header{position:sticky;top:0;gap:6px}.templates-section,.about-section,.contact-section{scroll-margin-top:0}}
+        @media(prefers-reduced-motion:reduce){.site-header,.nav a,.button,.template-actions a,.contact-link,.feature,.template-card,.about-inner{transition:none!important;scroll-behavior:auto!important}.site-header .account-actions a:focus-visible,.button:focus-visible{box-shadow:none}}
     </style>
     <link rel="stylesheet" href="{{ asset('css/everleaf-cursors.css') }}">
     <link rel="stylesheet" href="{{ asset('css/everleaf-theme-toggle.css') }}">
@@ -44,7 +52,7 @@
 </head>
 <body id="top">
 <header class="site-header">
-    <a class="identity" href="#top" aria-label="EverLeaf home"><span class="brand-mark" aria-hidden="true">E</span><span class="brand-name">EverLeaf</span><span class="brand-tag">Grow your story. Share your work.</span></a>
+    <a class="identity" href="#top" aria-label="EverLeaf home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36" width="26" height="26" focusable="false"><path d="M7 27C8 16 15 8 29 5c-1.5 13-8.5 20.5-22 22Z" fill="#1d3622"/><path d="M9 26c6-7 11-11 18-17M8 29c7-5 14-6 21-4" fill="none" stroke="#edf3d3" stroke-linecap="round" stroke-width="2"/></svg></span><span class="brand-name">EverLeaf</span><span class="brand-tag">Grow your story. Share your work.</span></a>
     <nav class="nav" aria-label="Main navigation"><a class="active" href="#top">Home</a><a href="#features">Features</a><a href="#templates">Templates</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
     <div class="account-actions">
         @auth
@@ -56,43 +64,43 @@
 </header>
 <main>
     <section class="hero-shell" aria-labelledby="hero-title"><div class="hero">
-        <div class="hero-copy"><p class="eyebrow">❧ &nbsp; TURN YOUR SKILLS INTO OPPORTUNITIES</p>
+        <div class="hero-copy"><p class="eyebrow">&#10087; &nbsp; TURN YOUR SKILLS INTO OPPORTUNITIES</p>
             <h1 id="hero-title"><span class="gradient">EverLeaf</span><br>Portfolio Generator</h1>
             <p class="hero-description">Create your professional portfolio with a nature-inspired design. Choose from 3 unique templates, save your information online, and showcase your work to the world.</p>
-            <div class="hero-actions"><a class="button" href="{{ auth()->check() ? route('portfolios.create') : route('register') }}"><span aria-hidden="true">❧</span> Create Your Portfolio <span aria-hidden="true">→</span></a><a class="button secondary" href="#templates"><span aria-hidden="true">◉</span> View Templates</a></div>
-            <div class="assurance"><span class="assurance-icon" aria-hidden="true">✓</span><span>Build at your own pace<small>Add your details · explore the styles · share when ready</small></span></div>
+            <div class="hero-actions"><a class="button" href="{{ auth()->check() ? route('portfolios.create') : route('register') }}"><span aria-hidden="true">&#10087;</span> Create Your Portfolio <span aria-hidden="true">&#8594;</span></a><a class="button secondary" href="#templates"><span aria-hidden="true">&#9673;</span> View Templates</a></div>
+            <div class="assurance"><span class="assurance-icon" aria-hidden="true">&#10003;</span><span>Build at your own pace<small>Add your details &middot; explore the styles &middot; share when ready</small></span></div>
         </div>
         <div class="hero-art" aria-hidden="true"><div class="vine"></div>
             <div class="paper-card"><div class="paper-head"><i class="paper-face"></i><span class="paper-lines"><i></i><i></i></span></div><div class="paper-photo"></div><div class="paper-info"><i></i><i></i><i></i><i></i></div></div>
-            <div class="profile-card"><div class="profile-top"><div class="avatar">P</div><div><h2>Your Name</h2><p>Your specialty · Your introduction</p><div class="social-dots"><i></i><i></i><i></i></div></div></div><div class="bio-card"><strong>About Me</strong><p>Share what you love building and the experiences that shaped your work. Your story belongs here.</p></div><div class="mini-stats"><div><strong>Skills</strong><span>WHAT I DO</span></div><div><strong>Projects</strong><span>MY WORK</span></div><div><strong>Experience</strong><span>MY JOURNEY</span></div></div></div><div class="leaf-chip">❧</div>
+            <div class="profile-card"><div class="profile-top"><div class="avatar">P</div><div><h2>Your Name</h2><p>Your specialty &middot; Your introduction</p><div class="social-dots"><i></i><i></i><i></i></div></div></div><div class="bio-card"><strong>About Me</strong><p>Share what you love building and the experiences that shaped your work. Your story belongs here.</p></div><div class="mini-stats"><div><strong>Skills</strong><span>WHAT I DO</span></div><div><strong>Projects</strong><span>MY WORK</span></div><div><strong>Experience</strong><span>MY JOURNEY</span></div></div></div><div class="leaf-chip">&#10087;</div>
         </div>
     </div></section>
     <section class="features-band" id="features" aria-labelledby="how-title"><div class="how-heading"><h2 id="how-title">How It Works</h2><p>Create your portfolio in just a few simple steps.</p></div><div class="features">
-        <article class="feature"><div class="feature-icon" aria-hidden="true">♙</div><h2>1. Enter Information</h2><p>Fill in your personal details, skills, education, and more.</p></article>
-        <article class="feature"><div class="feature-icon" aria-hidden="true">▤</div><h2>2. Save to Database</h2><p>Your data is securely stored online and ready when you return.</p></article>
-        <article class="feature"><div class="feature-icon" aria-hidden="true">▧</div><h2>3. Choose a Template</h2><p>Pick from three unique designs that fit your style.</p></article>
-        <article class="feature"><div class="feature-icon" aria-hidden="true">◎</div><h2>4. Generate &amp; Share</h2><p>Preview your portfolio and share it with the world.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">&#128100;</div><h2>1. Enter Information</h2><p>Fill in your personal details, skills, education, and more.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">&#128451;</div><h2>2. Save to Database</h2><p>Your data is securely stored online and ready when you return.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">&#9638;</div><h2>3. Choose a Template</h2><p>Pick from three unique designs that fit your style.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">&#9678;</div><h2>4. Generate &amp; Share</h2><p>Preview your portfolio and share it with the world.</p></article>
     </div></section>
-    <section class="templates-section" id="templates" aria-labelledby="templates-title"><div class="section-heading"><p class="section-kicker">— Find your look —</p><h2 id="templates-title">Choose Your Style</h2><p>Three ready-to-use designs. You can preview and change your selection later.</p></div>
+    <section class="templates-section" id="templates" aria-labelledby="templates-title"><div class="section-heading"><p class="section-kicker">&mdash; Find your look &mdash;</p><h2 id="templates-title">Choose Your Style</h2><p>Three ready-to-use designs. You can preview and change your selection later.</p></div>
         <div class="template-grid">
             <article class="template-card">
-                <div class="template-mock"><span class="template-number">01</span><div class="template-screen simple-screen"><div class="sample-simple-head"><span class="sample-avatar">AM</span><div><strong>Alex Morgan</strong><small>Web Designer · Developer</small></div></div><div class="sample-simple-layout"><div><section class="sample-simple-section"><b>About Me</b><p>I create thoughtful digital experiences and enjoy turning ideas into useful, clear websites.</p></section><section class="sample-simple-section"><b>Selected Projects</b><div class="sample-photo-row"><i></i><i></i><i></i></div></section></div><div><section class="sample-simple-section"><b>Education</b><p>Design &amp; Technology<br>2022 — Present</p></section><section class="sample-simple-section"><b>Skills</b><div class="sample-simple-tags"><i>Design</i><i>HTML</i><i>CSS</i><i>Laravel</i></div></section><section class="sample-simple-section"><b>Contact</b><p>hello@example.com</p></section></div></div></div><iframe class="template-preview-frame" title="Simple portfolio design example" src="{{ route('templates.demo', ['template' => 'minimal', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
-                <div class="template-copy"><p class="template-label"><span aria-hidden="true">❧</span> Template 1</p><h3>Simple</h3><p>A quiet, editorial layout with serif typography, clean sections, and room for your work.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'minimal']) : route('register', ['template' => 'minimal']) }}">Use This Template <span aria-hidden="true">→</span></a><a href="{{ route('templates.demo', ['template' => 'minimal']) }}">Preview</a></div></div>
+                <div class="template-mock"><span class="template-number">01</span><div class="template-screen simple-screen"><div class="sample-simple-head"><span class="sample-avatar">AM</span><div><strong>Alex Morgan</strong><small>Web Designer &middot; Developer</small></div></div><div class="sample-simple-layout"><div><section class="sample-simple-section"><b>About Me</b><p>I create thoughtful digital experiences and enjoy turning ideas into useful, clear websites.</p></section><section class="sample-simple-section"><b>Selected Projects</b><div class="sample-photo-row"><i></i><i></i><i></i></div></section></div><div><section class="sample-simple-section"><b>Education</b><p>Design &amp; Technology<br>2022 &mdash; Present</p></section><section class="sample-simple-section"><b>Skills</b><div class="sample-simple-tags"><i>Design</i><i>HTML</i><i>CSS</i><i>Laravel</i></div></section><section class="sample-simple-section"><b>Contact</b><p>hello@example.com</p></section></div></div></div><iframe class="template-preview-frame" title="Simple portfolio design example" src="{{ route('templates.demo', ['template' => 'minimal', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
+                <div class="template-copy"><p class="template-label"><span aria-hidden="true">&#10087;</span> Template 1</p><h3>Simple</h3><p>A quiet, editorial layout with serif typography, clean sections, and room for your work.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'minimal']) : route('register', ['template' => 'minimal']) }}">Use This Template <span aria-hidden="true">&#8594;</span></a><a href="{{ route('templates.demo', ['template' => 'minimal']) }}">Preview</a></div></div>
             </article>
             <article class="template-card">
-                <div class="template-mock"><span class="template-number">02</span><div class="template-screen modern-screen"><aside class="template-sidebar"><span class="modern-preview-avatar">AM</span><b class="modern-preview-name">Alex Morgan</b><span>⌂ &nbsp; Home</span><span>◉ &nbsp; About</span><span>✳ &nbsp; Skills</span><span>▧ &nbsp; Projects</span><span>◷ &nbsp; Experience</span><span>✉ &nbsp; Contact</span></aside><div class="template-content"><div class="modern-hero"><strong>Hello, I’m Alex Morgan</strong><span>Building thoughtful digital experiences.</span></div><div class="modern-stats"><i><b>05</b><br>Projects</i><i><b>03</b><br>Years</i><i><b>100%</b><br>Curiosity</i></div><div class="modern-grid"><div class="modern-card"><strong>About Me</strong><p>Designer and developer who loves useful, accessible work.</p></div><div class="modern-card"><strong>Featured Projects</strong><div class="template-photos"><i></i><i></i></div></div><div class="modern-card"><strong>Skills</strong><div class="template-pills"><i></i><i></i><i></i></div></div><div class="modern-card"><strong>Experience</strong><p>Product Designer · North Studio</p></div></div></div></div><iframe class="template-preview-frame" title="Modern portfolio design example" src="{{ route('templates.demo', ['template' => 'modern', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
-                <div class="template-copy"><p class="template-label"><span aria-hidden="true">❧</span> Template 2</p><h3>Modern</h3><p>A deep forest-green dashboard with a landscape hero, quick stats, project cards, and a sidebar.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'modern']) : route('register', ['template' => 'modern']) }}">Use This Template <span aria-hidden="true">→</span></a><a href="{{ route('templates.demo', ['template' => 'modern']) }}">Preview</a></div></div>
+                <div class="template-mock"><span class="template-number">02</span><div class="template-screen modern-screen"><aside class="template-sidebar"><span class="modern-preview-avatar">AM</span><b class="modern-preview-name">Alex Morgan</b><span>&#8962; &nbsp; Home</span><span>&#9673; &nbsp; About</span><span>&#10035; &nbsp; Skills</span><span>&#9638; &nbsp; Projects</span><span>&#9719; &nbsp; Experience</span><span>&#9993; &nbsp; Contact</span></aside><div class="template-content"><div class="modern-hero"><strong>Hello, I&rsquo;m Alex Morgan</strong><span>Building thoughtful digital experiences.</span></div><div class="modern-stats"><i><b>05</b><br>Projects</i><i><b>03</b><br>Years</i><i><b>100%</b><br>Curiosity</i></div><div class="modern-grid"><div class="modern-card"><strong>About Me</strong><p>Designer and developer who loves useful, accessible work.</p></div><div class="modern-card"><strong>Featured Projects</strong><div class="template-photos"><i></i><i></i></div></div><div class="modern-card"><strong>Skills</strong><div class="template-pills"><i></i><i></i><i></i></div></div><div class="modern-card"><strong>Experience</strong><p>Product Designer &middot; North Studio</p></div></div></div></div><iframe class="template-preview-frame" title="Modern portfolio design example" src="{{ route('templates.demo', ['template' => 'modern', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
+                <div class="template-copy"><p class="template-label"><span aria-hidden="true">&#10087;</span> Template 2</p><h3>Modern</h3><p>A deep forest-green dashboard with a landscape hero, quick stats, project cards, and a sidebar.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'modern']) : route('register', ['template' => 'modern']) }}">Use This Template <span aria-hidden="true">&#8594;</span></a><a href="{{ route('templates.demo', ['template' => 'modern']) }}">Preview</a></div></div>
             </article>
             <article class="template-card">
-                <div class="template-mock"><span class="template-number">03</span><div class="template-screen creative-screen"><div class="template-content"><div class="creative-nav"><span>Home</span><span>About</span><span>Skills</span><span>Projects</span><span>Contact</span></div><div class="creative-top"><div class="creative-person"><i class="template-face"></i><span class="template-lines"><i></i><i></i></span></div><div class="creative-about"><b class="template-section-title">A little about me</b><p>I’m a creative developer who loves nature, design, and bringing ideas to life.</p></div></div><div class="creative-lower"><div class="creative-skills"><b class="template-section-title">My Skills</b><div class="template-pills"><i></i><i></i><i></i><i></i></div></div><div class="creative-education"><b class="template-section-title">Education</b><p>Creative Technology<br>2022 — Present</p></div></div><div class="creative-projects"><b class="template-section-title">Featured Projects</b><div class="template-photos"><i></i><i></i><i></i></div></div></div></div><iframe class="template-preview-frame" title="Creative portfolio design example" src="{{ route('templates.demo', ['template' => 'creative', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
-                <div class="template-copy"><p class="template-label"><span aria-hidden="true">❧</span> Template 3</p><h3>Creative</h3><p>A warm paper-inspired design with organic shapes, expressive sections, and a personal feel.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'creative']) : route('register', ['template' => 'creative']) }}">Use This Template <span aria-hidden="true">→</span></a><a href="{{ route('templates.demo', ['template' => 'creative']) }}">Preview</a></div></div>
+                <div class="template-mock"><span class="template-number">03</span><div class="template-screen creative-screen"><div class="template-content"><div class="creative-nav"><span>Home</span><span>About</span><span>Skills</span><span>Projects</span><span>Contact</span></div><div class="creative-top"><div class="creative-person"><i class="template-face"></i><span class="template-lines"><i></i><i></i></span></div><div class="creative-about"><b class="template-section-title">A little about me</b><p>I&rsquo;m a creative developer who loves nature, design, and bringing ideas to life.</p></div></div><div class="creative-lower"><div class="creative-skills"><b class="template-section-title">My Skills</b><div class="template-pills"><i></i><i></i><i></i><i></i></div></div><div class="creative-education"><b class="template-section-title">Education</b><p>Creative Technology<br>2022 &mdash; Present</p></div></div><div class="creative-projects"><b class="template-section-title">Featured Projects</b><div class="template-photos"><i></i><i></i><i></i></div></div></div></div><iframe class="template-preview-frame" title="Creative portfolio design example" src="{{ route('templates.demo', ['template' => 'creative', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
+                <div class="template-copy"><p class="template-label"><span aria-hidden="true">&#10087;</span> Template 3</p><h3>Creative</h3><p>A warm paper-inspired design with organic shapes, expressive sections, and a personal feel.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'creative']) : route('register', ['template' => 'creative']) }}">Use This Template <span aria-hidden="true">&#8594;</span></a><a href="{{ route('templates.demo', ['template' => 'creative']) }}">Preview</a></div></div>
             </article>
         </div>
     </section>
-    <section class="about-section" id="about"><div class="about-inner"><div class="about-heading"><p class="about-kicker">ABOUT EVERLEAF</p><h2>A home for your next chapter.</h2></div><div class="about-copy"><p>Bring your profile, education, skills, projects, experience, and links together in one place.</p><p>Preview your designs, edit your details, and publish when you are ready.</p></div></div></section>
-    <section class="contact-section" id="contact"><h2>Contact the site owner</h2><p>Questions about EverLeaf? Reach Nikenji through email, phone, Facebook, or Messenger.</p><div class="contact-links"><a class="contact-link" href="mailto:penasnekenji2007@gmail.com"><span aria-hidden="true">✉</span>Email Nikenji</a><a class="contact-link" href="tel:+639187943762"><span aria-hidden="true">☎</span>0918 794 3762</a><a class="contact-link" href="https://www.facebook.com/search/top?q=NIKENJI%20PENAS" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">f</span>Find NIKENJI PENAS on Facebook</a><a class="contact-link" href="https://www.messenger.com/new" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span>Open Messenger</a></div><p class="contact-note">Facebook and Messenger open in a new tab. Search for <strong>NIKENJI PENAS</strong> in Messenger to start a chat.</p></section>
+    <section class="about-section" id="about"><div class="about-inner"><div class="about-heading"><p class="about-kicker">ABOUT EVERLEAF</p><h2>A HOME FOR YOUR NEXT CHAPTER</h2></div><div class="about-copy"><p>Bring your profile, education, skills, projects, experience, and links together in one place.</p><p>Preview your designs, edit your details, and publish when you are ready.</p></div></div></section>
+    <section class="contact-section" id="contact"><h2>Contact the site owner</h2><p>Questions about EverLeaf? Reach Nikenji through email, phone, Facebook, or Messenger.</p><div class="contact-links"><a class="contact-link" href="mailto:penasnekenji2007@gmail.com"><span aria-hidden="true">&#9993;</span>Email Nikenji</a><a class="contact-link" href="tel:+639187943762"><span aria-hidden="true">&#9742;</span>0918 794 3762</a><a class="contact-link" href="https://www.facebook.com/search/top?q=NIKENJI%20PENAS" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">f</span>Find NIKENJI PENAS on Facebook</a><a class="contact-link" href="https://www.messenger.com/new" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&#9673;</span>Open Messenger</a></div><p class="contact-note">Facebook and Messenger open in a new tab. Search for <strong>NIKENJI PENAS</strong> in Messenger to start a chat.</p></section>
 </main>
-<footer>EverLeaf Portfolio Generator · Grow your story. Share your work. <span>Forest waterfall photo by <a href="https://unsplash.com/photos/a-serene-waterfall-cascades-over-mossy-rocks-in-a-forest-iOVIAbuO-Sc" target="_blank" rel="noopener noreferrer">Yasin Onus</a> on Unsplash.</span></footer>
+<footer>EverLeaf Portfolio Generator &middot; Grow your story. Share your work. <span>Forest waterfall photo by <a href="https://unsplash.com/photos/a-serene-waterfall-cascades-over-mossy-rocks-in-a-forest-iOVIAbuO-Sc" target="_blank" rel="noopener noreferrer">Yasin Onus</a> on Unsplash.</span></footer>
 <script>
     const templateDemoFrames = document.querySelectorAll('[data-template-demo]');
     const fitTemplateDemoFrames = () => templateDemoFrames.forEach((frame) => {
@@ -129,6 +137,92 @@
     window.addEventListener('scroll', updateActiveNavLink, { passive: true });
     window.addEventListener('resize', updateActiveNavLink);
     updateActiveNavLink();
+</script>
+<script>
+      const templateDemoFrames = document.querySelectorAll('[data-template-demo]');
+
+      const fitTemplateDemoFrames = () => templateDemoFrames.forEach((frame) => {
+          const viewport = frame.parentElement;
+
+          frame.style.setProperty(
+              '--preview-scale',
+              String(
+                  Math.min(
+                      viewport.clientWidth / 1200,
+                      viewport.clientHeight / 740
+                  )
+              )
+          );
+      });
+
+      templateDemoFrames.forEach((frame) => frame.addEventListener('load', () => {
+          try {
+              const body = frame.contentDocument?.body;
+
+              if (
+                  body?.classList.contains('embedded-preview') &&
+                  body.classList.contains('demo-preview')
+              ) {
+                  frame.classList.add('is-ready');
+              }
+          } catch (_) {
+              // Keep the handcrafted mockup visible if the embedded preview cannot be read.
+          }
+      }));
+
+      fitTemplateDemoFrames();
+
+      const templateGrid = document.querySelector('.template-grid');
+
+      if (templateGrid && 'ResizeObserver' in window) {
+          new ResizeObserver(fitTemplateDemoFrames).observe(templateGrid);
+      }
+
+      const sectionNavLinks = [
+          ...document.querySelectorAll('.nav a[href^="#"]')
+      ];
+
+      const updateActiveNavLink = () => {
+          const passedLinks = sectionNavLinks
+              .slice(1)
+              .filter((link) => {
+                  const section = document.querySelector(
+                      link.getAttribute('href')
+                  );
+
+                  return section &&
+                      section.getBoundingClientRect().top <=
+                      window.innerHeight * 0.42;
+              });
+
+          const activeLink =
+              passedLinks.at(-1) || sectionNavLinks[0];
+
+          sectionNavLinks.forEach((link) => {
+              const active = link === activeLink;
+
+              link.classList.toggle('active', active);
+
+              if (active) {
+                  link.setAttribute('aria-current', 'location');
+              } else {
+                  link.removeAttribute('aria-current');
+              }
+          });
+      };
+
+      window.addEventListener(
+          'scroll',
+          updateActiveNavLink,
+          { passive: true }
+      );
+
+      window.addEventListener(
+          'resize',
+          updateActiveNavLink
+      );
+
+      updateActiveNavLink();
 </script>
 </body>
 </html>

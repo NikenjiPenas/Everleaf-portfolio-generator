@@ -6,7 +6,7 @@
 </div>
 @elseif (!(($public ?? false) || ($embedded ?? false)))
 <div class="toolbar">
-    <a class="back" href="{{ route('portfolios.index') }}">← My portfolios</a>
+    <a class="back" href="{{ route('portfolios.templates', $portfolio) }}">← Back to templates</a>
     <span class="preview-label">Previewing {{ $templateLabel ?? ($template === 'minimal' ? 'Simple' : ucfirst($template)) }}</span>
     <form method="POST" action="{{ route('portfolios.template.update', $portfolio) }}">
         @csrf

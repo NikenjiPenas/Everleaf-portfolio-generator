@@ -20,6 +20,7 @@ class PortfolioController extends Controller
     {
         return view('portfolios.index', [
             'portfolios' => Portfolio::query()->where('user_id', auth()->id())->latest()->get(),
+            'deletedPortfolios' => Portfolio::withTrashed()->where('user_id', auth()->id())->whereNotNull('deleted_at')->latest('deleted_at')->get(),
         ]);
     }
 
@@ -161,18 +162,21 @@ class PortfolioController extends Controller
     public function destroy(Portfolio $portfolio): RedirectResponse
     {
         $this->ensureOwner($portfolio);
-        $files = collect([$portfolio->profile_photo_path])
-            ->merge($portfolio->projects()->pluck('image_path'))
-            ->filter()
-            ->unique();
+        $portfolio->delete();
 
-        DB::transaction(fn () => $portfolio->delete());
+        return redirect()->route('portfolios.index')->with('success', 'Portfolio moved to Recently deleted. Its information and images are kept for recovery.');
+    }
 
-        foreach ($files as $file) {
-            Storage::disk('public')->delete($file);
-        }
+    public function restore(Request $request, int $portfolio): RedirectResponse
+    {
+        $deletedPortfolio = Portfolio::withTrashed()
+            ->where('user_id', $request->user()->id)
+            ->findOrFail($portfolio);
 
-        return redirect()->route('portfolios.index')->with('success', 'Portfolio deleted.');
+        abort_unless($deletedPortfolio->trashed(), 404);
+        $deletedPortfolio->restore();
+
+        return redirect()->route('portfolios.index')->with('success', 'Portfolio restored with its saved information, images, and design.');
     }
 
     private function savePortfolio(Request $request, ?Portfolio $portfolio = null): Portfolio

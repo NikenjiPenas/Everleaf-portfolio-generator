@@ -36,12 +36,15 @@
     </style>
     <link rel="stylesheet" href="{{ asset('css/everleaf-cursors.css') }}">
     <link rel="stylesheet" href="{{ asset('css/everleaf-theme-toggle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portfolio-navigation.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/creative-portfolio.css') }}">
     <script src="{{ asset('js/everleaf-theme-toggle.js') }}" defer></script>
+    <script src="{{ asset('js/portfolio-section-navigation.js') }}" defer></script>
 </head>
 <body class="site-template-creative {{ ($embedded ?? false) ? 'embedded-preview' : '' }} {{ ($demo ?? false) ? 'demo-preview' : '' }}">
 @include('portfolios.templates._toolbar')
 <main class="wrap"><div class="paper">
-    <nav class="top-nav" aria-label="Portfolio sections"><a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
+    <nav class="top-nav portfolio-section-nav" aria-label="Portfolio sections"><a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
     <section class="hero" id="home">
         <div class="profile-panel"><div class="profile-main">@if($portfolio->profile_photo_path)<img class="portrait" src="{{ asset('storage/'.$portfolio->profile_photo_path) }}" alt="Profile photo of {{ $portfolio->full_name }}">@else<div class="portrait initials" aria-hidden="true">{{ strtoupper(substr($portfolio->full_name, 0, 1)) }}</div>@endif<div><p class="role">Portfolio · Creative style</p><h1>{{ $portfolio->full_name }}</h1><p class="role">{{ $portfolio->workExperiences->first()?->position ?: 'Creative professional' }}@if($portfolio->workExperiences->first()?->company) · {{ $portfolio->workExperiences->first()->company }}@endif</p></div></div><p class="quote">“Small steps<br>create big dreams.”</p></div>
         <section class="about-panel" id="about"><div class="about-copy"><h2>About Me</h2><p>{{ $portfolio->about_me ?: 'I love learning, making thoughtful work, and finding new ways to bring ideas to life.' }}</p></div>@if($portfolio->projects->first()?->image_path)<img class="about-photo" src="{{ asset('storage/'.$portfolio->projects->first()->image_path) }}" alt="A project from {{ $portfolio->full_name }}">@else<div class="about-photo forest-photo" role="img" aria-label="Forest scenery"></div>@endif</section>

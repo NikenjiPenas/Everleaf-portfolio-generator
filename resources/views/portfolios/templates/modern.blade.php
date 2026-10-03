@@ -18,7 +18,9 @@
     </style>
     <link rel="stylesheet" href="{{ asset('css/everleaf-cursors.css') }}">
     <link rel="stylesheet" href="{{ asset('css/everleaf-theme-toggle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portfolio-navigation.css') }}">
     <script src="{{ asset('js/everleaf-theme-toggle.js') }}" defer></script>
+    <script src="{{ asset('js/portfolio-section-navigation.js') }}" defer></script>
 </head>
 <body class="site-template-modern {{ ($embedded ?? false) ? 'embedded-preview' : '' }} {{ ($demo ?? false) ? 'demo-preview' : '' }}">
 @include('portfolios.templates._toolbar')
@@ -28,7 +30,7 @@
             @if($portfolio->profile_photo_path)<img class="portrait" src="{{ asset('storage/'.$portfolio->profile_photo_path) }}" alt="">@else<div class="portrait initials" aria-hidden="true">{{ strtoupper(substr($portfolio->full_name, 0, 1)) }}</div>@endif
             <div><strong>{{ $portfolio->full_name }}</strong><small>{{ $portfolio->about_me ? \Illuminate\Support\Str::limit($portfolio->about_me, 46) : 'Portfolio · '.$templateLabel.' style' }}</small></div>
         </div>
-        <nav class="side-nav" aria-label="Portfolio sections"><a href="#home" aria-current="location"><span class="side-icon">⌂</span>Home</a><a href="#about"><span class="side-icon">◉</span>About</a><a href="#skills"><span class="side-icon">✳</span>Skills</a><a href="#projects"><span class="side-icon">▧</span>Projects</a><a href="#experience"><span class="side-icon">◷</span>Experience</a><a href="#contact"><span class="side-icon">✉</span>Contact</a></nav>
+        <nav class="side-nav portfolio-section-nav" aria-label="Portfolio sections"><a href="#home" aria-current="location"><span class="side-icon">⌂</span>Home</a><a href="#about"><span class="side-icon">◉</span>About</a><a href="#skills"><span class="side-icon">✳</span>Skills</a><a href="#projects"><span class="side-icon">▧</span>Projects</a>@if($portfolio->educationEntries->isNotEmpty())<a href="#education"><span class="side-icon">▤</span>Education</a>@endif<a href="#experience"><span class="side-icon">◷</span>Experience</a><a href="#contact"><span class="side-icon">✉</span>Contact</a></nav>
         <div class="side-contact"><strong>Let’s Connect</strong><p>Feel free to reach out.</p>@if($portfolio->email)<a href="mailto:{{ $portfolio->email }}">✉ Email</a>@endif @foreach($portfolio->socialLinks as $link)<a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer">{{ $link->platform }} ↗</a>@endforeach</div>
     </aside>
     <main class="portfolio">
@@ -47,18 +49,5 @@
         <footer class="footer">{{ $portfolio->full_name }} · {{ $templateLabel }} Portfolio</footer>
     </main>
 </div>
-<script>
-    const sectionLinks = [...document.querySelectorAll('.side-nav a[href^="#"]')];
-    const pageSections = sectionLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
-    const sectionObserver = new IntersectionObserver((entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible) return;
-        sectionLinks.forEach((link) => {
-            if (link.getAttribute('href') === `#${visible.target.id}`) link.setAttribute('aria-current', 'location');
-            else link.removeAttribute('aria-current');
-        });
-    }, { rootMargin: '-20% 0px -60% 0px', threshold: [0, .2, .5, 1] });
-    pageSections.forEach((section) => sectionObserver.observe(section));
-</script>
 </body>
 </html>

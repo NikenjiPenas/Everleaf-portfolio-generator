@@ -22,6 +22,8 @@
         .view-button,.edit-button,.delete,.publish,.signout{min-height:40px;padding:8px 11px;font-size:11px;transition:background .15s,border-color .15s,transform .15s,filter .15s}
         .view-button:hover,.edit-button:hover,.delete:hover,.publish:hover,.signout:hover{transform:translateY(-1px);filter:brightness(1.12)}
         a:focus-visible,button:focus-visible{outline:3px solid #e0eeae;outline-offset:3px}
+        .recovery{margin-top:34px}.recovery-heading{margin-bottom:11px}.recovery-heading h2{margin:0;color:var(--cream);font:600 22px Georgia,"Times New Roman",serif}.recovery-heading p{margin:4px 0 0;color:var(--soft);font-size:12px}.recovery-list{display:grid;gap:8px}.recovery-item{grid-template-columns:minmax(0,1fr) auto;padding:12px 15px;background:linear-gradient(110deg,#17241add,#102018e8)}.recovery-item .portfolio-main{align-items:center}.recovery-item .meta{font-size:11px}.restore-button{min-height:40px;border:1px solid #d7e7a77a;border-radius:9px;padding:8px 13px;background:linear-gradient(120deg,#829e58,#4d713e);color:#f4f1de;font:inherit;font-size:12px;font-weight:750;cursor:pointer;transition:transform .16s,filter .16s,box-shadow .16s}.restore-button:hover{transform:translateY(-2px) scale(1.03);filter:brightness(1.12);box-shadow:0 0 17px #95ca6b70}.recovery-item form{margin:0}
+        .recovery-empty{padding:16px;border:1px solid var(--line);border-radius:11px;background:#102218bd;color:var(--soft);font-size:12px}
     </style>
     <link rel="stylesheet" href="{{ asset('css/everleaf-cursors.css') }}">
     <link rel="stylesheet" href="{{ asset('css/everleaf-theme-toggle.css') }}">
@@ -69,6 +71,21 @@
                     @endforeach
                 </div>
             @endif
+            <section class="recovery" aria-labelledby="recovery-title">
+                <div class="recovery-heading"><h2 id="recovery-title">Recently deleted</h2><p>Deleted portfolios stay here with their saved information, images, and design, ready to restore.</p></div>
+                @if ($deletedPortfolios->isNotEmpty())
+                    <div class="recovery-list">
+                        @foreach ($deletedPortfolios as $deletedPortfolio)
+                            <article class="portfolio recovery-item">
+                                <div class="portfolio-main"><div class="avatar" aria-hidden="true">{{ strtoupper(substr($deletedPortfolio->full_name, 0, 1)) }}</div><div class="portfolio-details"><div class="name">{{ $deletedPortfolio->full_name }}</div><div class="meta">{{ $deletedPortfolio->template_key === 'minimal' ? 'Simple' : ucfirst($deletedPortfolio->template_key) }} design · Deleted {{ $deletedPortfolio->deleted_at->format('M j, Y') }}</div></div></div>
+                                <form method="POST" action="{{ route('portfolios.restore', $deletedPortfolio->id) }}" onsubmit="return confirm('Restore this portfolio with all its saved information and design?')">@csrf<button class="restore-button" type="submit">↶ Restore portfolio</button></form>
+                            </article>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="recovery-empty">Nothing to recover right now. Portfolios you delete will appear here.</div>
+                @endif
+            </section>
         </main>
     </div>
 </div>

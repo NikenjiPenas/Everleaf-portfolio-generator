@@ -1,59 +1,166 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# EverLeaf Portfolio Generator
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+EverLeaf is a web application for building, previewing, and managing personal portfolio websites. Users can enter their profile and career information, choose one of three layouts, and publish a shareable portfolio page.
 
-## About Laravel
+> **Project status:** Local Laravel application in development. A production cloud database, public deployment URL, and final submission screenshots have not been configured yet. Update this section when those are ready.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Project objective
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The project provides a simple end-to-end portfolio creation flow:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Create an account and sign in.
+2. Enter personal details, education, skills, projects, experience, and social links.
+3. Save and manage portfolio information.
+4. Preview and choose one of the three portfolio designs.
+5. Publish the portfolio and open its public page.
+6. Edit, delete, or restore a portfolio from the management area.
 
-## Learning Laravel
+## Portfolio designs
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+The application provides exactly three portfolio templates:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Template | Design |
+| --- | --- |
+| **Simple** | Clean editorial layout with clear sections and generous spacing. |
+| **Modern** | Dark forest-inspired layout with a sidebar, cards, and visual sections. |
+| **Creative** | Distinctive paper-inspired layout with an expressive, organic arrangement. |
 
-## Laravel Sponsors
+The template previews and public portfolio pages use the same saved portfolio information.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Features
 
-### Premium Partners
+- Account registration, sign in, and sign out.
+- Portfolio form for name, profile picture, email, contact number, address, and about text.
+- Repeatable education, skills, project, work experience, and social-link entries.
+- Three template previews and template selection.
+- Portfolio creation, viewing, editing, publishing, and deletion.
+- Soft-delete recovery for portfolios.
+- Public portfolio pages at `/p/{slug}` for published portfolios.
+- Responsive, nature-inspired interface and section navigation.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Technologies
 
-## Contributing
+- **Backend:** PHP 8.2+, Laravel 12
+- **Frontend:** Blade templates, Tailwind CSS 4, Vite, JavaScript
+- **Package managers:** Composer and npm
+- **Database:** Laravel database migrations; the checked-in `.env.example` defaults to SQLite for local setup. A cloud database must be configured for the final hosted submission.
+- **Hosting:** To be selected/configured. Railway is a planned option, not yet a deployed service.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Local setup
 
-## Code of Conduct
+### Requirements
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- PHP 8.2 or newer with the extensions required by Laravel
+- Composer
+- Node.js and npm
+- A database supported by Laravel (SQLite is the example default; MySQL can also be configured)
 
-## Security Vulnerabilities
+### Install and run
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+```
+
+Configure the database settings in `.env`. For the SQLite example, create the database file if it does not already exist:
+
+```bash
+touch database/database.sqlite
+```
+
+Then run migrations, install frontend dependencies, build assets, and start Laravel:
+
+```bash
+php artisan migrate
+npm install
+npm run build
+php artisan serve
+```
+
+Open the local URL printed by `php artisan serve` (usually `http://127.0.0.1:8000`). During frontend development, use `npm run dev` in a separate terminal instead of `npm run build` when you want Vite's development server.
+
+On Windows PowerShell, create the SQLite file with:
+
+```powershell
+New-Item -ItemType File -Path database/database.sqlite -Force
+```
+
+## Database structure
+
+The schema is defined in `database/migrations/` and uses Laravel migrations.
+
+| Table | Purpose and main data |
+| --- | --- |
+| `users` | Registered user accounts. |
+| `portfolios` | Owner, unique public slug, name, email, contact details, address, biography, profile photo path, selected template, and publish status. |
+| `education_entries` | School, degree, field of study, dates, current-study status, and description for a portfolio. |
+| `skill_entries` | Skill name, level, and display order. |
+| `portfolio_projects` | Project title, description, technologies, project/GitHub links, image path, and display order. |
+| `work_experiences` | Position, company, dates, current-work status, description, and display order. |
+| `social_links` | Social platform, URL, and display order. |
+| `cache`, `jobs` | Laravel framework cache and queue support tables. |
+
+Portfolio entries belong to a user. Education, skills, projects, work experiences, and social links belong to a portfolio. Deleting a portfolio cascades to its related entries; portfolio soft deletion supports the in-app recovery flow.
+
+## Main routes
+
+- `/` — welcome / start page
+- `/home` — application home page
+- `/register` and `/login` — account access
+- `/portfolios` — portfolio management (sign-in required)
+- `/portfolios/create` — portfolio information form (sign-in required)
+- `/portfolios/{id}/templates` — template selection (sign-in required)
+- `/portfolios/{id}/preview/{template}` — portfolio preview (sign-in required)
+- `/p/{slug}` — public page for a published portfolio
+- `/template-demo/{template}` — template demonstration page
+
+## Project structure
+
+```text
+app/Http/Controllers/   Request handling and portfolio flows
+app/Models/             Eloquent models and relationships
+database/migrations/    Database schema
+public/css/             Custom styles
+public/images/          Interface and nature-themed assets
+public/js/               Frontend interactions
+resources/views/         Blade pages and the three templates
+routes/web.php           Web routes
+```
+
+## Documentation and submission checklist
+
+The project criteria require a publicly accessible site, an online database, working create/read/update/delete operations, three distinct templates, and documentation. Complete these items before final submission:
+
+- [ ] Configure and verify the production cloud database.
+- [ ] Deploy the app and verify the public URL in a browser.
+- [ ] Test create, save, retrieve after refresh, template selection, preview, edit, delete, and recovery against the deployed database.
+- [ ] Add the final **Published Website URL** below.
+- [ ] Add screenshots of the home page, information form, management page, and all three templates under `docs/screenshots/` and link them here.
+- [ ] Confirm all buttons and forms work and check desktop, tablet, and mobile layouts.
+
+**Published website:** Not deployed yet.
+
+**Online database platform:** Not configured yet. Do not place database credentials here.
+
+Suggested screenshots to add when ready:
+
+```text
+docs/screenshots/home.png
+docs/screenshots/portfolio-form.png
+docs/screenshots/manage-portfolios.png
+docs/screenshots/template-simple.png
+docs/screenshots/template-modern.png
+docs/screenshots/template-creative.png
+```
+
+## Security
+
+- Never commit `.env`, database passwords, application keys, API tokens, or other secrets.
+- Set production credentials as environment variables in the hosting provider.
+- Keep `APP_DEBUG=false` in production.
+- `.env` is excluded by `.gitignore`; check `git status` before publishing.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project currently has no separate project license declared. The Laravel framework and its dependencies retain their own licenses.

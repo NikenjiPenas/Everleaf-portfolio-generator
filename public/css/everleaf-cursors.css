@@ -12,7 +12,7 @@ html body input[type="reset"],
 html body select,
 html body label:has(input),
 html body [role="button"]:not([aria-disabled="true"]) {
-    cursor: url("../images/cursor-wood-hand.svg") 14 5, pointer !important;
+    cursor: url("../images/cursor-wood-hand.svg") 20 4, pointer !important;
 }
 
 html body input:not([type="button"]):not([type="submit"]):not([type="reset"]),

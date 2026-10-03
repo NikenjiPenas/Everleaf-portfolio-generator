@@ -2,8 +2,9 @@ html[data-everleaf-theme] { color-scheme: dark; }
 html[data-everleaf-theme="light"] { color-scheme: light; }
 
 body:has(> .everleaf-atmosphere) { isolation: isolate; }
-body > .everleaf-atmosphere { position: fixed; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
-body > :not(.everleaf-atmosphere) { position: relative; z-index: 1; }
+body > .everleaf-atmosphere { position: fixed; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; }
+/* Keep page content above the atmosphere without overriding intentional absolute/sticky layouts. */
+body > :not(.everleaf-atmosphere) { z-index: 1; }
 .everleaf-atmosphere::before { position: absolute; inset: 0; content: ""; transition: background .35s ease, opacity .35s ease; }
 html[data-everleaf-theme="light"] .everleaf-atmosphere::before {
     background: radial-gradient(ellipse at 12% 7%, rgba(229, 244, 177, .13), transparent 30%),
@@ -112,4 +113,270 @@ html[data-everleaf-theme="dark"] .site-template-creative { color-scheme: dark; }
 @media (prefers-reduced-motion: reduce) {
     .everleaf-mode-controls button { transition: none; }
     .everleaf-firefly { animation: none; opacity: .35; }
+}
+
+/* Shared EverLeaf moss-light border and interaction treatment. */
+@keyframes everleaf-logo-glow {
+    0%, 100% { box-shadow: 0 0 0 1px rgba(190, 226, 145, .24), 0 0 12px rgba(150, 215, 105, .32), inset 0 1px rgba(255, 255, 230, .24); }
+    50% { box-shadow: 0 0 0 2px rgba(207, 241, 163, .42), 0 0 22px rgba(153, 225, 99, .58), inset 0 1px rgba(255, 255, 230, .4); }
+}
+
+html[data-everleaf-theme] .brand-mark {
+    border-color: rgba(205, 237, 158, .78);
+    animation: everleaf-logo-glow 3.2s ease-in-out infinite;
+    transition: transform .18s ease, filter .18s ease;
+}
+html[data-everleaf-theme] .identity:hover .brand-mark,
+html[data-everleaf-theme] .brand:hover .brand-mark,
+html[data-everleaf-theme] .welcome-brand:hover .brand-mark {
+    transform: scale(1.1);
+    filter: brightness(1.12);
+}
+
+html[data-everleaf-theme] :is(.card, .portfolio, .entry, .template-card, .feature, .about-inner, .contact-link, .empty, .sidebar, .hero, .stats, .stat, .paper, .profile-panel, .section, .project, .side-contact) {
+    border-color: rgba(190, 225, 148, .36);
+    filter: drop-shadow(0 0 4px rgba(150, 216, 105, .18));
+}
+html[data-everleaf-theme] .welcome-scene::before {
+    border-color: rgba(209, 241, 167, .88);
+    box-shadow: 0 32px 90px rgba(0, 0, 0, .58), 0 0 16px rgba(162, 226, 115, .48), 0 0 42px rgba(137, 214, 98, .3), inset 0 1px rgba(249, 255, 226, .42), inset 0 0 42px rgba(171, 217, 132, .1);
+}
+
+html[data-everleaf-theme] .side-nav a {
+    border-color: rgba(190, 225, 148, .22);
+    transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease, color .18s ease;
+}
+html[data-everleaf-theme] .side-nav a:hover,
+html[data-everleaf-theme] .side-nav a:focus-visible,
+html[data-everleaf-theme] .side-nav a.active {
+    transform: scale(1.035);
+    border-color: rgba(207, 239, 161, .78);
+    background: linear-gradient(110deg, rgba(161, 205, 111, .22), rgba(75, 124, 73, .24));
+    color: #f5f8e8;
+    box-shadow: 0 0 0 1px rgba(183, 224, 137, .16), 0 0 16px rgba(147, 218, 103, .32), inset 0 0 13px rgba(173, 224, 125, .1);
+}
+html[data-everleaf-theme] .side-nav a:active,
+html[data-everleaf-theme] :is(button, .button, [role="button"]):active {
+    transform: scale(.96);
+    filter: brightness(1.16);
+    box-shadow: 0 0 20px rgba(155, 224, 105, .48), inset 0 0 12px rgba(201, 239, 157, .16);
+}
+html[data-everleaf-theme] :is(.button, button, [role="button"], .template-actions a, .contact-link, .signout, .view-button, .edit-button, .delete, .publish, .add, .submit) {
+    border-color: rgba(194, 226, 153, .42);
+    transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+html[data-everleaf-theme] :is(.button, button, [role="button"], .template-actions a, .contact-link, .signout, .view-button, .edit-button, .delete, .publish, .add, .submit):hover {
+    transform: translateY(-2px) scale(1.025);
+    border-color: rgba(214, 245, 176, .9);
+    box-shadow: 0 0 0 1px rgba(183, 224, 137, .2), 0 0 19px rgba(147, 218, 103, .36), 0 8px 20px rgba(0, 0, 0, .24);
+    filter: brightness(1.08);
+}
+html[data-everleaf-theme] :is(button, .button, [role="button"]):focus-visible,
+html[data-everleaf-theme] .side-nav a:focus-visible {
+    outline: 2px solid rgba(211, 244, 167, .96);
+    outline-offset: 3px;
+}
+html[data-everleaf-theme] :is(input, textarea, select):hover {
+    border-color: rgba(188, 228, 142, .74);
+    box-shadow: 0 0 11px rgba(143, 211, 99, .18);
+}
+html[data-everleaf-theme] :is(input, textarea, select):focus {
+    border-color: #c2e895;
+    box-shadow: 0 0 0 3px rgba(174, 224, 128, .2), 0 0 16px rgba(143, 211, 99, .28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html[data-everleaf-theme] .brand-mark { animation: none; }
+    html[data-everleaf-theme] .side-nav a,
+    html[data-everleaf-theme] :is(.button, button, [role="button"], .template-actions a, .contact-link, .signout, .view-button, .edit-button, .delete, .publish, .add, .submit) { transition: none; }
+}
+
+/* Readable section controls and in-template navigation for all portfolio styles. */
+body.site-template-modern .toolbar > a:first-child,
+body.site-template-minimal .toolbar > a:first-child,
+body.site-template-creative .toolbar > a:first-child,
+body.site-template-modern .toolbar .demo-use,
+body.site-template-minimal .toolbar .demo-use,
+body.site-template-creative .toolbar .demo-use {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border: 1px solid rgba(117, 157, 91, .58);
+    border-radius: 10px;
+    background: rgba(76, 112, 66, .12);
+    font-size: 14px;
+}
+body.site-template-modern .toolbar button,
+body.site-template-minimal .toolbar button,
+body.site-template-creative .toolbar button {
+    min-height: 42px;
+    padding: 8px 16px;
+    border: 1px solid rgba(192, 225, 148, .82);
+    border-radius: 10px;
+    font-size: 14px;
+}
+body.site-template-modern .toolbar .preview-label,
+body.site-template-minimal .toolbar .preview-label,
+body.site-template-creative .toolbar .preview-label { font-size: 14px; }
+body.site-template-modern .layout,
+body.site-template-minimal .wrap,
+body.site-template-creative .wrap { scroll-margin-top: 76px; }
+
+html[data-everleaf-theme] body.site-template-modern .side-nav a,
+html[data-everleaf-theme] body.site-template-creative .top-nav a,
+html[data-everleaf-theme] body.site-template-minimal .portfolio-section-nav a {
+    min-height: 40px;
+    align-items: center;
+    font-size: 14px;
+    transition: transform .18s ease, color .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+html[data-everleaf-theme] body.site-template-modern .side-nav a[aria-current="location"],
+html[data-everleaf-theme] body.site-template-creative .top-nav a[aria-current="location"],
+html[data-everleaf-theme] body.site-template-minimal .portfolio-section-nav a[aria-current="location"] {
+    border-color: rgba(137, 178, 97, .86);
+    background: linear-gradient(110deg, rgba(169, 203, 126, .28), rgba(95, 143, 83, .18));
+    color: #27432b;
+    box-shadow: 0 0 0 1px rgba(151, 195, 109, .24), 0 0 17px rgba(120, 177, 88, .32), inset 0 0 12px rgba(135, 182, 99, .16);
+}
+html[data-everleaf-theme="dark"] body.site-template-modern .side-nav a[aria-current="location"] { color: #f4f5e8; }
+html[data-everleaf-theme="dark"] body.site-template-creative .top-nav a[aria-current="location"] { color: #f4f5e8; }
+html[data-everleaf-theme="dark"] body.site-template-minimal .portfolio-section-nav a[aria-current="location"] { color: #f4f5e8; }
+
+/* Strong, high-contrast active states remain visible on the forest navigation. */
+body.site-template-modern .side-nav a[aria-current="location"],
+body.site-template-creative .top-nav a[aria-current="location"] {
+    color: #f4f5e8;
+    border-color: rgba(201, 231, 160, .96);
+    background: linear-gradient(110deg, rgba(148, 187, 99, .46), rgba(72, 119, 70, .42));
+    box-shadow: 0 0 0 1px rgba(199, 232, 155, .32), 0 0 22px rgba(141, 206, 99, .52), inset 0 0 15px rgba(202, 237, 159, .2);
+}
+body.site-template-minimal .portfolio-section-nav a[aria-current="location"] {
+    color: #29432c;
+    border-color: rgba(104, 148, 86, .92);
+    background: linear-gradient(110deg, rgba(187, 215, 155, .68), rgba(139, 177, 115, .48));
+    box-shadow: 0 0 0 1px rgba(117, 158, 93, .26), 0 0 18px rgba(117, 158, 93, .35);
+}
+html[data-everleaf-theme="dark"] body.site-template-minimal .portfolio-section-nav a[aria-current="location"] { color: #f4f5e8; }
+/* Demo preview deliberately disables outbound links; keep its section menu usable. */
+body.demo-preview .portfolio-section-nav a { pointer-events: auto; }
+body.site-template-modern :is(.hero, .card):target,
+body.site-template-minimal :is(.intro, .section):target,
+body.site-template-creative :is(.hero, .section, .about-panel):target {
+    outline: 2px solid rgba(184, 224, 137, .9);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(161, 211, 111, .18), 0 0 28px rgba(143, 211, 99, .42), 0 15px 35px rgba(0, 0, 0, .27);
+    transition: outline-color .2s ease, box-shadow .2s ease;
+}
+
+body.site-template-minimal .portfolio-section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 22px;
+    padding: 7px 0 10px;
+    border-bottom: 1px solid rgba(98, 122, 88, .3);
+}
+body.site-template-minimal .portfolio-section-nav a {
+    display: inline-flex;
+    justify-content: center;
+    padding: 7px 12px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    color: #405b45;
+    font-weight: 650;
+    text-decoration: none;
+}
+body.site-template-minimal .portfolio-section-nav a:hover,
+body.site-template-creative .top-nav a:hover,
+body.site-template-modern .side-nav a:hover {
+    transform: translateY(-1px) scale(1.035);
+    border-color: rgba(137, 178, 97, .72);
+    box-shadow: 0 0 14px rgba(120, 177, 88, .26);
+}
+body.site-template-modern :is(.card, .hero, .stats, .stat, .sidebar, .side-contact) { scroll-margin-top: 78px; }
+body.site-template-minimal :is(.intro, .section) { scroll-margin-top: 78px; }
+body.site-template-creative :is(.hero, .section, .about-panel) { scroll-margin-top: 78px; }
+
+/* Keep the three generated portfolio designs comfortably readable on desktop and mobile. */
+body.site-template-modern { font-size: 16px; }
+body.site-template-modern .identity small,
+body.site-template-modern .stat span,
+body.site-template-modern .timeline-meta,
+body.site-template-modern .project-meta,
+body.site-template-modern .footer { font-size: 12px; }
+body.site-template-modern .side-contact strong,
+body.site-template-modern .side-contact p,
+body.site-template-modern .side-contact a,
+body.site-template-modern .toolbar a,
+body.site-template-modern .toolbar .preview-label { font-size: 14px; }
+body.site-template-modern .eyebrow { font-size: 11px; }
+body.site-template-modern .hero p,
+body.site-template-modern .card p,
+body.site-template-modern .timeline-item p,
+body.site-template-modern .project p { font-size: 14px; line-height: 1.65; }
+body.site-template-modern .hero a,
+body.site-template-modern .project-links a,
+body.site-template-modern .social-list a,
+body.site-template-modern .contact-details { font-size: 14px; }
+body.site-template-modern .card h2 { font-size: 18px; }
+body.site-template-modern .project h3,
+body.site-template-modern .timeline-item h3 { font-size: 15px; }
+body.site-template-modern .chip { font-size: 13px; }
+body.site-template-minimal { font-size: 16px; }
+body.site-template-minimal .kicker,
+body.site-template-minimal .section h2 { font-size: 13px; }
+body.site-template-minimal .meta,
+body.site-template-minimal .tags,
+body.site-template-minimal .footer { font-size: 12px; }
+body.site-template-minimal .item p,
+body.site-template-minimal .about-copy { font-size: 16px; line-height: 1.7; }
+body.site-template-minimal .skill { font-size: 15px; }
+body.site-template-minimal .skill small { font-size: 13px; }
+body.site-template-minimal .contact,
+body.site-template-minimal .social-list,
+body.site-template-minimal .contact-cta,
+body.site-template-minimal .project-links { font-size: 14px; }
+body.site-template-minimal .project-links a { font-size: 14px; }
+body.site-template-creative { font-size: 16px; }
+body.site-template-creative .role,
+body.site-template-creative .about-panel p,
+body.site-template-creative .timeline-item p,
+body.site-template-creative .project p,
+body.site-template-creative .contact-row a,
+body.site-template-creative .contact-row span { font-size: 14px; line-height: 1.65; }
+body.site-template-creative .quote { font-size: 16px; }
+body.site-template-creative .top-nav a,
+body.site-template-creative .section h2,
+body.site-template-creative .about-panel h2 { font-size: 15px; }
+body.site-template-creative .timeline-item h3,
+body.site-template-creative .project h3 { font-size: 15px; }
+body.site-template-creative .meta,
+body.site-template-creative .tags,
+body.site-template-creative .footer { font-size: 12px; }
+body.site-template-creative .skill,
+body.site-template-creative .social-list a,
+body.site-template-creative .project-links a { font-size: 13px; }
+body.site-template-modern :is(.side-nav a, .toolbar a, .toolbar button),
+body.site-template-minimal :is(.portfolio-section-nav a, .toolbar a, .toolbar button),
+body.site-template-creative :is(.top-nav a, .toolbar a, .toolbar button) { cursor: pointer; }
+body.site-template-modern :is(.side-nav a, .toolbar a, .toolbar button):active,
+body.site-template-minimal :is(.portfolio-section-nav a, .toolbar a, .toolbar button):active,
+body.site-template-creative :is(.top-nav a, .toolbar a, .toolbar button):active { transform: scale(.96); }
+
+@media (max-width: 720px) {
+    body.site-template-modern .side-nav a,
+    body.site-template-minimal .portfolio-section-nav a,
+    body.site-template-creative .top-nav a { min-height: 38px; font-size: 12px; }
+    body.site-template-modern .hero p,
+    body.site-template-modern .card p,
+    body.site-template-modern .timeline-item p,
+    body.site-template-modern .project p,
+    body.site-template-minimal .item p,
+    body.site-template-minimal .about-copy,
+    body.site-template-creative .role,
+    body.site-template-creative .about-panel p,
+    body.site-template-creative .timeline-item p,
+    body.site-template-creative .project p { font-size: 14px; }
 }
