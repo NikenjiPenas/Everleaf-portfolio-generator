@@ -39,9 +39,15 @@ return [
         ],
 
         'public' => [
-            'driver' => 'local',
+            'driver' => env('PORTFOLIO_STORAGE_DRIVER', 'local'),
             'root' => storage_path('app/public'),
-            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
+            'url' => env('PORTFOLIO_STORAGE_URL', env('AWS_URL', rtrim(env('APP_URL', 'http://localhost'), '/').'/storage')),
+            'key' => env('PORTFOLIO_STORAGE_KEY', env('AWS_ACCESS_KEY_ID')),
+            'secret' => env('PORTFOLIO_STORAGE_SECRET', env('AWS_SECRET_ACCESS_KEY')),
+            'region' => env('PORTFOLIO_STORAGE_REGION', env('AWS_DEFAULT_REGION', 'us-east-1')),
+            'bucket' => env('PORTFOLIO_STORAGE_BUCKET', env('AWS_BUCKET')),
+            'endpoint' => env('PORTFOLIO_STORAGE_ENDPOINT', env('AWS_ENDPOINT')),
+            'use_path_style_endpoint' => env('PORTFOLIO_STORAGE_USE_PATH_STYLE_ENDPOINT', env('AWS_USE_PATH_STYLE_ENDPOINT', false)),
             'visibility' => 'public',
             'throw' => false,
             'report' => false,

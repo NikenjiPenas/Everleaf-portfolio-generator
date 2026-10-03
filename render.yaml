@@ -1,0 +1,56 @@
+services:
+  - type: web
+    name: everleaf-portfolio-generator
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: master
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    autoDeployTrigger: commit
+    envVars:
+      - key: APP_NAME
+        value: EverLeaf
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        fromService:
+          type: web
+          name: everleaf-portfolio-generator
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_SSLMODE
+        value: require
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: PORTFOLIO_STORAGE_DRIVER
+        value: s3
+      - key: PORTFOLIO_STORAGE_KEY
+        sync: false
+      - key: PORTFOLIO_STORAGE_SECRET
+        sync: false
+      - key: PORTFOLIO_STORAGE_REGION
+        sync: false
+      - key: PORTFOLIO_STORAGE_BUCKET
+        sync: false
+      - key: PORTFOLIO_STORAGE_URL
+        sync: false
+      - key: PORTFOLIO_STORAGE_ENDPOINT
+        sync: false
+      - key: PORTFOLIO_STORAGE_USE_PATH_STYLE_ENDPOINT
+        value: "true"

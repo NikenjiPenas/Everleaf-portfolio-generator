@@ -2,7 +2,7 @@
 
 EverLeaf is a web application for building, previewing, and managing personal portfolio websites. Users can enter their profile and career information, choose one of three layouts, and publish a shareable portfolio page.
 
-> **Project status:** Local Laravel application in development. A production cloud database, public deployment URL, and final submission screenshots have not been configured yet. Update this section when those are ready.
+> **Project status:** Render deployment configuration is prepared for the free web-service plan. A Supabase project, production secrets, live deployment URL, and final screenshots still need to be configured.
 
 ## Project objective
 
@@ -43,8 +43,8 @@ The template previews and public portfolio pages use the same saved portfolio in
 - **Backend:** PHP 8.2+, Laravel 12
 - **Frontend:** Blade templates, Tailwind CSS 4, Vite, JavaScript
 - **Package managers:** Composer and npm
-- **Database:** Laravel database migrations; the checked-in `.env.example` defaults to SQLite for local setup. A cloud database must be configured for the final hosted submission.
-- **Hosting:** To be selected/configured. Railway is a planned option, not yet a deployed service.
+- **Database:** Laravel migrations; local setup defaults to SQLite. The planned hosted setup uses Supabase PostgreSQL and Supabase Storage.
+- **Hosting:** Render Docker web service (`free` plan) with the public `master` branch from GitHub.
 
 ## Local setup
 
@@ -130,7 +130,7 @@ routes/web.php           Web routes
 
 ## Screenshots
 
-Capture these screenshots from the local site **before deployment**, using placeholder/demo portfolio information. Save the PNG files in `docs/screenshots/`. The image files have not been added yet; link them here after capture.
+Capture these screenshots from the deployed site after the app is online, using placeholder/demo portfolio information. Save the PNG files in `docs/screenshots/`. The image files have not been added yet; link them here after capture.
 
 | Page | Screenshot file |
 | --- | --- |
@@ -141,20 +141,28 @@ Capture these screenshots from the local site **before deployment**, using place
 | Modern template | `docs/screenshots/template-modern.png` |
 | Creative template | `docs/screenshots/template-creative.png` |
 
-## Documentation and submission checklist
+## Free deployment setup
 
-The project criteria require a publicly accessible site, an online database, working create/read/update/delete operations, three distinct templates, and documentation. Complete these items before final submission, in this order:
+The checked-in `Dockerfile` builds the Laravel application with PHP-FPM and Nginx. `render.yaml` selects the Render `free` plan and generates the Laravel application key. The container runs the Laravel database migrations on startup. Render’s free web service sleeps after 15 minutes without traffic, and its local filesystem is temporary, so portfolio photos use the configured external object-storage disk.
 
-1. [ ] Capture and add the six screenshots listed above.
-2. [ ] Configure and verify the production cloud database.
-3. [ ] Deploy the app and verify it in a browser.
-4. [ ] Test create, save, retrieve after refresh, template selection, preview, edit, delete, and recovery against the deployed database.
-5. [ ] Add the final **Published Website URL** below.
-6. [ ] Confirm all buttons and forms work and check desktop, tablet, and mobile layouts.
+The deployment uses a Supabase PostgreSQL database and a public Supabase Storage bucket for portfolio photos. Create a Supabase project and bucket, enable its S3 protocol, then enter its database and S3 connection values in the Render service environment. Keep all credentials in Render’s environment settings; never commit them. Use a dedicated bucket and keep its S3 access credentials server-side only.
+
+Free-plan limits apply: Supabase Free currently includes 500 MB of database space and 1 GB of file storage, and may pause projects after seven days of low activity. Render’s free service may take about a minute to wake after idle time. These plans are suitable for a demo or hobby project, not guaranteed production availability.
+
+Do not import local account or portfolio records as part of first deployment. The hosted database starts with a fresh schema; existing local portfolio data must be reviewed separately before any transfer.
+
+## Deployment and submission checklist
+
+1. [ ] Sign in to Render and create the free web service from this repository.
+2. [ ] Create a Supabase project and public media bucket; set the database and storage secrets in Render.
+3. [ ] Wait for the first successful deployment and record the public URL.
+4. [ ] Verify registration, sign in, portfolio creation, save/reload, template preview/selection, publishing, and image uploads.
+5. [ ] Capture and add the six screenshots listed above from the deployed site.
+6. [ ] Confirm navigation, buttons, and forms work; check desktop, tablet, and mobile layouts.
 
 **Published website:** Not deployed yet.
 
-**Online database platform:** Not configured yet. Do not place database credentials here.
+**Online database platform:** Supabase PostgreSQL (project not configured yet). Do not place database credentials here.
 
 ## Security
 

@@ -54,7 +54,7 @@
                         @php($templateLabel = $portfolio->template_key === 'minimal' ? 'Simple' : ucfirst($portfolio->template_key))
                         <article class="portfolio">
                             <div class="portfolio-thumb thumb-{{ $portfolio->template_key }}">
-                                @if ($portfolio->profile_photo_path)<img src="{{ asset('storage/'.$portfolio->profile_photo_path) }}" alt="Profile photo of {{ $portfolio->full_name }}">@else<span class="thumb-initial" aria-hidden="true">{{ strtoupper(substr($portfolio->full_name, 0, 1)) }}</span>@endif
+                                @if ($portfolio->profile_photo_path)<img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($portfolio->profile_photo_path) }}" alt="Profile photo of {{ $portfolio->full_name }}">@else<span class="thumb-initial" aria-hidden="true">{{ strtoupper(substr($portfolio->full_name, 0, 1)) }}</span>@endif
                                 <span class="thumb-caption">{{ $portfolio->full_name }} · {{ $templateLabel }}</span>
                             </div>
                             <div class="portfolio-main"><div class="avatar" aria-hidden="true">{{ strtoupper(substr($portfolio->full_name, 0, 1)) }}</div><div class="portfolio-details">
