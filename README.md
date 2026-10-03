@@ -128,31 +128,33 @@ resources/views/         Blade pages and the three templates
 routes/web.php           Web routes
 ```
 
+## Screenshots
+
+Capture these screenshots from the local site **before deployment**, using placeholder/demo portfolio information. Save the PNG files in `docs/screenshots/`. The image files have not been added yet; link them here after capture.
+
+| Page | Screenshot file |
+| --- | --- |
+| Home page | `docs/screenshots/home.png` |
+| Portfolio information form | `docs/screenshots/portfolio-form.png` |
+| Portfolio management page | `docs/screenshots/manage-portfolios.png` |
+| Simple template | `docs/screenshots/template-simple.png` |
+| Modern template | `docs/screenshots/template-modern.png` |
+| Creative template | `docs/screenshots/template-creative.png` |
+
 ## Documentation and submission checklist
 
-The project criteria require a publicly accessible site, an online database, working create/read/update/delete operations, three distinct templates, and documentation. Complete these items before final submission:
+The project criteria require a publicly accessible site, an online database, working create/read/update/delete operations, three distinct templates, and documentation. Complete these items before final submission, in this order:
 
-- [ ] Configure and verify the production cloud database.
-- [ ] Deploy the app and verify the public URL in a browser.
-- [ ] Test create, save, retrieve after refresh, template selection, preview, edit, delete, and recovery against the deployed database.
-- [ ] Add the final **Published Website URL** below.
-- [ ] Add screenshots of the home page, information form, management page, and all three templates under `docs/screenshots/` and link them here.
-- [ ] Confirm all buttons and forms work and check desktop, tablet, and mobile layouts.
+1. [ ] Capture and add the six screenshots listed above.
+2. [ ] Configure and verify the production cloud database.
+3. [ ] Deploy the app and verify it in a browser.
+4. [ ] Test create, save, retrieve after refresh, template selection, preview, edit, delete, and recovery against the deployed database.
+5. [ ] Add the final **Published Website URL** below.
+6. [ ] Confirm all buttons and forms work and check desktop, tablet, and mobile layouts.
 
 **Published website:** Not deployed yet.
 
 **Online database platform:** Not configured yet. Do not place database credentials here.
-
-Suggested screenshots to add when ready:
-
-```text
-docs/screenshots/home.png
-docs/screenshots/portfolio-form.png
-docs/screenshots/manage-portfolios.png
-docs/screenshots/template-simple.png
-docs/screenshots/template-modern.png
-docs/screenshots/template-creative.png
-```
 
 ## Security
 
