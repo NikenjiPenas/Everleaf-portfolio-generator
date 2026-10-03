@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#102016">
-    <title>EcoTech Portfolio Generator · Grow your story</title>
+    <title>EverLeaf Portfolio Generator · Grow your story</title>
     <style>
         :root{color-scheme:dark;--forest:#102016;--forest-deep:#09140e;--leaf:#b8cb8e;--moss:#829d61;--cream:#f5f1df;--soft:#d5ddc9;--glass:rgba(12,27,17,.76);--line:rgba(224,236,204,.23)}
         *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px}body{margin:0;background:var(--forest-deep);color:var(--cream);font:15px/1.6 Inter,"Segoe UI",Arial,sans-serif}a{color:inherit}
@@ -40,12 +40,11 @@
     </style>
     <link rel="stylesheet" href="{{ asset('css/everleaf-cursors.css') }}">
     <link rel="stylesheet" href="{{ asset('css/everleaf-theme-toggle.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/ecotech-site.css') }}">
     <script src="{{ asset('js/everleaf-theme-toggle.js') }}" defer></script>
 </head>
 <body id="top">
 <header class="site-header">
-    <a class="identity" href="#top" aria-label="EcoTech home"><span class="brand-mark" aria-hidden="true">E</span><span class="brand-name">EcoTech</span><span class="brand-tag">Nature meets digital craft.</span></a>
+    <a class="identity" href="#top" aria-label="EverLeaf home"><span class="brand-mark" aria-hidden="true">E</span><span class="brand-name">EverLeaf</span><span class="brand-tag">Grow your story. Share your work.</span></a>
     <nav class="nav" aria-label="Main navigation"><a class="active" href="#top">Home</a><a href="#features">Features</a><a href="#templates">Templates</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
     <div class="account-actions">
         @auth
@@ -58,13 +57,12 @@
 <main>
     <section class="hero-shell" aria-labelledby="hero-title"><div class="hero">
         <div class="hero-copy"><p class="eyebrow">❧ &nbsp; TURN YOUR SKILLS INTO OPPORTUNITIES</p>
-            <h1 id="hero-title"><span class="gradient">EcoTech</span><br>Portfolio Generator</h1>
-            <p class="eco-tagline">Merging organic green with digital precision.</p>
+            <h1 id="hero-title"><span class="gradient">EverLeaf</span><br>Portfolio Generator</h1>
             <p class="hero-description">Create your professional portfolio with a nature-inspired design. Choose from 3 unique templates, save your information online, and showcase your work to the world.</p>
-            <div class="hero-launch-panel"><label for="eco-template">Start your project · Choose a design</label><select id="eco-template" aria-label="Choose a starting portfolio design"><option value="modern">Modern · Eco glass</option><option value="minimal">Simple · Clean and calm</option><option value="creative">Creative · Organic collage</option></select><div class="hero-actions"><a id="eco-start-link" class="button" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'modern']) : route('register', ['template' => 'modern']) }}"><span aria-hidden="true">❧</span> Create Your Portfolio <span aria-hidden="true">→</span></a><a class="button secondary" href="#templates"><span aria-hidden="true">◉</span> View Templates</a></div></div>
+            <div class="hero-actions"><a class="button" href="{{ auth()->check() ? route('portfolios.create') : route('register') }}"><span aria-hidden="true">❧</span> Create Your Portfolio <span aria-hidden="true">→</span></a><a class="button secondary" href="#templates"><span aria-hidden="true">◉</span> View Templates</a></div>
             <div class="assurance"><span class="assurance-icon" aria-hidden="true">✓</span><span>Build at your own pace<small>Add your details · explore the styles · share when ready</small></span></div>
         </div>
-        <div class="hero-art" aria-hidden="true"><p class="hero-preview-label">LIVE PREVIEW · YOUR PORTFOLIO</p><div class="vine"></div>
+        <div class="hero-art" aria-hidden="true"><div class="vine"></div>
             <div class="paper-card"><div class="paper-head"><i class="paper-face"></i><span class="paper-lines"><i></i><i></i></span></div><div class="paper-photo"></div><div class="paper-info"><i></i><i></i><i></i><i></i></div></div>
             <div class="profile-card"><div class="profile-top"><div class="avatar">P</div><div><h2>Your Name</h2><p>Your specialty · Your introduction</p><div class="social-dots"><i></i><i></i><i></i></div></div></div><div class="bio-card"><strong>About Me</strong><p>Share what you love building and the experiences that shaped your work. Your story belongs here.</p></div><div class="mini-stats"><div><strong>Skills</strong><span>WHAT I DO</span></div><div><strong>Projects</strong><span>MY WORK</span></div><div><strong>Experience</strong><span>MY JOURNEY</span></div></div></div><div class="leaf-chip">❧</div>
         </div>
@@ -91,10 +89,10 @@
             </article>
         </div>
     </section>
-    <section class="about-section" id="about"><div class="about-inner"><div class="about-heading"><p class="about-kicker">ABOUT ECOTECH</p><h2>A home for your next chapter.</h2></div><div class="about-copy"><p>Bring your profile, education, skills, projects, experience, and links together in one place.</p><p>Preview your designs, edit your details, and publish when you are ready.</p></div></div></section>
-    <section class="contact-section" id="contact"><h2>Contact the site owner</h2><p>Questions about EcoTech? Reach Nikenji through email, phone, Facebook, or Messenger.</p><div class="contact-links"><a class="contact-link" href="mailto:penasnekenji2007@gmail.com"><span aria-hidden="true">✉</span>Email Nikenji</a><a class="contact-link" href="tel:+639187943762"><span aria-hidden="true">☎</span>0918 794 3762</a><a class="contact-link" href="https://www.facebook.com/search/top?q=NIKENJI%20PENAS" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">f</span>Find NIKENJI PENAS on Facebook</a><a class="contact-link" href="https://www.messenger.com/new" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span>Open Messenger</a></div><p class="contact-note">Facebook and Messenger open in a new tab. Search for <strong>NIKENJI PENAS</strong> in Messenger to start a chat.</p></section>
+    <section class="about-section" id="about"><div class="about-inner"><div class="about-heading"><p class="about-kicker">ABOUT EVERLEAF</p><h2>A home for your next chapter.</h2></div><div class="about-copy"><p>Bring your profile, education, skills, projects, experience, and links together in one place.</p><p>Preview your designs, edit your details, and publish when you are ready.</p></div></div></section>
+    <section class="contact-section" id="contact"><h2>Contact the site owner</h2><p>Questions about EverLeaf? Reach Nikenji through email, phone, Facebook, or Messenger.</p><div class="contact-links"><a class="contact-link" href="mailto:penasnekenji2007@gmail.com"><span aria-hidden="true">✉</span>Email Nikenji</a><a class="contact-link" href="tel:+639187943762"><span aria-hidden="true">☎</span>0918 794 3762</a><a class="contact-link" href="https://www.facebook.com/search/top?q=NIKENJI%20PENAS" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">f</span>Find NIKENJI PENAS on Facebook</a><a class="contact-link" href="https://www.messenger.com/new" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span>Open Messenger</a></div><p class="contact-note">Facebook and Messenger open in a new tab. Search for <strong>NIKENJI PENAS</strong> in Messenger to start a chat.</p></section>
 </main>
-<footer>EcoTech Portfolio Generator · Nature meets digital craft. <span>Forest waterfall photo by <a href="https://unsplash.com/photos/a-serene-waterfall-cascades-over-mossy-rocks-in-a-forest-iOVIAbuO-Sc" target="_blank" rel="noopener noreferrer">Yasin Onus</a> on Unsplash.</span></footer>
+<footer>EverLeaf Portfolio Generator · Grow your story. Share your work. <span>Forest waterfall photo by <a href="https://unsplash.com/photos/a-serene-waterfall-cascades-over-mossy-rocks-in-a-forest-iOVIAbuO-Sc" target="_blank" rel="noopener noreferrer">Yasin Onus</a> on Unsplash.</span></footer>
 <script>
     const templateDemoFrames = document.querySelectorAll('[data-template-demo]');
     const fitTemplateDemoFrames = () => templateDemoFrames.forEach((frame) => {
@@ -113,17 +111,6 @@
     }));
     fitTemplateDemoFrames();
     new ResizeObserver(fitTemplateDemoFrames).observe(document.querySelector('.template-grid'));
-
-    const ecoTemplate = document.querySelector('#eco-template');
-    const ecoStartLink = document.querySelector('#eco-start-link');
-    if (ecoTemplate && ecoStartLink) {
-        const updateEcoStartLink = () => {
-            const next = new URL(ecoStartLink.href);
-            next.searchParams.set('template', ecoTemplate.value);
-            ecoStartLink.href = next.toString();
-        };
-        ecoTemplate.addEventListener('change', updateEcoStartLink);
-    }
 
     const sectionNavLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
     const updateActiveNavLink = () => {
