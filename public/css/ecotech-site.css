@@ -1,0 +1,148 @@
+:root {
+    --eco-ink: #eafff7;
+    --eco-muted: #b8d2cd;
+    --eco-line: rgba(111, 255, 214, .34);
+    --eco-cyan: #61f1d0;
+    --eco-green: #9fffc4;
+    --eco-glass: rgba(4, 29, 30, .86);
+}
+
+html { scroll-behavior: smooth; }
+body {
+    color: var(--eco-ink) !important;
+    background-color: #031715 !important;
+    background-image: linear-gradient(180deg, rgba(3, 20, 22, .66), rgba(3, 20, 18, .82)), url('/images/ecotech-interface-bg.svg') !important;
+    background-position: center, center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+header, .site-header, .topbar, .toolbar {
+    border-color: var(--eco-line) !important;
+    background: rgba(3, 22, 24, .92) !important;
+    color: var(--eco-ink) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .25), inset 0 -1px rgba(100, 255, 212, .08);
+    backdrop-filter: blur(18px);
+}
+.brand, .brand-name, .identity, .topbar-user, .toolbar .preview-label { color: var(--eco-ink) !important; }
+.brand-mark, .brand .brand-mark, .avatar, .user-avatar {
+    border-color: rgba(112, 255, 213, .8) !important;
+    background: linear-gradient(145deg, #21d9ad, #087e75) !important;
+    color: #031b19 !important;
+    box-shadow: 0 0 18px rgba(70, 239, 199, .26), inset 0 1px rgba(255, 255, 255, .45);
+}
+.nav a, .side-nav a, .toolbar a, .back { color: #d8f7ed !important; }
+.nav a:hover, .nav a:focus-visible, .side-nav a:hover, .side-nav a.active { color: #9ffff0 !important; }
+.nav a.active:after { background: var(--eco-cyan) !important; box-shadow: 0 0 12px var(--eco-cyan); }
+
+main, .workspace, .app-shell, .layout, .wrap { color: var(--eco-ink); }
+.card, .portfolio, .entry, .template-card, .about-inner, .paper, .profile-panel,
+.about-panel, .section, .project, .sidebar, .side-contact, .side-contact-card,
+.contact-card, .skills-card, .experience-card, .education-card, .about-card {
+    border-color: var(--eco-line) !important;
+    background: linear-gradient(145deg, rgba(8, 47, 46, .92), rgba(3, 25, 27, .94)) !important;
+    color: var(--eco-ink) !important;
+    box-shadow: 0 18px 46px rgba(0, 0, 0, .3), 0 0 24px rgba(35, 232, 195, .09), inset 0 1px rgba(207, 255, 237, .1) !important;
+    backdrop-filter: blur(14px);
+}
+.portfolio:hover, .template-card:hover, .feature:hover, .contact-link:hover {
+    border-color: rgba(111, 255, 219, .8) !important;
+    box-shadow: 0 20px 52px rgba(0, 0, 0, .36), 0 0 28px rgba(45, 239, 199, .22), inset 0 1px rgba(232, 255, 245, .16) !important;
+}
+
+h1, h2, h3, .name, .card h2, .section h2, .item h3, .project h3,
+.profile-panel h1, .about-panel h2, .timeline-item h3 { color: #f0fff7 !important; }
+p, label, .muted, .intro, .meta, .hint, .role, .quote, .about-copy,
+.about-panel p, .item p, .project p, .contact, .side-user, .side-user small,
+.heading p, .card p, .portfolio-details, .template-copy p { color: var(--eco-muted) !important; }
+a { text-underline-offset: 3px; }
+
+input, textarea, select, .field input, .field textarea, .field select {
+    border-color: rgba(113, 237, 211, .42) !important;
+    background: rgba(2, 23, 24, .88) !important;
+    color: #effff8 !important;
+    box-shadow: inset 0 1px 5px rgba(0, 0, 0, .28);
+}
+input::placeholder, textarea::placeholder { color: #9bbdb6 !important; }
+input:focus, textarea:focus, select:focus { border-color: var(--eco-cyan) !important; box-shadow: 0 0 0 3px rgba(68, 238, 201, .2) !important; }
+select option { background: #082b2a; color: #effff8; }
+.entry, .skill, .choice, .project, .modern-card, .stat, .mini-stats {
+    border-color: rgba(112, 238, 211, .25) !important;
+    background-color: rgba(8, 42, 41, .82) !important;
+    color: #e9fff6 !important;
+}
+
+.button, .submit, .signout, .view-button, .edit-button, .publish,
+.actions button, .template-actions a, .template-link, .contact-link,
+.everleaf-mode-controls button[aria-pressed="true"] {
+    border-color: rgba(131, 255, 220, .78) !important;
+    background: linear-gradient(120deg, #22d9b5, #087e7b) !important;
+    color: #031b1a !important;
+    box-shadow: 0 7px 24px rgba(25, 217, 181, .22), inset 0 1px rgba(235, 255, 247, .45) !important;
+}
+.button:hover, .submit:hover, .signout:hover, .view-button:hover,
+.edit-button:hover, .publish:hover, .actions button:hover, .contact-link:hover {
+    filter: brightness(1.15) !important;
+    box-shadow: 0 9px 28px rgba(25, 217, 181, .35), inset 0 1px rgba(235, 255, 247, .55) !important;
+}
+.delete, .remove { border-color: rgba(255, 149, 135, .55) !important; }
+.add { border-color: var(--eco-line) !important; background: rgba(10, 67, 62, .86) !important; color: #dffff5 !important; }
+.brand-tag, .section-kicker, .about-kicker, .eyebrow { color: #8dffe0 !important; }
+.feature-icon, .feature, .contact-link, .template-number, .step {
+    border-color: var(--eco-line) !important;
+    box-shadow: 0 0 22px rgba(35, 232, 195, .12), inset 0 1px rgba(222, 255, 242, .12);
+}
+.features-band, .templates-section, .about-section, .contact-section, .hero-shell {
+    background-image: linear-gradient(180deg, rgba(3, 27, 28, .78), rgba(2, 18, 19, .88)), url('/images/ecotech-interface-bg.svg') !important;
+    background-position: center;
+    background-size: cover;
+}
+.hero-shell:before { background: linear-gradient(90deg, rgba(2, 18, 19, .86), rgba(3, 28, 29, .54) 56%, rgba(3, 23, 24, .5)) !important; }
+.hero-description, .assurance, .assurance small { color: #e0f6ed !important; }
+.hero-launch-panel { padding: 14px 16px; border: 1px solid var(--eco-line); border-radius: 14px; background: rgba(3, 30, 31, .72); box-shadow: inset 0 1px rgba(222,255,242,.1), 0 0 22px rgba(35,232,195,.1); backdrop-filter: blur(12px); }
+.hero-launch-panel label { display:block; margin-bottom:6px; color:#c9fff0 !important; font-size:11px; font-weight:750; }
+.hero-launch-panel select { width:min(100%,250px); min-height:38px; padding:8px 10px; border-radius:9px; }
+.hero-launch-panel .hero-actions { margin-top:10px; }
+.eco-tagline { margin: 0 0 9px; color: #b5ffec !important; font-size: 12px; letter-spacing: .08em; }
+
+.site-template-minimal .wrap, .site-template-creative .paper {
+    border-color: var(--eco-line) !important;
+    background: linear-gradient(145deg, rgba(8, 45, 43, .96), rgba(3, 23, 25, .97)) !important;
+    color: var(--eco-ink) !important;
+}
+.site-template-minimal .section h2, .site-template-minimal .intro h1,
+.site-template-minimal .item h3, .site-template-minimal .item p,
+.site-template-minimal .meta, .site-template-minimal .skill,
+.site-template-minimal .contact, .site-template-minimal .footer,
+.site-template-creative .profile-panel h1, .site-template-creative .section h2,
+.site-template-creative .about-panel h2, .site-template-creative .timeline-item h3,
+.site-template-creative .project h3, .site-template-creative .project p,
+.site-template-creative .meta, .site-template-creative .tags,
+.site-template-creative .about-panel p, .site-template-creative .role,
+.site-template-creative .quote { color: #e4fff4 !important; }
+.site-template-minimal .item, .site-template-minimal .skill,
+.site-template-minimal .project, .site-template-creative .profile-panel,
+.site-template-creative .about-panel, .site-template-creative .section,
+.site-template-creative .project, .site-template-creative .skill {
+    border-color: rgba(112, 238, 211, .3) !important;
+    background: rgba(8, 42, 41, .86) !important;
+}
+.site-template-minimal .contact a, .site-template-minimal .social-list a,
+.site-template-minimal .project-links a, .site-template-creative .project-links a,
+.site-template-creative .contact-row a { color: #8effde !important; }
+
+.everleaf-mode-controls { border-color: rgba(108, 255, 221, .58) !important; background: rgba(3, 24, 26, .95) !important; }
+.everleaf-mode-controls button { color: #d8fff2 !important; }
+.everleaf-mode-controls button[aria-pressed="true"] { background: linear-gradient(120deg, #20d9b2, #087d7d) !important; color: #031b1a !important; }
+.everleaf-firefly { background: #a1fff0 !important; box-shadow: 0 0 7px 2px rgba(129,255,231,.72), 0 0 19px 6px rgba(26,228,203,.42) !important; }
+.everleaf-mode-controls button:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline-color: #8effe1 !important; }
+
+@media (max-width: 700px) {
+    .hero-launch-panel select { width: 100%; }
+    .hero-launch-panel .hero-actions { display:flex; flex-wrap:wrap; }
+    .hero-launch-panel .button { flex:1 1 140px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { scroll-behavior: auto !important; }
+}
