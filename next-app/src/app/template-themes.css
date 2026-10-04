@@ -6,6 +6,44 @@
 .public-portfolio.creative .role,.public-portfolio.creative .public-about,.public-portfolio.creative .public-project p { color:#515846; }
 .public-portfolio.creative .public-project { background:#fff7e3;border-color:#c8b991; }
 .public-portfolio.creative .public-skills span { color:#445b39;border-color:#82936288; }
+
+/* Modern keeps EverLeaf's forest-glass look, with clearer grouped sections. */
+.public-portfolio.modern { padding:clamp(24px,5vw,55px);border-color:#a8c9788a;background:linear-gradient(145deg,#10291eeF,#071811f2);color:#edf0dc;box-shadow:0 25px 80px #0008,0 0 30px #b9dc7530; }
+.public-portfolio.modern .public-head { padding-bottom:26px;border-bottom:1px solid #b9d17a55; }
+.public-portfolio.modern .public-about { padding:22px;border:1px solid #b9d17a40;border-radius:16px;background:linear-gradient(135deg,#d9edaa12,#ffffff05); }
+.public-portfolio.modern .public-project { background:linear-gradient(145deg,#183b29ed,#0d2118ed);border-color:#b9d17a55; }
+.public-portfolio.modern .public-skills span { background:#cfe99b12;color:#e4efc5;border-color:#b9d17a70; }
+
+/* Simple uses an editorial paper layout with calm spacing and fine rules. */
+.public-portfolio.minimal { padding:clamp(26px,6vw,64px);border-radius:10px;box-shadow:0 22px 70px #07130d66; }
+.public-portfolio.minimal>.brand { color:#26372b; }
+.public-portfolio.minimal>.brand .brand-mark { box-shadow:none; }
+.public-portfolio.minimal>.brand small { color:#52674c; }
+.public-portfolio.minimal .public-head { margin-top:30px!important;padding:0 0 28px;border-bottom:1px solid #b8b69f; }
+.public-portfolio.minimal .public-avatar { border-radius:18px;border:1px solid #aeb89a; }
+.public-portfolio.minimal .eyebrow { color:#526d47; }
+.public-portfolio.minimal .public-about { max-width:none;margin:26px 0;padding:0 0 25px;border-bottom:1px solid #c7c3ac; }
+.public-portfolio.minimal .public-projects { grid-template-columns:1fr; }
+.public-portfolio.minimal .public-project { border-radius:8px;box-shadow:none; }
+.public-portfolio.minimal .public-skills span { background:#e4e8d8;border-radius:6px; }
+.public-portfolio.minimal .site-footer { border-color:#b8b69f;color:#465846; }
+
+/* Creative keeps the warm paper palette and gives project cards a collage rhythm. */
+.public-portfolio.creative { position:relative;overflow:hidden;padding:clamp(24px,5vw,55px);border-radius:18px;background:linear-gradient(135deg,#f1e8d2 0%,#e5d8ba 52%,#f2e9d5 100%);box-shadow:0 25px 80px #120f0780,inset 0 0 0 7px #fff4df,inset 0 0 0 9px #c7b58e; }
+.public-portfolio.creative>.brand,.public-portfolio.creative>.brand small { color:#32452f; }
+.public-portfolio.creative>.brand .brand-mark { box-shadow:0 4px 14px #31432935; }
+.public-portfolio.creative .public-head { margin:34px 0 28px!important;padding:22px;border:1px solid #a7936a80;border-radius:18px;background:linear-gradient(115deg,#fffaf0c9,#fff5df78);box-shadow:0 12px 30px #56452a16; }
+.public-portfolio.creative .public-avatar { border-radius:24px 24px 24px 7px;border-color:#8f9a64;box-shadow:0 8px 20px #40372027; }
+.public-portfolio.creative .eyebrow { color:#556942; }
+.public-portfolio.creative .public-about { max-width:none;margin:28px 0;padding:22px 24px;border:1px solid #b49c70a6;border-left:5px solid #82945f;border-radius:5px 16px 16px 5px;background:#fff8e6b8; }
+.public-portfolio.creative .public-skills span { background:#fff8e9a8;border-radius:8px 15px 8px 15px;box-shadow:0 4px 10px #4b3e2117; }
+.public-portfolio.creative .public-projects { grid-template-columns:repeat(2,minmax(0,1fr));gap:18px; }
+.public-portfolio.creative .public-project { min-height:150px;border-radius:5px 18px 7px 18px;background:#fff8e6e8;box-shadow:0 13px 27px #493d251b; }
+.public-portfolio.creative .public-project:nth-child(odd) { transform:rotate(-1deg); }
+.public-portfolio.creative .public-project:nth-child(even) { transform:rotate(1deg); }
+.public-portfolio.creative .project-photo { max-height:260px;border:4px solid #fffaf0;box-shadow:0 4px 14px #4b3c2530; }
+.public-portfolio.creative .site-footer { border-color:#b49c70a6;color:#46513a; }
+@media(max-width:600px) { .public-portfolio.creative .public-projects { grid-template-columns:1fr; }.public-portfolio.creative .public-project:nth-child(n) { transform:none; }.public-portfolio.creative .public-head { align-items:flex-start; } }
 .form-title { margin:8px 0;font:700 44px/1.1 Georgia,serif; }
 .upload-field>label { display:block;font-size:13px;font-weight:700; }
 .upload-field input[type=file] { width:100%;margin-top:8px;padding:10px;border:1px solid #b8cc9252;border-radius:10px;background:#ffffff0c;color:#eff3df; }
