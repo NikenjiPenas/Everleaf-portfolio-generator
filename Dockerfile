@@ -11,6 +11,9 @@ RUN apk add --no-cache nginx supervisor gettext icu-dev libzip-dev postgresql-de
     && docker-php-ext-install bcmath intl opcache pcntl pdo_pgsql zip \
     && sed -i 's/^;clear_env = no/clear_env = no/' /usr/local/etc/php-fpm.d/www.conf
 
+# The form permits project images up to 4 MB; increase PHP's stock 2 MB limit.
+RUN printf 'file_uploads=On\nupload_max_filesize=5M\npost_max_size=40M\n' > /usr/local/etc/php/conf.d/uploads.ini
+
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html

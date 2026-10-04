@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\PasswordResetController;
 
 Route::view('/', 'welcome')->name('welcome');
 Route::view('/home', 'home')->name('home');
@@ -11,6 +12,10 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+Route::get('/forgot-password', [PasswordResetController::class, 'requestForm'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'sendLink'])->middleware('throttle:5,1')->name('password.email');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'resetForm'])->name('password.reset');
+Route::post('/reset-password', [PasswordResetController::class, 'reset'])->middleware('throttle:5,1')->name('password.update');
 Route::view('/signed-out', 'auth.signed-out')->name('auth.signed-out');
 Route::get('/p/{slug}', [PortfolioController::class, 'publicPage'])->name('portfolios.public');
 Route::get('/template-demo/{template}', [PortfolioController::class, 'demoPreview'])

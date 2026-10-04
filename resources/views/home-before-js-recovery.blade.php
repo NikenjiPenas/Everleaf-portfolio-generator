@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#102016">
-    <title>EverLeaf Portfolio Generator &middot; Grow your story</title>
+    <title>EverLeaf Portfolio Generator · Grow your story</title>
     <style>
         :root{color-scheme:dark;--forest:#102016;--forest-deep:#09140e;--leaf:#b8cb8e;--moss:#829d61;--cream:#f5f1df;--soft:#d5ddc9;--glass:rgba(12,27,17,.76);--line:rgba(224,236,204,.23)}
         *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px}body{margin:0;background:var(--forest-deep);color:var(--cream);font:15px/1.6 Inter,"Segoe UI",Arial,sans-serif}a{color:inherit}
@@ -37,53 +37,6 @@
         .features-band{border-block:1px solid #c8df9866;box-shadow:inset 0 1px 22px #b8d98712,inset 0 -1px 22px #b8d98712}.features{gap:13px}.features .feature,.features .feature:last-child{position:relative;overflow:hidden;padding:17px 20px;border:1px solid #c7df8e65;border-radius:15px;background:linear-gradient(145deg,#203527e8,#102018e8);box-shadow:inset 0 1px #f4f8e41c,0 0 17px #b7d98512;transition:transform .18s,border-color .18s,box-shadow .18s}.features .feature:hover{transform:translateY(-3px);border-color:#d7eba1c7;box-shadow:inset 0 1px #f4f8e433,0 0 24px #b7d98538,0 9px 22px #0005}.template-card{border-color:#c7df8e65;box-shadow:inset 0 1px #f4f8e41c,0 0 20px #b7d98516,0 16px 38px #0005}.template-card:hover{border-color:#d7eba1d9;box-shadow:inset 0 1px #f4f8e433,0 0 27px #b7d98542,0 19px 42px #0007}.about-inner{grid-template-columns:minmax(240px,.78fr) minmax(0,1.22fr);gap:32px;padding:30px 34px;border-color:#c7df8e78;box-shadow:inset 0 1px #f4f8e426,0 0 23px #b7d9851e,0 16px 38px #0004;transition:border-color .18s,box-shadow .18s}.about-heading{padding-right:28px;border-right:1px solid #c7df8e55}.about-kicker{margin:0 0 8px!important;color:#c5dc94!important;font-size:10px!important;font-weight:800;letter-spacing:.19em;text-transform:uppercase}.about-inner h2{max-width:350px;margin:0;font-size:clamp(25px,3vw,34px);line-height:1.2;text-wrap:balance}.about-copy{display:grid;gap:10px}.about-inner .about-copy p{margin:0;color:#e0e8d7;font-size:14px;line-height:1.8}.about-inner:hover{border-color:#d7eba1c9;box-shadow:inset 0 1px #f4f8e44a,0 0 29px #b7d9853d,0 18px 42px #0006}.contact-section{border-top-color:#c7df8e65;box-shadow:inset 0 1px 22px #b8d98714}.contact-section .contact-link{border-color:#c7df8e78;box-shadow:inset 0 1px #f4f8e422,0 0 15px #b7d9851b,0 10px 24px #0005}.contact-section .contact-link:hover,.contact-section .contact-link:focus-visible{border-color:#e0efaed9;box-shadow:inset 0 1px #ffffff50,0 0 23px #b7d98556,0 12px 27px #0007}.contact-section .contact-link:focus-visible,.template-actions a:focus-visible{outline:2px solid #e2efb2;outline-offset:3px}
         @media(max-width:700px){.features{gap:9px}.features .feature,.features .feature:last-child{padding:13px 11px}.about-inner{grid-template-columns:1fr;gap:17px;padding:22px 20px}.about-heading{padding:0 0 15px;border-right:0;border-bottom:1px solid #c7df8e55}.about-inner h2{max-width:100%;font-size:25px}.about-inner .about-copy p{font-size:13px}}
         @media(prefers-reduced-motion:reduce){.features .feature,.about-inner,.template-card{transition:none}.features .feature:hover,.template-card:hover{transform:none}}
-        /* Keep the glass navigation reachable on every screen size and align section links below it. */
-        .site-header{position:sticky;top:0;z-index:100;border-bottom-color:#dbe8cc44;background:rgba(8,22,14,.92);box-shadow:0 12px 30px #0004,inset 0 -1px #e7f0d30d;transition:background .22s ease,border-color .22s ease,box-shadow .22s ease}
-        .templates-section,.about-section,.contact-section{scroll-margin-top:0}
-        .site-header{position:sticky;top:0;z-index:100}
-        html{scroll-padding-top:82px}
-        .templates-section,.about-section,.contact-section{scroll-margin-top:1px}
-        .templates-section .section-heading,.about-inner,.contact-section>h2,.contact-section>p,.contact-links{scroll-margin-top:82px}
-        .templates-section.nav-arrival .template-card,.about-section.nav-arrival .about-inner,.contact-section.nav-arrival .contact-link,.features-band.nav-arrival .feature{animation:nav-arrival-glow .9s cubic-bezier(.2,.75,.25,1) both}
-        .templates-section.nav-arrival .template-card:nth-child(2){animation-delay:70ms}.templates-section.nav-arrival .template-card:nth-child(3){animation-delay:140ms}
-        .contact-section.nav-arrival .contact-link:nth-child(2){animation-delay:70ms}.contact-section.nav-arrival .contact-link:nth-child(3){animation-delay:140ms}.contact-section.nav-arrival .contact-link:nth-child(4){animation-delay:210ms}
-        @keyframes nav-arrival-glow{0%{transform:translateY(8px) scale(.985);border-color:#c9e78c;box-shadow:0 0 0 1px #c4e58b7a,0 0 26px #a9d66e80,0 16px 34px #0007}55%{transform:translateY(0) scale(1.012);border-color:#c9e78c;box-shadow:0 0 0 1px #c4e58b69,0 0 22px #a9d66e63,0 16px 34px #0007}100%{transform:translateY(0) scale(1);border-color:#dbe9c832;box-shadow:0 16px 38px #0003}}
-        .nav a,.site-header .account-actions a,.button,.template-actions a,.contact-link{cursor:pointer}
-        .button:focus-visible,.site-header .account-actions a:focus-visible{outline:2px solid #e2efb2;outline-offset:3px;box-shadow:0 0 22px #c4df8d66}
-        .template-card:focus-within{border-color:#d7eba1d9;box-shadow:inset 0 1px #f4f8e433,0 0 27px #b7d98542,0 19px 42px #0007}
-        @media(max-width:700px){html{scroll-padding-top:132px}.site-header{position:sticky;top:0;z-index:100;gap:6px}.templates-section,.about-section,.contact-section{scroll-margin-top:1px}.templates-section .section-heading,.about-inner,.contact-section>h2,.contact-section>p,.contact-links{scroll-margin-top:132px}}
-        @media(prefers-reduced-motion:reduce){.site-header,.nav a,.button,.template-actions a,.contact-link,.feature,.template-card,.about-inner{transition:none!important;scroll-behavior:auto!important}.templates-section.nav-arrival .template-card,.about-section.nav-arrival .about-inner,.contact-section.nav-arrival .contact-link,.features-band.nav-arrival .feature{animation:none!important}.site-header .account-actions a:focus-visible,.button:focus-visible{box-shadow:none}}
-
-        /* Floating Modern portfolio tablet artwork in the hero. */
-        .hero-art{display:grid;min-height:470px;place-items:center;perspective:1400px}
-        .hero-art:before{inset:10% 4%;border:1px solid #d9edb326;border-radius:50%;background:radial-gradient(ellipse at 52% 48%,#a5ce6d35 0,rgba(91,136,61,.13) 34%,transparent 70%);filter:blur(8px)}
-        .hero-art:after{position:absolute;inset:12% 5%;border:1px solid #e2efc51a;border-radius:42% 18% 38% 17%;content:"";pointer-events:none}
-        .vine{display:none}
-        .hero-roots{position:absolute;z-index:1;inset:1% -2%;width:104%;height:98%;overflow:visible;filter:drop-shadow(0 0 5px #a8d87966);pointer-events:none}
-        .hero-roots path{fill:none;stroke:#9bbb68;stroke-linecap:round;stroke-width:2;opacity:.74}
-        .hero-roots .root-fine{stroke:#d1e99a;stroke-width:1;opacity:.66}
-        .hero-roots .root-leaf{fill:#a4c975;stroke:#e0f5aa;stroke-width:1;filter:drop-shadow(0 0 5px #a9e37b)}
-        .modern-tablet{position:relative;z-index:2;width:min(96%,620px);height:376px;padding:12px;border:1px solid #d6e9ac8f;border-radius:25px;background:linear-gradient(145deg,#53664a,#14241a 16%,#07120d 72%,#526442);box-shadow:0 34px 70px #000b,0 0 0 2px #e5f3c51c,0 0 34px #b4df784a,inset 0 1px 1px #f2f5da8a;transform:rotateY(-8deg) rotateX(2deg) rotateZ(-1deg);transition:transform .35s ease,box-shadow .35s ease}
-        .hero-art:hover .modern-tablet{transform:rotateY(-3deg) rotateX(1deg) translateY(-5px);box-shadow:0 42px 82px #000b,0 0 0 2px #e5f3c528,0 0 45px #b4df7860,inset 0 1px 1px #f2f5da8a}
-        .modern-tablet:before{position:absolute;top:50%;right:4px;width:3px;height:46px;border-radius:4px;background:linear-gradient(#27392b,#80945d,#253528);content:"";transform:translateY(-50%)}
-        .modern-screen-view{display:grid;grid-template-columns:132px minmax(0,1fr);height:100%;overflow:hidden;border:1px solid #cfe09a35;border-radius:15px;background:#09150f;color:#f2f1df;box-shadow:inset 0 0 24px #0008}
-        .modern-view-sidebar{display:flex;flex-direction:column;gap:9px;padding:17px 12px;border-right:1px solid #d9e8c522;background:linear-gradient(180deg,#172b1f,#0c1b13 76%,#12251a)}
-        .modern-view-brand{display:flex;align-items:center;gap:8px;padding:0 2px 13px;border-bottom:1px solid #dce8c52a}
-        .modern-view-brand i{display:grid;flex:none;width:31px;height:31px;place-items:center;border:1px solid #d7ebb484;border-radius:50%;background:linear-gradient(145deg,#b4d07f,#476845);box-shadow:0 0 13px #a6d66d59;color:#102016;font:700 16px Georgia,serif}
-        .modern-view-brand span{min-width:0;color:#eef1dc;font:700 10px/1.3 Georgia,serif}.modern-view-brand small{display:block;margin-top:2px;color:#bbc9b2;font:8px/1.35 Inter,"Segoe UI",Arial,sans-serif}
-        .modern-view-nav{display:grid;gap:5px}.modern-view-nav span{display:flex;align-items:center;gap:8px;min-height:28px;padding:4px 7px;border:1px solid transparent;border-radius:7px;color:#d3ddc7;font-size:9px}.modern-view-nav span:before{display:grid;flex:none;width:15px;height:15px;place-items:center;border:1px solid #c6dba17a;border-radius:5px;color:#d9e9b4;font-size:8px}.modern-view-nav span:nth-child(1):before{content:"⌂"}.modern-view-nav span:nth-child(2):before{content:"i"}.modern-view-nav span:nth-child(3):before{content:"✳"}.modern-view-nav span:nth-child(4):before{content:"▧"}.modern-view-nav span:nth-child(5):before{content:"◷"}.modern-view-nav span:nth-child(6):before{content:"✉"}.modern-view-nav span:first-child{border-color:#bdd88a47;background:#8eae632a;color:#f4f2df}
-        .modern-view-content{min-width:0;padding:16px 17px;background:radial-gradient(ellipse at 88% 4%,#819d4c18,transparent 30%),#0b1911}
-        .modern-view-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;color:#bdcf99;font-size:8px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
-        .modern-view-topline span:last-child{padding:5px 8px;border:1px solid #c8df9766;border-radius:999px;background:#91b36524;color:#e9f0d7;font-size:8px;letter-spacing:0;text-transform:none}
-        .modern-view-hero{position:relative;display:flex;min-height:111px;align-items:flex-end;overflow:hidden;padding:13px 14px;border:1px solid #d8e8bd44;border-radius:11px;background:linear-gradient(90deg,#07130feF 0%,#0a1913db 48%,#0a191355 100%),url('https://images.unsplash.com/photo-1546835196-5fe79a546d7c?auto=format&fit=crop&w=1000&q=78') center 53%/cover;box-shadow:inset 0 0 24px #0005}
-        .modern-view-hero-copy{position:relative;max-width:88%}.modern-view-hero-copy small{display:block;margin-bottom:4px;color:#c5dc91;font-size:8px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.modern-view-hero-copy strong{display:block;color:#f5f2df;font:600 clamp(16px,1.8vw,22px)/1.12 Georgia,"Times New Roman",serif;text-shadow:0 2px 8px #000}.modern-view-hero-copy p{margin:5px 0 0;color:#e1e7d8;font-size:9px;line-height:1.4}
-        .modern-view-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:9px 0}.modern-view-stat{padding:7px 9px;border:1px solid #dbe8c52b;border-radius:8px;background:linear-gradient(145deg,#1a2d20,#112117);box-shadow:inset 0 1px #ffffff0a}.modern-view-stat strong{display:block;color:#eaf0d7;font:600 14px/1.15 Georgia,serif}.modern-view-stat span{color:#b9c8ae;font-size:8px}
-        .modern-view-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}.modern-view-card{min-height:70px;padding:9px 10px;border:1px solid #dbe8c52b;border-radius:9px;background:#122319}.modern-view-card h3{margin:0 0 5px;color:#e9efd9;font:600 11px/1.2 Georgia,serif}.modern-view-card p{margin:0;color:#c0ceb8;font-size:8px;line-height:1.5}.modern-view-card .modern-view-skills{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}.modern-view-skills span{padding:3px 6px;border:1px solid #bad58646;border-radius:999px;background:#a4c67519;color:#dae7c5;font-size:7px}
-        .root-glow-dot{position:absolute;z-index:3;width:7px;height:7px;border-radius:50%;background:#ecffb9;box-shadow:0 0 8px 3px #b9e980,0 0 22px 8px #99d26378;pointer-events:none}.root-glow-dot.one{top:14%;left:17%}.root-glow-dot.two{right:12%;top:24%;width:5px;height:5px}.root-glow-dot.three{bottom:16%;left:8%;width:4px;height:4px}
-        @media(max-width:900px){.hero-art{min-height:430px}.modern-tablet{width:100%;height:350px}.modern-screen-view{grid-template-columns:116px minmax(0,1fr)}.modern-view-sidebar{padding:14px 9px}}
-        @media(max-width:700px){.hero-art{width:min(100%,510px);min-height:325px;margin:2px auto 0;transform:none}.modern-tablet{width:96%;height:294px;padding:9px;border-radius:20px;transform:rotateY(-4deg) rotateZ(-.7deg)}.modern-screen-view{grid-template-columns:93px minmax(0,1fr);border-radius:12px}.modern-view-sidebar{gap:6px;padding:10px 7px}.modern-view-brand{gap:5px;padding-bottom:8px}.modern-view-brand i{width:25px;height:25px;font-size:13px}.modern-view-brand span{font-size:8px}.modern-view-brand small{font-size:7px}.modern-view-nav{gap:3px}.modern-view-nav span{min-height:23px;gap:5px;padding:3px 4px;font-size:8px}.modern-view-nav span:before{width:13px;height:13px;font-size:7px}.modern-view-content{padding:11px 10px}.modern-view-topline{font-size:7px}.modern-view-topline span:last-child{font-size:7px}.modern-view-hero{min-height:82px;padding:9px}.modern-view-hero-copy small{font-size:7px}.modern-view-hero-copy strong{font-size:16px}.modern-view-hero-copy p{font-size:8px}.modern-view-stat{padding:5px 6px}.modern-view-stat strong{font-size:12px}.modern-view-stat span{font-size:7px}.modern-view-cards{gap:5px}.modern-view-card{min-height:58px;padding:7px}.modern-view-card h3{font-size:9px}.modern-view-card p{font-size:7px}}
-        @media(max-width:380px){.hero-art{min-height:285px}.modern-tablet{height:260px;padding:7px}.modern-screen-view{grid-template-columns:78px minmax(0,1fr)}.modern-view-sidebar{padding:8px 5px}.modern-view-brand span{font-size:7px}.modern-view-nav span{font-size:7px}.modern-view-content{padding:8px 7px}.modern-view-hero{min-height:72px}.modern-view-cards{gap:4px}.modern-view-card{padding:6px}}
-        @media(prefers-reduced-motion:reduce){.modern-tablet{transition:none}}
     </style>
     <link rel="stylesheet" href="{{ asset('css/everleaf-cursors.css') }}">
     <link rel="stylesheet" href="{{ asset('css/everleaf-theme-toggle.css') }}">
@@ -91,7 +44,7 @@
 </head>
 <body id="top">
 <header class="site-header">
-    <a class="identity" href="#top" aria-label="EverLeaf home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36" width="26" height="26" focusable="false"><path d="M7 27C8 16 15 8 29 5c-1.5 13-8.5 20.5-22 22Z" fill="#1d3622"/><path d="M9 26c6-7 11-11 18-17M8 29c7-5 14-6 21-4" fill="none" stroke="#edf3d3" stroke-linecap="round" stroke-width="2"/></svg></span><span class="brand-name">EverLeaf</span><span class="brand-tag">Grow your story. Share your work.</span></a>
+    <a class="identity" href="#top" aria-label="EverLeaf home"><span class="brand-mark" aria-hidden="true">E</span><span class="brand-name">EverLeaf</span><span class="brand-tag">Grow your story. Share your work.</span></a>
     <nav class="nav" aria-label="Main navigation"><a class="active" href="#top">Home</a><a href="#features">Features</a><a href="#templates">Templates</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
     <div class="account-actions">
         @auth
@@ -103,61 +56,43 @@
 </header>
 <main>
     <section class="hero-shell" aria-labelledby="hero-title"><div class="hero">
-        <div class="hero-copy"><p class="eyebrow">&#10087; &nbsp; TURN YOUR SKILLS INTO OPPORTUNITIES</p>
+        <div class="hero-copy"><p class="eyebrow">❧ &nbsp; TURN YOUR SKILLS INTO OPPORTUNITIES</p>
             <h1 id="hero-title"><span class="gradient">EverLeaf</span><br>Portfolio Generator</h1>
             <p class="hero-description">Create your professional portfolio with a nature-inspired design. Choose from 3 unique templates, save your information online, and showcase your work to the world.</p>
-            <div class="hero-actions"><a class="button" href="{{ auth()->check() ? route('portfolios.create') : route('register') }}"><span aria-hidden="true">&#10087;</span> Create Your Portfolio <span aria-hidden="true">&#8594;</span></a><a class="button secondary" href="#templates"><span aria-hidden="true">&#9673;</span> View Templates</a></div>
-            <div class="assurance"><span class="assurance-icon" aria-hidden="true">&#10003;</span><span>Build at your own pace<small>Add your details &middot; explore the styles &middot; share when ready</small></span></div>
+            <div class="hero-actions"><a class="button" href="{{ auth()->check() ? route('portfolios.create') : route('register') }}"><span aria-hidden="true">❧</span> Create Your Portfolio <span aria-hidden="true">→</span></a><a class="button secondary" href="#templates"><span aria-hidden="true">◉</span> View Templates</a></div>
+            <div class="assurance"><span class="assurance-icon" aria-hidden="true">✓</span><span>Build at your own pace<small>Add your details · explore the styles · share when ready</small></span></div>
         </div>
-        <div class="hero-art" aria-hidden="true">
-            <svg class="hero-roots" viewBox="0 0 620 450" preserveAspectRatio="none" focusable="false">
-                <path d="M17 389C71 348 86 293 144 273c36-13 44-46 68-77M21 402c73-19 103-62 132-111 19-33 47-46 67-67M24 413c86 1 128-35 168-79 24-27 42-42 62-51M602 383c-59-39-77-86-126-106-37-15-44-46-67-78M602 401c-71-20-101-64-130-113-19-33-46-48-65-69M595 416c-84 1-128-38-166-81-22-26-42-42-62-50"/>
-                <path class="root-fine" d="M85 344c-18 17-34 27-61 35M112 317c-6-24-7-41-1-62M151 279c-18-17-31-30-41-51M191 241c-4-25-2-42 7-61M535 343c18 16 35 27 62 34M506 315c7-24 7-42 2-62M467 278c18-18 31-31 42-52M428 239c4-24 2-42-7-61"/>
-                <path class="root-leaf" d="M77 354c-25-5-36-19-39-38 22 1 36 13 39 38Zm34-39c-20-15-25-33-18-51 19 10 26 27 18 51Zm37-45c-24-8-34-23-33-43 22 5 34 20 33 43Zm40-41c-16-20-16-39-4-55 15 14 17 33 4 55Zm357 125c25-5 36-18 40-37-23 1-37 12-40 37Zm-33-39c20-15 25-33 18-51-19 10-27 27-18 51Zm-38-45c24-8 34-23 33-43-22 5-34 20-33 43Zm-40-41c16-20 16-39 4-55-15 14-17 33-4 55Z"/>
-            </svg>
-            <span class="root-glow-dot one"></span><span class="root-glow-dot two"></span><span class="root-glow-dot three"></span>
-            <div class="modern-tablet">
-                <div class="modern-screen-view">
-                    <aside class="modern-view-sidebar">
-                        <div class="modern-view-brand"><i>N</i><span>Nikenji Peñas<small>Creative Developer</small></span></div>
-                        <nav class="modern-view-nav" aria-label="Example portfolio sections"><span>Home</span><span>About</span><span>Skills</span><span>Projects</span><span>Experience</span><span>Contact</span></nav>
-                    </aside>
-                    <div class="modern-view-content">
-                        <div class="modern-view-topline"><span>Portfolio · Modern style</span><span>Available for work</span></div>
-                        <div class="modern-view-hero"><div class="modern-view-hero-copy"><small>Web developer · Designer</small><strong>Hello, I’m Nikenji Peñas</strong><p>Building useful digital experiences with care.</p></div></div>
-                        <div class="modern-view-stats"><div class="modern-view-stat"><strong>03</strong><span>Featured projects</span></div><div class="modern-view-stat"><strong>08</strong><span>Core skills</span></div><div class="modern-view-stat"><strong>100%</strong><span>Curiosity</span></div></div>
-                        <div class="modern-view-cards"><article class="modern-view-card"><h3>About Me</h3><p>A quick introduction, education, and experience in one clear profile.</p></article><article class="modern-view-card"><h3>My Skills</h3><div class="modern-view-skills"><span>Laravel</span><span>PHP</span><span>MySQL</span><span>UI/UX</span></div></article></div>
-                    </div>
-                </div>
-            </div>
+        <div class="hero-art" aria-hidden="true"><div class="vine"></div>
+            <div class="paper-card"><div class="paper-head"><i class="paper-face"></i><span class="paper-lines"><i></i><i></i></span></div><div class="paper-photo"></div><div class="paper-info"><i></i><i></i><i></i><i></i></div></div>
+            <div class="profile-card"><div class="profile-top"><div class="avatar">P</div><div><h2>Your Name</h2><p>Your specialty · Your introduction</p><div class="social-dots"><i></i><i></i><i></i></div></div></div><div class="bio-card"><strong>About Me</strong><p>Share what you love building and the experiences that shaped your work. Your story belongs here.</p></div><div class="mini-stats"><div><strong>Skills</strong><span>WHAT I DO</span></div><div><strong>Projects</strong><span>MY WORK</span></div><div><strong>Experience</strong><span>MY JOURNEY</span></div></div></div><div class="leaf-chip">❧</div>
         </div>
     </div></section>
     <section class="features-band" id="features" aria-labelledby="how-title"><div class="how-heading"><h2 id="how-title">How It Works</h2><p>Create your portfolio in just a few simple steps.</p></div><div class="features">
-        <article class="feature"><div class="feature-icon" aria-hidden="true">&#128100;</div><h2>1. Enter Information</h2><p>Fill in your personal details, skills, education, and more.</p></article>
-        <article class="feature"><div class="feature-icon" aria-hidden="true">&#128451;</div><h2>2. Save to Database</h2><p>Your data is securely stored online and ready when you return.</p></article>
-        <article class="feature"><div class="feature-icon" aria-hidden="true">&#9638;</div><h2>3. Choose a Template</h2><p>Pick from three unique designs that fit your style.</p></article>
-        <article class="feature"><div class="feature-icon" aria-hidden="true">&#9678;</div><h2>4. Generate &amp; Share</h2><p>Preview your portfolio and share it with the world.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">♙</div><h2>1. Enter Information</h2><p>Fill in your personal details, skills, education, and more.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">▤</div><h2>2. Save to Database</h2><p>Your data is securely stored online and ready when you return.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">▧</div><h2>3. Choose a Template</h2><p>Pick from three unique designs that fit your style.</p></article>
+        <article class="feature"><div class="feature-icon" aria-hidden="true">◎</div><h2>4. Generate &amp; Share</h2><p>Preview your portfolio and share it with the world.</p></article>
     </div></section>
-    <section class="templates-section" id="templates" aria-labelledby="templates-title"><div class="section-heading"><p class="section-kicker">&mdash; Find your look &mdash;</p><h2 id="templates-title">Choose Your Style</h2><p>Three ready-to-use designs. You can preview and change your selection later.</p></div>
+    <section class="templates-section" id="templates" aria-labelledby="templates-title"><div class="section-heading"><p class="section-kicker">— Find your look —</p><h2 id="templates-title">Choose Your Style</h2><p>Three ready-to-use designs. You can preview and change your selection later.</p></div>
         <div class="template-grid">
             <article class="template-card">
-                <div class="template-mock"><span class="template-number">01</span><div class="template-screen simple-screen"><div class="sample-simple-head"><span class="sample-avatar">AM</span><div><strong>Alex Morgan</strong><small>Web Designer &middot; Developer</small></div></div><div class="sample-simple-layout"><div><section class="sample-simple-section"><b>About Me</b><p>I create thoughtful digital experiences and enjoy turning ideas into useful, clear websites.</p></section><section class="sample-simple-section"><b>Selected Projects</b><div class="sample-photo-row"><i></i><i></i><i></i></div></section></div><div><section class="sample-simple-section"><b>Education</b><p>Design &amp; Technology<br>2022 &mdash; Present</p></section><section class="sample-simple-section"><b>Skills</b><div class="sample-simple-tags"><i>Design</i><i>HTML</i><i>CSS</i><i>Laravel</i></div></section><section class="sample-simple-section"><b>Contact</b><p>hello@example.com</p></section></div></div></div><iframe class="template-preview-frame" title="Simple portfolio design example" src="{{ route('templates.demo', ['template' => 'minimal', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
-                <div class="template-copy"><p class="template-label"><span aria-hidden="true">&#10087;</span> Template 1</p><h3>Simple</h3><p>A quiet, editorial layout with serif typography, clean sections, and room for your work.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'minimal']) : route('register', ['template' => 'minimal']) }}">Use This Template <span aria-hidden="true">&#8594;</span></a><a href="{{ route('templates.demo', ['template' => 'minimal']) }}">Preview</a></div></div>
+                <div class="template-mock"><span class="template-number">01</span><div class="template-screen simple-screen"><div class="sample-simple-head"><span class="sample-avatar">AM</span><div><strong>Alex Morgan</strong><small>Web Designer · Developer</small></div></div><div class="sample-simple-layout"><div><section class="sample-simple-section"><b>About Me</b><p>I create thoughtful digital experiences and enjoy turning ideas into useful, clear websites.</p></section><section class="sample-simple-section"><b>Selected Projects</b><div class="sample-photo-row"><i></i><i></i><i></i></div></section></div><div><section class="sample-simple-section"><b>Education</b><p>Design &amp; Technology<br>2022 — Present</p></section><section class="sample-simple-section"><b>Skills</b><div class="sample-simple-tags"><i>Design</i><i>HTML</i><i>CSS</i><i>Laravel</i></div></section><section class="sample-simple-section"><b>Contact</b><p>hello@example.com</p></section></div></div></div><iframe class="template-preview-frame" title="Simple portfolio design example" src="{{ route('templates.demo', ['template' => 'minimal', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
+                <div class="template-copy"><p class="template-label"><span aria-hidden="true">❧</span> Template 1</p><h3>Simple</h3><p>A quiet, editorial layout with serif typography, clean sections, and room for your work.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'minimal']) : route('register', ['template' => 'minimal']) }}">Use This Template <span aria-hidden="true">→</span></a><a href="{{ route('templates.demo', ['template' => 'minimal']) }}">Preview</a></div></div>
             </article>
             <article class="template-card">
-                <div class="template-mock"><span class="template-number">02</span><div class="template-screen modern-screen"><aside class="template-sidebar"><span class="modern-preview-avatar">AM</span><b class="modern-preview-name">Alex Morgan</b><span>&#8962; &nbsp; Home</span><span>&#9673; &nbsp; About</span><span>&#10035; &nbsp; Skills</span><span>&#9638; &nbsp; Projects</span><span>&#9719; &nbsp; Experience</span><span>&#9993; &nbsp; Contact</span></aside><div class="template-content"><div class="modern-hero"><strong>Hello, I&rsquo;m Alex Morgan</strong><span>Building thoughtful digital experiences.</span></div><div class="modern-stats"><i><b>05</b><br>Projects</i><i><b>03</b><br>Years</i><i><b>100%</b><br>Curiosity</i></div><div class="modern-grid"><div class="modern-card"><strong>About Me</strong><p>Designer and developer who loves useful, accessible work.</p></div><div class="modern-card"><strong>Featured Projects</strong><div class="template-photos"><i></i><i></i></div></div><div class="modern-card"><strong>Skills</strong><div class="template-pills"><i></i><i></i><i></i></div></div><div class="modern-card"><strong>Experience</strong><p>Product Designer &middot; North Studio</p></div></div></div></div><iframe class="template-preview-frame" title="Modern portfolio design example" src="{{ route('templates.demo', ['template' => 'modern', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
-                <div class="template-copy"><p class="template-label"><span aria-hidden="true">&#10087;</span> Template 2</p><h3>Modern</h3><p>A deep forest-green dashboard with a landscape hero, quick stats, project cards, and a sidebar.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'modern']) : route('register', ['template' => 'modern']) }}">Use This Template <span aria-hidden="true">&#8594;</span></a><a href="{{ route('templates.demo', ['template' => 'modern']) }}">Preview</a></div></div>
+                <div class="template-mock"><span class="template-number">02</span><div class="template-screen modern-screen"><aside class="template-sidebar"><span class="modern-preview-avatar">AM</span><b class="modern-preview-name">Alex Morgan</b><span>⌂ &nbsp; Home</span><span>◉ &nbsp; About</span><span>✳ &nbsp; Skills</span><span>▧ &nbsp; Projects</span><span>◷ &nbsp; Experience</span><span>✉ &nbsp; Contact</span></aside><div class="template-content"><div class="modern-hero"><strong>Hello, I’m Alex Morgan</strong><span>Building thoughtful digital experiences.</span></div><div class="modern-stats"><i><b>05</b><br>Projects</i><i><b>03</b><br>Years</i><i><b>100%</b><br>Curiosity</i></div><div class="modern-grid"><div class="modern-card"><strong>About Me</strong><p>Designer and developer who loves useful, accessible work.</p></div><div class="modern-card"><strong>Featured Projects</strong><div class="template-photos"><i></i><i></i></div></div><div class="modern-card"><strong>Skills</strong><div class="template-pills"><i></i><i></i><i></i></div></div><div class="modern-card"><strong>Experience</strong><p>Product Designer · North Studio</p></div></div></div></div><iframe class="template-preview-frame" title="Modern portfolio design example" src="{{ route('templates.demo', ['template' => 'modern', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
+                <div class="template-copy"><p class="template-label"><span aria-hidden="true">❧</span> Template 2</p><h3>Modern</h3><p>A deep forest-green dashboard with a landscape hero, quick stats, project cards, and a sidebar.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'modern']) : route('register', ['template' => 'modern']) }}">Use This Template <span aria-hidden="true">→</span></a><a href="{{ route('templates.demo', ['template' => 'modern']) }}">Preview</a></div></div>
             </article>
             <article class="template-card">
-                <div class="template-mock"><span class="template-number">03</span><div class="template-screen creative-screen"><div class="template-content"><div class="creative-nav"><span>Home</span><span>About</span><span>Skills</span><span>Projects</span><span>Contact</span></div><div class="creative-top"><div class="creative-person"><i class="template-face"></i><span class="template-lines"><i></i><i></i></span></div><div class="creative-about"><b class="template-section-title">A little about me</b><p>I&rsquo;m a creative developer who loves nature, design, and bringing ideas to life.</p></div></div><div class="creative-lower"><div class="creative-skills"><b class="template-section-title">My Skills</b><div class="template-pills"><i></i><i></i><i></i><i></i></div></div><div class="creative-education"><b class="template-section-title">Education</b><p>Creative Technology<br>2022 &mdash; Present</p></div></div><div class="creative-projects"><b class="template-section-title">Featured Projects</b><div class="template-photos"><i></i><i></i><i></i></div></div></div></div><iframe class="template-preview-frame" title="Creative portfolio design example" src="{{ route('templates.demo', ['template' => 'creative', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
-                <div class="template-copy"><p class="template-label"><span aria-hidden="true">&#10087;</span> Template 3</p><h3>Creative</h3><p>A warm paper-inspired design with organic shapes, expressive sections, and a personal feel.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'creative']) : route('register', ['template' => 'creative']) }}">Use This Template <span aria-hidden="true">&#8594;</span></a><a href="{{ route('templates.demo', ['template' => 'creative']) }}">Preview</a></div></div>
+                <div class="template-mock"><span class="template-number">03</span><div class="template-screen creative-screen"><div class="template-content"><div class="creative-nav"><span>Home</span><span>About</span><span>Skills</span><span>Projects</span><span>Contact</span></div><div class="creative-top"><div class="creative-person"><i class="template-face"></i><span class="template-lines"><i></i><i></i></span></div><div class="creative-about"><b class="template-section-title">A little about me</b><p>I’m a creative developer who loves nature, design, and bringing ideas to life.</p></div></div><div class="creative-lower"><div class="creative-skills"><b class="template-section-title">My Skills</b><div class="template-pills"><i></i><i></i><i></i><i></i></div></div><div class="creative-education"><b class="template-section-title">Education</b><p>Creative Technology<br>2022 — Present</p></div></div><div class="creative-projects"><b class="template-section-title">Featured Projects</b><div class="template-photos"><i></i><i></i><i></i></div></div></div></div><iframe class="template-preview-frame" title="Creative portfolio design example" src="{{ route('templates.demo', ['template' => 'creative', 'embed' => 1]) }}" loading="eager" sandbox="allow-same-origin" data-template-demo></iframe></div>
+                <div class="template-copy"><p class="template-label"><span aria-hidden="true">❧</span> Template 3</p><h3>Creative</h3><p>A warm paper-inspired design with organic shapes, expressive sections, and a personal feel.</p><div class="template-actions"><a class="template-link" href="{{ auth()->check() ? route('portfolios.create', ['template' => 'creative']) : route('register', ['template' => 'creative']) }}">Use This Template <span aria-hidden="true">→</span></a><a href="{{ route('templates.demo', ['template' => 'creative']) }}">Preview</a></div></div>
             </article>
         </div>
     </section>
-    <section class="about-section" id="about"><div class="about-inner"><div class="about-heading"><p class="about-kicker">ABOUT EVERLEAF</p><h2>A HOME FOR YOUR NEXT CHAPTER</h2></div><div class="about-copy"><p>Bring your profile, education, skills, projects, experience, and links together in one place.</p><p>Preview your designs, edit your details, and publish when you are ready.</p></div></div></section>
-    <section class="contact-section" id="contact"><h2>Contact the site owner</h2><p>Questions about EverLeaf? Reach Nikenji through email, phone, Facebook, or Messenger.</p><div class="contact-links"><a class="contact-link" href="mailto:penasnekenji2007@gmail.com"><span aria-hidden="true">&#9993;</span>Email Nikenji</a><a class="contact-link" href="tel:+639187943762"><span aria-hidden="true">&#9742;</span>0918 794 3762</a><a class="contact-link" href="https://www.facebook.com/search/top?q=NIKENJI%20PENAS" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">f</span>Find NIKENJI PENAS on Facebook</a><a class="contact-link" href="https://www.messenger.com/new" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&#9673;</span>Open Messenger</a></div><p class="contact-note">Facebook and Messenger open in a new tab. Search for <strong>NIKENJI PENAS</strong> in Messenger to start a chat.</p></section>
+    <section class="about-section" id="about"><div class="about-inner"><div class="about-heading"><p class="about-kicker">ABOUT EVERLEAF</p><h2>A home for your next chapter.</h2></div><div class="about-copy"><p>Bring your profile, education, skills, projects, experience, and links together in one place.</p><p>Preview your designs, edit your details, and publish when you are ready.</p></div></div></section>
+    <section class="contact-section" id="contact"><h2>Contact the site owner</h2><p>Questions about EverLeaf? Reach Nikenji through email, phone, Facebook, or Messenger.</p><div class="contact-links"><a class="contact-link" href="mailto:penasnekenji2007@gmail.com"><span aria-hidden="true">✉</span>Email Nikenji</a><a class="contact-link" href="tel:+639187943762"><span aria-hidden="true">☎</span>0918 794 3762</a><a class="contact-link" href="https://www.facebook.com/search/top?q=NIKENJI%20PENAS" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">f</span>Find NIKENJI PENAS on Facebook</a><a class="contact-link" href="https://www.messenger.com/new" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span>Open Messenger</a></div><p class="contact-note">Facebook and Messenger open in a new tab. Search for <strong>NIKENJI PENAS</strong> in Messenger to start a chat.</p></section>
 </main>
-<footer>EverLeaf Portfolio Generator &middot; Grow your story. Share your work. <span>Forest waterfall photo by <a href="https://unsplash.com/photos/a-serene-waterfall-cascades-over-mossy-rocks-in-a-forest-iOVIAbuO-Sc" target="_blank" rel="noopener noreferrer">Yasin Onus</a> on Unsplash.</span></footer>
+<footer>EverLeaf Portfolio Generator · Grow your story. Share your work. <span>Forest waterfall photo by <a href="https://unsplash.com/photos/a-serene-waterfall-cascades-over-mossy-rocks-in-a-forest-iOVIAbuO-Sc" target="_blank" rel="noopener noreferrer">Yasin Onus</a> on Unsplash.</span></footer>
 <script>
     const templateDemoFrames = document.querySelectorAll('[data-template-demo]');
     const fitTemplateDemoFrames = () => templateDemoFrames.forEach((frame) => {
@@ -194,99 +129,6 @@
     window.addEventListener('scroll', updateActiveNavLink, { passive: true });
     window.addEventListener('resize', updateActiveNavLink);
     updateActiveNavLink();
-    sectionNavLinks.forEach((link) => link.addEventListener('click', () => {
-        const target = document.querySelector(link.getAttribute('href'));
-        if (!target) return;
-        target.classList.remove('nav-arrival');
-        requestAnimationFrame(() => target.classList.add('nav-arrival'));
-        window.setTimeout(() => target.classList.remove('nav-arrival'), 1200);
-    }));
-</script>
-<script>
-      const templateDemoFrames = document.querySelectorAll('[data-template-demo]');
-
-      const fitTemplateDemoFrames = () => templateDemoFrames.forEach((frame) => {
-          const viewport = frame.parentElement;
-
-          frame.style.setProperty(
-              '--preview-scale',
-              String(
-                  Math.min(
-                      viewport.clientWidth / 1200,
-                      viewport.clientHeight / 740
-                  )
-              )
-          );
-      });
-
-      templateDemoFrames.forEach((frame) => frame.addEventListener('load', () => {
-          try {
-              const body = frame.contentDocument?.body;
-
-              if (
-                  body?.classList.contains('embedded-preview') &&
-                  body.classList.contains('demo-preview')
-              ) {
-                  frame.classList.add('is-ready');
-              }
-          } catch (_) {
-              // Keep the handcrafted mockup visible if the embedded preview cannot be read.
-          }
-      }));
-
-      fitTemplateDemoFrames();
-
-      const templateGrid = document.querySelector('.template-grid');
-
-      if (templateGrid && 'ResizeObserver' in window) {
-          new ResizeObserver(fitTemplateDemoFrames).observe(templateGrid);
-      }
-
-      const sectionNavLinks = [
-          ...document.querySelectorAll('.nav a[href^="#"]')
-      ];
-
-      const updateActiveNavLink = () => {
-          const passedLinks = sectionNavLinks
-              .slice(1)
-              .filter((link) => {
-                  const section = document.querySelector(
-                      link.getAttribute('href')
-                  );
-
-                  return section &&
-                      section.getBoundingClientRect().top <=
-                      window.innerHeight * 0.42;
-              });
-
-          const activeLink =
-              passedLinks.at(-1) || sectionNavLinks[0];
-
-          sectionNavLinks.forEach((link) => {
-              const active = link === activeLink;
-
-              link.classList.toggle('active', active);
-
-              if (active) {
-                  link.setAttribute('aria-current', 'location');
-              } else {
-                  link.removeAttribute('aria-current');
-              }
-          });
-      };
-
-      window.addEventListener(
-          'scroll',
-          updateActiveNavLink,
-          { passive: true }
-      );
-
-      window.addEventListener(
-          'resize',
-          updateActiveNavLink
-      );
-
-      updateActiveNavLink();
 </script>
 </body>
 </html>

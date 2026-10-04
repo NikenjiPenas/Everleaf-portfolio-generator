@@ -145,7 +145,22 @@ Capture these screenshots from the deployed site after the app is online, using 
 
 The checked-in `Dockerfile` builds the Laravel application with PHP-FPM and Nginx. `render.yaml` selects the Render `free` plan and generates the Laravel application key. The container runs the Laravel database migrations on startup. Render’s free web service sleeps after 15 minutes without traffic, and its local filesystem is temporary, so portfolio photos use the configured external object-storage disk.
 
-The deployment uses a Supabase PostgreSQL database and a public Supabase Storage bucket for portfolio photos. Create a Supabase project and bucket, enable its S3 protocol, then enter its database and S3 connection values in the Render service environment. Keep all credentials in Render’s environment settings; never commit them. Use a dedicated bucket and keep its S3 access credentials server-side only.
+The deployment uses a Supabase PostgreSQL database and a public Supabase Storage bucket for profile and project images. This is shared object storage, so people can upload from their own devices and images remain available to every visitor after the Render service restarts or redeploys. Create a dedicated bucket named `portfolio-media` and make it public so published portfolio pages can display its images. A public bucket makes its image URLs readable by anyone who has the URL; do not upload private or sensitive images.
+
+In Render, set the `PORTFOLIO_STORAGE_*` variables listed in `render.yaml` from **Supabase → Storage → S3 Configuration**:
+
+| Render variable | Value |
+| --- | --- |
+| `PORTFOLIO_STORAGE_DRIVER` | `s3` (already set by the Blueprint) |
+| `PORTFOLIO_STORAGE_KEY` | Supabase S3 Access Key ID |
+| `PORTFOLIO_STORAGE_SECRET` | Supabase S3 Secret Access Key |
+| `PORTFOLIO_STORAGE_REGION` | Region shown in Supabase S3 Configuration |
+| `PORTFOLIO_STORAGE_BUCKET` | `portfolio-media` (or the exact bucket you created) |
+| `PORTFOLIO_STORAGE_ENDPOINT` | Supabase S3 endpoint, ending in `/storage/v1/s3` |
+| `PORTFOLIO_STORAGE_URL` | Public object base URL: `https://<project-ref>.supabase.co/storage/v1/object/public/<bucket>` |
+| `PORTFOLIO_STORAGE_USE_PATH_STYLE_ENDPOINT` | `true` |
+
+The S3 endpoint is used by the server to write files; `PORTFOLIO_STORAGE_URL` is the separate public URL used by browsers to display them. Keep both S3 keys in Render only. The application never sends these keys to a visitor's browser. The container is configured to accept the image sizes allowed by the portfolio form, and storage errors are raised instead of silently losing an uploaded image.
 
 Free-plan limits apply: Supabase Free currently includes 500 MB of database space and 1 GB of file storage, and may pause projects after seven days of low activity. Render’s free service may take about a minute to wake after idle time. These plans are suitable for a demo or hobby project, not guaranteed production availability.
 

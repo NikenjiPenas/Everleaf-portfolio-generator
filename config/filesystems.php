@@ -41,7 +41,11 @@ return [
         'public' => [
             'driver' => env('PORTFOLIO_STORAGE_DRIVER', 'local'),
             'root' => storage_path('app/public'),
-            'url' => env('PORTFOLIO_STORAGE_URL', env('AWS_URL', rtrim(env('APP_URL', 'http://localhost'), '/').'/storage')),
+            // Local uploads should use the current site origin (and port), not APP_URL.
+            // Hosted object storage can still provide an absolute URL via PORTFOLIO_STORAGE_URL/AWS_URL.
+            'url' => env('PORTFOLIO_STORAGE_URL', env('PORTFOLIO_STORAGE_DRIVER', 'local') === 'local'
+                ? '/storage'
+                : env('AWS_URL', rtrim(env('APP_URL', 'http://localhost'), '/').'/storage')),
             'key' => env('PORTFOLIO_STORAGE_KEY', env('AWS_ACCESS_KEY_ID')),
             'secret' => env('PORTFOLIO_STORAGE_SECRET', env('AWS_SECRET_ACCESS_KEY')),
             'region' => env('PORTFOLIO_STORAGE_REGION', env('AWS_DEFAULT_REGION', 'us-east-1')),
@@ -49,7 +53,8 @@ return [
             'endpoint' => env('PORTFOLIO_STORAGE_ENDPOINT', env('AWS_ENDPOINT')),
             'use_path_style_endpoint' => env('PORTFOLIO_STORAGE_USE_PATH_STYLE_ENDPOINT', env('AWS_USE_PATH_STYLE_ENDPOINT', false)),
             'visibility' => 'public',
-            'throw' => false,
+            // Surface failed uploads instead of silently saving a portfolio without its image.
+            'throw' => true,
             'report' => false,
         ],
 
