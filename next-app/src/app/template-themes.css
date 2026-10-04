@@ -1,0 +1,13 @@
+.public-portfolio.minimal { background:#f0eedf;color:#26372b;border-color:#d5cfb8; }
+.public-portfolio.minimal .role,.public-portfolio.minimal .public-about,.public-portfolio.minimal .public-project p { color:#4c5b4a; }
+.public-portfolio.minimal .public-project { background:#fff9;border-color:#c7c4aa; }
+.public-portfolio.minimal .public-skills span { color:#3e5c3a;border-color:#77956a77; }
+.public-portfolio.creative { background:#ede3c9;color:#29392a;border-color:#d2c29c; }
+.public-portfolio.creative .role,.public-portfolio.creative .public-about,.public-portfolio.creative .public-project p { color:#515846; }
+.public-portfolio.creative .public-project { background:#fff7e3;border-color:#c8b991; }
+.public-portfolio.creative .public-skills span { color:#445b39;border-color:#82936288; }
+.form-title { margin:8px 0;font:700 44px/1.1 Georgia,serif; }
+.upload-field>label { display:block;font-size:13px;font-weight:700; }
+.upload-field input[type=file] { width:100%;margin-top:8px;padding:10px;border:1px solid #b8cc9252;border-radius:10px;background:#ffffff0c;color:#eff3df; }
+.upload-help,.upload-status { margin:6px 0 0;color:#c4cfb7;font-size:12px; }
+.project-photo { display:block;width:100%;max-height:230px;margin-bottom:14px;border-radius:10px;object-fit:cover; }
