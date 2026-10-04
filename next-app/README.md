@@ -1,21 +1,13 @@
-# EverLeaf Next.js version
+# EverLeaf Next.js application
 
-This is a separate Next.js 16 app using Supabase Auth, Postgres, and Storage. The existing Laravel app at the repository root is preserved while this version is evaluated.
+This is the deployed Next.js application for EverLeaf Portfolio Generator. For the full project guide—including local setup, Supabase configuration, deployment, routes, data handling, and the screenshot checklist—see the [repository README](../README.md).
 
-## Local setup
+Quick start:
 
-1. Create `.env.local` by copying `env.example`.
-2. In Supabase, copy the project URL and publishable key into the matching variables. `NEXT_PUBLIC_SITE_URL` should be `http://localhost:3000` locally.
-3. Run `supabase/migrations/202610040001_portfolios.sql` in the Supabase SQL Editor.
-4. Run `npm install`, then `npm run dev`, and open `http://localhost:3000`.
-5. In Supabase Auth URL Configuration, allow `http://localhost:3000/auth/callback` for local email confirmation.
+```bash
+cp env.example .env.local
+npm ci
+npm run dev
+```
 
-## Deploy to Vercel
-
-Import the GitHub repository into Vercel and set **Root Directory** to `next-app`. Vercel detects Next.js automatically. Add the three Supabase public settings and `NEXT_PUBLIC_SITE_URL` as Vercel environment variables; set the site URL to the production Vercel domain and allow its `/auth/callback` route in Supabase Auth URL Configuration. Redeploy after adding environment variables.
-
-The app uses Supabase cookie-based server authentication and Row Level Security. Profile and project photos are uploaded directly from the visitor's device to the `portfolio-media` Supabase Storage bucket, so they do not pass through Vercel's request-size limit. That bucket is public so a published portfolio can show its images; never put private photos there. Only a Supabase publishable key is used by this app; do not add a service-role key to a `NEXT_PUBLIC_` variable.
-
-## Current scope
-
-The first pass includes the EverLeaf landing page, account creation and sign-in, a portfolio dashboard, profile photo upload, public/private publishing, and public portfolio pages with Simple, Modern, and Creative theme styling. This is a new app alongside Laravel; transfer of existing Laravel accounts and portfolio data is not included.
+Before starting locally, fill in the Supabase values in `.env.local` and run `supabase/migrations/202610040001_portfolios.sql` in the Supabase SQL Editor. Open `http://localhost:3000` after the development server starts.
