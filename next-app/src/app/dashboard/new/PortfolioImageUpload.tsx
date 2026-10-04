@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
-type Props = { name: string; label: string; multiple?: boolean; maxMegabytes: number; help: string };
+type Props = { name: string; label: string; multiple?: boolean; maxMegabytes: number; help: string; initialPaths?: string[] };
 
-export default function PortfolioImageUpload({ name, label, multiple = false, maxMegabytes, help }: Props) {
-  const [paths, setPaths] = useState<string[]>([]);
+export default function PortfolioImageUpload({ name, label, multiple = false, maxMegabytes, help, initialPaths = [] }: Props) {
+  const [paths, setPaths] = useState<string[]>(initialPaths);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -38,5 +38,5 @@ export default function PortfolioImageUpload({ name, label, multiple = false, ma
     }
   }
 
-  return <div className="upload-field"><label htmlFor={name}>{label}</label><input id={name} type="file" accept="image/png,image/jpeg,image/webp" multiple={multiple} onChange={(event) => void upload(event.target.files)} disabled={busy} /><p className="upload-help">{help}</p>{busy && <p role="status" className="upload-status">Uploading securely to your portfolio storage…</p>}{status && <p role="status" className="upload-status">{status}</p>}{paths.map((path) => <input type="hidden" name={name} value={path} key={path} />)}</div>;
+  return <div className="upload-field"><label htmlFor={name}>{label}</label>{initialPaths.length > 0 && <p className="upload-help">Current image{initialPaths.length === 1 ? "" : "s"} is saved. Upload a replacement to change it.</p>}<input id={name} type="file" accept="image/png,image/jpeg,image/webp" multiple={multiple} onChange={(event) => void upload(event.target.files)} disabled={busy} /><p className="upload-help">{help}</p>{busy && <p role="status" className="upload-status">Uploading securely to your portfolio storage…</p>}{status && <p role="status" className="upload-status">{status}</p>}{paths.map((path, index) => <input type="hidden" name={name} value={path} key={`${path}-${index}`} />)}</div>;
 }

@@ -14,6 +14,76 @@ function slugify(value: string) {
 
 function safeTemplate(value: string) { return value === "simple" ? "minimal" : value; }
 
+type SavedProject = { title: string; description?: string; image_path?: string | null; technologies?: string[]; project_url?: string | null; github_url?: string | null };
+function portfolioProjects(formData: FormData, userId: string) {
+  const lines = text(formData, "projects").split("\n").map((line) => line.trim()).filter(Boolean).slice(0, 12);
+  const imagePaths = formData.getAll("project_image_paths").map((path) => String(path).trim());
+  let original: SavedProject[] = [];
+  try {
+    const parsed: unknown = JSON.parse(text(formData, "existing_projects"));
+    if (Array.isArray(parsed)) original = parsed as SavedProject[];
+  } catch { /* New portfolio form has no saved project payload. */ }
+  if (imagePaths.some((path) => path && !path.startsWith(`${userId}/`))) return null;
+  return lines.map((line, index) => {
+    const [titlePart, ...descriptionParts] = line.split("|");
+    const title = titlePart.trim();
+    const description = descriptionParts.join("|").trim() || original[index]?.description || "Add a short description in your next edit.";
+    return {
+      ...original[index], title, description,
+      image_path: imagePaths[index] || original[index]?.image_path || null,
+    };
+  }).filter((project) => project.title);
+}
+
+function portfolioDetails(formData: FormData) {
+  const rows = (name: string) => formData.getAll(name).map((value) => String(value).trim());
+  const educationKeys = rows("education_row_key");
+  const experienceKeys = rows("experience_row_key");
+  const education = rows("education_school").map((school, index) => ({
+    id: (formData.get(`education_id_${educationKeys[index]}`) as string | null) || undefined,
+    school: school.slice(0, 180), degree: rows("education_degree")[index]?.slice(0, 180) || null,
+    field_of_study: rows("education_field")[index]?.slice(0, 180) || null,
+    start_date: rows("education_start")[index] || null, end_date: rows("education_end")[index] || null,
+    currently_studying: formData.get(`education_current_${educationKeys[index]}`) === "true",
+    description: rows("education_description")[index]?.slice(0, 2000) || null, sort_order: index,
+  })).filter((item) => item.school).slice(0, 12);
+  const experience = rows("experience_position").map((position, index) => ({
+    id: (formData.get(`experience_id_${experienceKeys[index]}`) as string | null) || undefined,
+    position: position.slice(0, 180), company: rows("experience_company")[index]?.slice(0, 180) || null,
+    start_date: rows("experience_start")[index] || null, end_date: rows("experience_end")[index] || null,
+    currently_working: formData.get(`experience_current_${experienceKeys[index]}`) === "true",
+    description: rows("experience_description")[index]?.slice(0, 2000) || null, sort_order: index,
+  })).filter((item) => item.position).slice(0, 12);
+  const socialKeys = rows("social_row_key");
+  const socialLinks = rows("social_platform").map((platform, index) => ({ id: (formData.get(`social_id_${socialKeys[index]}`) as string | null) || undefined, platform: platform.slice(0, 80), url: rows("social_url")[index]?.slice(0, 500) || "", sort_order: index }))
+    .filter((item) => item.platform && item.url).slice(0, 16);
+  return { education, experience, socialLinks };
+}
+
+async function savePortfolioDetails(supabase: Awaited<ReturnType<typeof createClient>>, portfolioId: string, details: ReturnType<typeof portfolioDetails>) {
+  const groups = [
+    { table: "portfolio_education", rows: details.education },
+    { table: "portfolio_experiences", rows: details.experience },
+    { table: "portfolio_social_links", rows: details.socialLinks },
+  ] as const;
+  for (const group of groups) {
+    const { data: current, error: readError } = await supabase.from(group.table).select("id").eq("portfolio_id", portfolioId);
+    if (readError) return readError;
+    const submittedIds = group.rows.flatMap((row) => row.id ? [row.id] : []);
+    const removedIds = (current ?? []).map((row: { id: string }) => row.id).filter((id: string) => !submittedIds.includes(id));
+    const values = group.rows.map(({ id: _id, ...row }) => ({ ...( _id ? { id: _id } : {}), ...row, portfolio_id: portfolioId }));
+    if (values.length) {
+      const { error } = await supabase.from(group.table).upsert(values, { onConflict: "id" });
+      if (error) return error;
+    }
+    if (removedIds.length) {
+      const { error } = await supabase.from(group.table).delete().in("id", removedIds).eq("portfolio_id", portfolioId);
+      if (error) return error;
+    }
+  }
+  return null;
+}
+
 export async function signUp(formData: FormData) {
   const supabase = await createClient();
   const name = text(formData, "name");
@@ -77,30 +147,14 @@ export async function savePortfolio(formData: FormData) {
   if (!fullName || !email || !email.includes("@") || !["modern", "creative", "minimal"].includes(template)) redirect("/dashboard/new?error=Check+your+name,+email,+and+template.");
 
   const profilePhotoPath = text(formData, "profile_photo_path") || null;
-  const projectImagePaths = formData.getAll("project_image_paths").map((path) => String(path).trim()).filter(Boolean);
-  if ((profilePhotoPath && !profilePhotoPath.startsWith(`${userId}/`)) || projectImagePaths.some((path) => !path.startsWith(`${userId}/`))) redirect("/dashboard/new?error=An+uploaded+image+did+not+belong+to+your+account.");
+  if (profilePhotoPath && !profilePhotoPath.startsWith(`${userId}/`)) redirect("/dashboard/new?error=An+uploaded+image+did+not+belong+to+your+account.");
+  const projects = portfolioProjects(formData, userId);
+  if (!projects) redirect("/dashboard/new?error=An+uploaded+image+did+not+belong+to+your+account.");
 
   const baseSlug = slugify(fullName) || "portfolio";
   const slug = `${baseSlug}-${crypto.randomUUID().slice(0, 8)}`;
-  const rows = (name: string) => formData.getAll(name).map((value) => String(value).trim());
-  const educationFields = rows("education_school");
-  const educationKeys = rows("education_row_key");
-  const experienceKeys = rows("experience_row_key");
-  const education = educationFields.map((school, index) => ({
-    school: school.slice(0, 180), degree: rows("education_degree")[index]?.slice(0, 180) || null,
-    field_of_study: rows("education_field")[index]?.slice(0, 180) || null,
-    start_date: rows("education_start")[index] || null, end_date: rows("education_end")[index] || null,
-    currently_studying: formData.get(`education_current_${educationKeys[index]}`) === "true",
-    description: rows("education_description")[index]?.slice(0, 2000) || null, sort_order: index,
-  })).filter((item) => item.school).slice(0, 12);
-  const experience = rows("experience_position").map((position, index) => ({
-    position: position.slice(0, 180), company: rows("experience_company")[index]?.slice(0, 180) || null,
-    start_date: rows("experience_start")[index] || null, end_date: rows("experience_end")[index] || null,
-    currently_working: formData.get(`experience_current_${experienceKeys[index]}`) === "true",
-    description: rows("experience_description")[index]?.slice(0, 2000) || null, sort_order: index,
-  })).filter((item) => item.position).slice(0, 12);
-  const socialLinks = rows("social_platform").map((platform, index) => ({ platform: platform.slice(0, 80), url: rows("social_url")[index]?.slice(0, 500) || "", sort_order: index }))
-    .filter((item) => item.platform && item.url).slice(0, 16);
+  const details = portfolioDetails(formData);
+  const { education, experience, socialLinks } = details;
   if (socialLinks.some(({ url }) => { try { const parsed = new URL(url); return !["http:", "https:"].includes(parsed.protocol); } catch { return true; } })) {
     redirect("/dashboard/new?error=Social+links+must+use+valid+http+or+https+URLs.");
   }
@@ -116,24 +170,69 @@ export async function savePortfolio(formData: FormData) {
     template_key: template,
     profile_photo_path: profilePhotoPath,
     skills: text(formData, "skills").split(",").map((skill) => skill.trim()).filter(Boolean).slice(0, 20),
-    projects: text(formData, "projects").split("\n").map((line) => line.trim()).filter(Boolean).slice(0, 12).map((title, index) => ({ title, description: "Add a short description in your next edit.", image_path: projectImagePaths[index] || null })),
+    projects,
   }).select("id").single();
   if (error) redirect(`/dashboard/new?error=${encodeURIComponent(error.message)}`);
   const portfolioId = savedPortfolio?.id;
   if (!portfolioId) redirect("/dashboard/new?error=The+portfolio+could+not+be+saved.");
-  const details = [
-    education.length ? supabase.from("portfolio_education").insert(education.map((item) => ({ ...item, portfolio_id: portfolioId }))) : null,
-    experience.length ? supabase.from("portfolio_experiences").insert(experience.map((item) => ({ ...item, portfolio_id: portfolioId }))) : null,
-    socialLinks.length ? supabase.from("portfolio_social_links").insert(socialLinks.map((item) => ({ ...item, portfolio_id: portfolioId }))) : null,
-  ].filter(Boolean);
-  const detailResults = await Promise.all(details);
-  const detailError = detailResults.find((result) => result?.error)?.error;
+  const detailError = await savePortfolioDetails(supabase, portfolioId, details);
   if (detailError) {
     await supabase.from("portfolios").delete().eq("id", portfolioId).eq("user_id", userId);
     redirect(`/dashboard/new?error=${encodeURIComponent(`Portfolio details could not be saved: ${detailError.message}`)}`);
   }
   revalidatePath("/dashboard");
   redirect("/dashboard?message=Portfolio+saved.");
+}
+
+export async function updatePortfolio(formData: FormData) {
+  const supabase = await createClient();
+  const id = text(formData, "id");
+  const { data: claimsData, error: claimsError } = await supabase.auth.getClaims();
+  const userId = claimsData?.claims?.sub;
+  if (claimsError || !userId) redirect("/login?error=Please+sign+in+to+edit+a+portfolio.");
+  const fullName = text(formData, "full_name");
+  const email = text(formData, "email");
+  const template = text(formData, "template_key");
+  if (!id || !fullName || !email.includes("@") || !["modern", "creative", "minimal"].includes(template)) redirect(`/dashboard/${id}/edit?error=Check+your+name,+email,+and+template.`);
+  const { data: currentPortfolio, error: readError } = await supabase.from("portfolios").select("id,profile_photo_path,projects").eq("id", id).eq("user_id", userId).maybeSingle();
+  if (readError || !currentPortfolio) redirect("/dashboard?error=Portfolio+not+found.");
+  const profilePhotoPath = text(formData, "profile_photo_path") || null;
+  if (profilePhotoPath && !profilePhotoPath.startsWith(`${userId}/`)) redirect(`/dashboard/${id}/edit?error=An+uploaded+image+did+not+belong+to+your+account.`);
+  const projects = portfolioProjects(formData, userId);
+  if (!projects) redirect(`/dashboard/${id}/edit?error=An+uploaded+image+did+not+belong+to+your+account.`);
+  const details = portfolioDetails(formData);
+  if (details.socialLinks.some(({ url }) => { try { return !["http:", "https:"].includes(new URL(url).protocol); } catch { return true; } })) redirect(`/dashboard/${id}/edit?error=Social+links+must+use+valid+http+or+https+URLs.`);
+  const { error } = await supabase.from("portfolios").update({
+    full_name: fullName, role: text(formData, "role"), email, about_me: text(formData, "about_me"),
+    contact_number: text(formData, "contact_number").slice(0, 60) || null,
+    address: text(formData, "address").slice(0, 240) || null,
+    template_key: template, profile_photo_path: profilePhotoPath,
+    skills: text(formData, "skills").split(",").map((skill) => skill.trim()).filter(Boolean).slice(0, 20), projects,
+  }).eq("id", id).eq("user_id", userId);
+  if (error) redirect(`/dashboard/${id}/edit?error=${encodeURIComponent(error.message)}`);
+  const detailError = await savePortfolioDetails(supabase, id, details);
+  if (detailError) redirect(`/dashboard/${id}/edit?error=${encodeURIComponent(`Portfolio details could not be saved: ${detailError.message}`)}`);
+  revalidatePath("/dashboard");
+  revalidatePath(`/p/${text(formData, "slug")}`);
+  redirect("/dashboard?message=Portfolio+updated.");
+}
+
+export async function deletePortfolio(formData: FormData) {
+  const supabase = await createClient();
+  const id = text(formData, "id");
+  const { data: claimsData } = await supabase.auth.getClaims();
+  const userId = claimsData?.claims?.sub;
+  if (!userId) redirect("/login");
+  const { data: portfolio, error: readError } = await supabase.from("portfolios").select("id,slug,profile_photo_path,projects").eq("id", id).eq("user_id", userId).maybeSingle();
+  if (readError || !portfolio) redirect("/dashboard?error=Portfolio+not+found.");
+  const { error } = await supabase.from("portfolios").delete().eq("id", id).eq("user_id", userId);
+  if (error) redirect(`/dashboard?error=${encodeURIComponent(error.message)}`);
+  const imagePaths = [portfolio.profile_photo_path, ...(Array.isArray(portfolio.projects) ? portfolio.projects.map((project: { image_path?: string | null }) => project.image_path) : [])]
+    .filter((path): path is string => typeof path === "string" && path.startsWith(`${userId}/`));
+  if (imagePaths.length) await supabase.storage.from(process.env.NEXT_PUBLIC_SUPABASE_MEDIA_BUCKET || "portfolio-media").remove([...new Set(imagePaths)]);
+  revalidatePath("/dashboard");
+  revalidatePath(`/p/${portfolio.slug}`);
+  redirect("/dashboard?message=Portfolio+deleted.");
 }
 
 export async function togglePublished(formData: FormData) {
