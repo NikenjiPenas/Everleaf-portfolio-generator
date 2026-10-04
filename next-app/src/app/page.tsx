@@ -1,5 +1,4 @@
 import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
 
 export default function WelcomePage() {
   return (
@@ -8,9 +7,6 @@ export default function WelcomePage() {
         <span className="brand-mark" aria-hidden="true">E</span>
         <span className="brand-name">EverLeaf</span>
       </Link>
-      <header className="welcome-controls" aria-label="Appearance settings">
-        <ThemeToggle placement="header" />
-      </header>
       <section className="welcome-board" aria-labelledby="welcome-title">
         <p className="welcome-kicker">A PORTFOLIO JOURNEY, ROOTED IN NATURE</p>
         <h1 id="welcome-title">Welcome to EverLeaf</h1>
