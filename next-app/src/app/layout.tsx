@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "../components/portfolio-templates/templates.css";
+import "./everleaf-original.css";
 import ThemeToggle from "./ThemeToggle";
 
 export const metadata: Metadata = {

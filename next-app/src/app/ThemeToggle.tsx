@@ -9,9 +9,10 @@ export default function ThemeToggle({ placement = "global" }: Props) {
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    const saved = localStorage.getItem("everleaf-theme");
+    const saved = localStorage.getItem("everleaf-color-mode") ?? localStorage.getItem("everleaf-theme");
     const initial: Theme = saved === "light" ? "light" : "dark";
     document.documentElement.dataset.theme = initial;
+    document.documentElement.dataset.everleafTheme = initial;
     setTheme(initial);
 
     const sync = (event: Event) => setTheme((event as CustomEvent<Theme>).detail);
@@ -21,6 +22,8 @@ export default function ThemeToggle({ placement = "global" }: Props) {
 
   function choose(next: Theme) {
     document.documentElement.dataset.theme = next;
+    document.documentElement.dataset.everleafTheme = next;
+    localStorage.setItem("everleaf-color-mode", next);
     localStorage.setItem("everleaf-theme", next);
     setTheme(next);
     document.dispatchEvent(new CustomEvent("everleaf-theme-change", { detail: next }));

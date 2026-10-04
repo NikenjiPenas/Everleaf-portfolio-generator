@@ -5,11 +5,11 @@
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; scroll-padding-top:90px; background:#06130e; }
 html,body { overflow-x:clip; }
-body { isolation:isolate; margin:0; background:transparent; color:var(--ink); font:16px/1.6 Arial,Helvetica,sans-serif; cursor:url("/cursor-wood-arrow.svg") 5 3,auto; }
+body { isolation:isolate; margin:0; background:transparent; color:var(--ink); font:16px/1.6 Arial,Helvetica,sans-serif; cursor:url("/images/cursor-wood-arrow.svg") 6 3,auto; }
 body:before { content:""; position:fixed; inset:0; z-index:-2; background:linear-gradient(180deg,#06140e9c 0%,#06140e82 38%,#06140edb 100%),url("https://images.unsplash.com/photo-1770932136939-7e7f322cd8f6?auto=format&fit=crop&w=2400&q=85") center 44%/cover no-repeat; }
 body:after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; background:radial-gradient(ellipse at 50% 0%,#d8f19a18,transparent 35%),radial-gradient(ellipse at 4% 45%,#99cf5b13,transparent 25%),radial-gradient(ellipse at 96% 66%,#b9e87312,transparent 28%); }
-a { color:inherit; text-decoration:none; cursor:url("/cursor-wood-hand.svg") 16 8,pointer; }
-button,select,[role="button"],input[type="checkbox"],input[type="radio"] { cursor:url("/cursor-wood-hand.svg") 16 8,pointer; }
+a { color:inherit; text-decoration:none; cursor:url("/images/cursor-wood-hand.svg") 20 4,pointer; }
+button,select,[role="button"],input[type="checkbox"],input[type="radio"] { cursor:url("/images/cursor-wood-hand.svg") 20 4,pointer; }
 a:focus-visible,button:focus-visible { outline:2px solid var(--leaf); outline-offset:4px; }
 .section-wrap { width:min(1180px,calc(100% - 48px)); margin-inline:auto; }
 .site-header { position:sticky; top:0; z-index:20; min-height:74px; display:flex; align-items:center; justify-content:space-between; gap:24px; padding:12px max(24px,calc((100vw - 1320px)/2)); border-bottom:1px solid var(--line); background:#06140fe0; backdrop-filter:blur(16px); }
@@ -161,3 +161,17 @@ body:has(.site-header) .theme-switch-global { display:none; }
 :root[data-theme="light"] .journey-step>i { border-color:#82966399;background:linear-gradient(145deg,#e1e9cb,#b9c99f);color:#30432d; }
 @media(max-width:900px) { .journey-steps { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:600px) { .journey-steps { grid-template-columns:1fr;gap:12px; }.journey-step { min-height:0;padding:18px; }.journey-step h3 { margin-top:12px; } }
+/* Repeatable education, work, and social details in the portfolio form. */
+.details-group { min-width:0;margin:0;padding:18px;border:1px solid var(--line);border-radius:15px;background:#ffffff06; }
+.details-group legend { padding:0 9px;color:var(--leaf);font:700 18px Georgia,serif; }
+.details-row { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:6px 0 16px;padding:15px;border:1px solid var(--line);border-radius:12px;background:#00000012; }
+.details-row label { display:grid;gap:6px; }
+.details-row label:has(textarea) { grid-column:1/-1; }
+.details-row input,.details-row textarea { width:100%;min-width:0; }
+.details-row textarea { min-height:75px; }
+.details-row .details-check { display:flex;align-items:center;gap:8px; }
+.details-row .details-check input { width:auto; }
+.details-remove { justify-self:start; }
+:root[data-theme="light"] .details-group { background:#ffffff70; }
+:root[data-theme="light"] .details-row { background:#ffffff75; }
+@media(max-width:600px) { .details-row { grid-template-columns:1fr;padding:12px; }.details-row label:has(textarea) { grid-column:auto; } }
