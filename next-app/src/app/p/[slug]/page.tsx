@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import TemplateRenderer from "@/components/portfolio-templates/TemplateRenderer";
 import type { TemplateKey } from "@/components/portfolio-templates/types";
+import { portfolioMediaUrl } from "@/lib/portfolio-media";
 
 export const dynamic = "force-dynamic";
 type Props = { params: Promise<{ slug: string }> };
@@ -15,9 +16,10 @@ export default async function PublicPortfolioPage({ params }: Props) {
   if (!portfolio) notFound();
   const skills = Array.isArray(portfolio.skills) ? portfolio.skills as string[] : [];
   const projects = Array.isArray(portfolio.projects) ? portfolio.projects as Project[] : [];
-  const bucket = process.env.NEXT_PUBLIC_SUPABASE_MEDIA_BUCKET || "portfolio-media";
-  const photo = portfolio.profile_photo_path ? supabase.storage.from(bucket).getPublicUrl(portfolio.profile_photo_path).data.publicUrl : null;
-  const resolvedProjects = projects.map((project) => ({ ...project, image_path: project.image_path ? supabase.storage.from(bucket).getPublicUrl(project.image_path).data.publicUrl : null }));
+  const [photo, resolvedProjects] = await Promise.all([
+    portfolioMediaUrl(supabase, portfolio.profile_photo_path),
+    Promise.all(projects.map(async (project) => ({ ...project, image_path: await portfolioMediaUrl(supabase, project.image_path) }))),
+  ]);
   const template: TemplateKey = ["minimal", "modern", "creative"].includes(portfolio.template_key) ? portfolio.template_key as TemplateKey : "modern";
   return <TemplateRenderer portfolio={{ ...portfolio, projects: resolvedProjects }} photo={photo} template={template} />;
 }
