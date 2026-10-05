@@ -10,3 +10,13 @@
 .el-detail-item p { margin:4px 0; }
 .el-detail-item small { display:block;opacity:.75; }
 .el-min-section#contact>a,.el-creative-contact>a { display:block;margin:7px 0;overflow-wrap:anywhere; }
+
+/* Keep the Modern template's connection options available on phones as well as desktop. */
+@media(max-width:760px){
+  .el-modern-connect{display:block;grid-column:1/-1;margin-top:13px;padding:12px 0 0}
+  .el-modern-connect>a{display:inline-flex;align-items:center;min-height:38px;margin:5px 7px 0 0;padding:8px 10px;border:1px solid #c9df9140;background:#b3cd7910}
+}
+.el-toolbar a:focus-visible,.el-toolbar button:focus-visible,.el-min-nav a:focus-visible,.el-modern-sidebar a:focus-visible,.el-creative-nav a:focus-visible,.el-creative-contact a:focus-visible{outline:2px solid #d7ef9d;outline-offset:3px;box-shadow:0 0 15px #b7d98255}
+.el-template .el-toolbar a:active,.el-template .el-toolbar button:active,.el-template .el-use-button:active{transform:scale(.975)}
+@media(hover:hover) and (pointer:fine){.el-template .el-min-nav a:hover,.el-template .el-modern-sidebar nav a:hover,.el-template .el-creative-nav a:hover,.el-template .el-creative-contact a:hover{ text-shadow:0 0 12px #c5e4879c;transform:translateY(-1px) scale(1.025)}.el-template .el-min-cta:hover,.el-template .el-modern-hero a:hover{border-color:#d7eba1;background-color:#8baa5b30;box-shadow:0 0 17px #b9d87850;transform:translateY(-2px) scale(1.025)}.el-template .el-modern-card:hover,.el-template .el-creative-panel:hover{border-color:#c9df916b;box-shadow:0 12px 35px #0003,0 0 16px #b6dc7030}}
+@media(prefers-reduced-motion:reduce){.el-template .el-toolbar a:active,.el-template .el-toolbar button:active,.el-template .el-use-button:active{transform:none}}

@@ -3,6 +3,7 @@ import "./globals.css";
 import "../components/portfolio-templates/templates.css";
 import "./everleaf-original.css";
 import ThemeToggle from "./ThemeToggle";
+import PixieDust from "../components/PixieDust";
 
 export const metadata: Metadata = {
   title: "EverLeaf | Portfolio Generator",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
-      <body>{children}<ThemeToggle placement="global" /><div className="firefly-scene" aria-hidden="true">{Array.from({ length: 16 }, (_, index) => <i key={index} className={`firefly firefly-${index + 1}`} />)}</div></body>
+      <body>{children}<ThemeToggle placement="global" /><PixieDust /><div className="firefly-scene" aria-hidden="true">{Array.from({ length: 16 }, (_, index) => <i key={index} className={`firefly firefly-${index + 1}`} />)}</div></body>
     </html>
   );
 }
