@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ThemeToggle from "../ThemeToggle";
+import HomeNavigation from "./HomeNavigation";
 import TemplatePreviewFrame from "@/components/portfolio-templates/TemplatePreviewFrame";
 import { createClient } from "@/lib/supabase/server";
 
@@ -19,7 +20,7 @@ export default async function Home() {
     <main>
       <header className="site-header">
         <Link className="brand" href="#home" aria-label="EverLeaf home"><span className="brand-mark">E</span><span>EverLeaf<small>PORTFOLIO GENERATOR</small></span></Link>
-        <nav aria-label="Main navigation"><a href="#home">Home</a><a href="#features">Features</a><a href="#templates">Templates</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+        <HomeNavigation />
         <div className="header-actions"><ThemeToggle placement="header"/>{signedIn ? <><Link className="button button-quiet" href="/dashboard">My portfolios</Link><Link className="button button-primary" href="/dashboard/new">Get started <span aria-hidden="true">→</span></Link></> : <><Link className="button button-quiet" href="/login">Login</Link><Link className="button button-primary" href="/signup">Get started <span aria-hidden="true">→</span></Link></>}</div>
       </header>
 

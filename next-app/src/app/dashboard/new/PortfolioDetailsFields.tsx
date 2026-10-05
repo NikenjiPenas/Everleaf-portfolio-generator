@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { PortfolioEducation, PortfolioExperience, PortfolioSocialLink } from "@/components/portfolio-templates/types";
+import { FieldError } from "./PortfolioForm";
 
 type Row<T> = { key: string; value?: T };
 
@@ -21,7 +22,7 @@ export default function PortfolioDetailsFields({ educationData = [], experienceD
 
   return <>
     <fieldset className="details-group wide">
-      <legend>Education</legend>
+      <legend>Education <span>(Optional)</span></legend>
       {education.map(({ key, value }, index) => <div className="details-row" key={key}>
         <input type="hidden" name="education_row_key" value={key} />
         {value?.id && <input type="hidden" name={`education_id_${key}`} value={value.id} />}
@@ -32,13 +33,13 @@ export default function PortfolioDetailsFields({ educationData = [], experienceD
         <label>End date<input name="education_end" type="date" defaultValue={value?.end_date ?? ""} /></label>
         <label>Description<textarea name="education_description" maxLength={2000} defaultValue={value?.description ?? ""} /></label>
         <label className="details-check"><input name={`education_current_${key}`} type="checkbox" value="true" defaultChecked={value?.currently_studying} /> Currently studying</label>
-        {education.length > 1 && <button className="secondary-button details-remove" type="button" onClick={() => setEducation((rows) => rows.filter((row) => row.key !== key))} aria-label={`Remove education ${index + 1}`}>Remove</button>}
+        <button className="secondary-button details-remove" type="button" onClick={() => setEducation((rows) => rows.filter((row) => row.key !== key))} aria-label={`Remove education ${index + 1}`}>REMOVE</button>
       </div>)}
       <button className="secondary-button" type="button" onClick={() => add(setEducation, "education")}>＋ Add education</button>
     </fieldset>
 
     <fieldset className="details-group wide">
-      <legend>Work experience</legend>
+      <legend>Work Experience <span>(Optional)</span></legend>
       {experience.map(({ key, value }, index) => <div className="details-row" key={key}>
         <input type="hidden" name="experience_row_key" value={key} />
         {value?.id && <input type="hidden" name={`experience_id_${key}`} value={value.id} />}
@@ -48,19 +49,19 @@ export default function PortfolioDetailsFields({ educationData = [], experienceD
         <label>End date<input name="experience_end" type="date" defaultValue={value?.end_date ?? ""} /></label>
         <label>Description<textarea name="experience_description" maxLength={2000} defaultValue={value?.description ?? ""} /></label>
         <label className="details-check"><input name={`experience_current_${key}`} type="checkbox" value="true" defaultChecked={value?.currently_working} /> Currently working here</label>
-        {experience.length > 1 && <button className="secondary-button details-remove" type="button" onClick={() => setExperience((rows) => rows.filter((row) => row.key !== key))} aria-label={`Remove experience ${index + 1}`}>Remove</button>}
+        <button className="secondary-button details-remove" type="button" onClick={() => setExperience((rows) => rows.filter((row) => row.key !== key))} aria-label={`Remove experience ${index + 1}`}>REMOVE</button>
       </div>)}
       <button className="secondary-button" type="button" onClick={() => add(setExperience, "experience")}>＋ Add experience</button>
     </fieldset>
 
     <fieldset className="details-group wide">
-      <legend>Social links</legend>
+      <legend>Social Links <span>(Optional)</span></legend>
       {social.map(({ key, value }, index) => <div className="details-row details-social" key={key}>
         <input type="hidden" name="social_row_key" value={key} />
         {value?.id && <input type="hidden" name={`social_id_${key}`} value={value.id} />}
-        <label>Platform<input name="social_platform" maxLength={80} placeholder="LinkedIn" defaultValue={value?.platform} /></label>
-        <label>Profile URL<input name="social_url" type="url" maxLength={500} placeholder="https://..." defaultValue={value?.url} /></label>
-        {social.length > 1 && <button className="secondary-button details-remove" type="button" onClick={() => setSocial((rows) => rows.filter((row) => row.key !== key))} aria-label={`Remove social link ${index + 1}`}>Remove</button>}
+        <label>Platform<input name="social_platform" maxLength={80} placeholder="LinkedIn" defaultValue={value?.platform} /><FieldError field={`social_platform.${index}`} /></label>
+        <label>Profile URL<input name="social_url" type="text" inputMode="url" maxLength={500} placeholder="https://..." defaultValue={value?.url} aria-describedby={`social-url-help-${key}`} /><small className="upload-help" id={`social-url-help-${key}`}>Enter a full address beginning with https://.</small><FieldError field={`social_url.${index}`} /></label>
+        <button className="secondary-button details-remove" type="button" onClick={() => setSocial((rows) => rows.filter((row) => row.key !== key))} aria-label={`Remove social link ${index + 1}`}>REMOVE</button>
       </div>)}
       <button className="secondary-button" type="button" onClick={() => add(setSocial, "social")}>＋ Add social link</button>
     </fieldset>

@@ -18,7 +18,7 @@ export default async function PortfolioTemplatesPage({ params, searchParams }: P
   const { id } = await params; const query = await searchParams; const supabase = await createClient();
   const { data: claims } = await supabase.auth.getClaims(); const userId = claims?.claims?.sub;
   if (!userId) redirect("/login");
-  const { data: portfolio } = await supabase.from("portfolios").select("*, portfolio_education(*), portfolio_experiences(*), portfolio_social_links(*)").eq("id", id).eq("user_id", userId).maybeSingle();
+  const { data: portfolio } = await supabase.from("portfolios").select("*, portfolio_education(*), portfolio_experiences(*), portfolio_social_links(*)").eq("id", id).eq("user_id", userId).is("deleted_at", null).maybeSingle();
   if (!portfolio) redirect("/dashboard?error=Portfolio+not+found.");
   const [photo, projects] = await Promise.all([
     portfolioMediaUrl(supabase, portfolio.profile_photo_path),

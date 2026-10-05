@@ -8,6 +8,41 @@ function text(formData: FormData, name: string) {
   return String(formData.get(name) ?? "").trim();
 }
 
+export type PortfolioFormState = { errors?: Record<string, string>; message?: string; values?: Record<string, string[]>; savedPortfolioId?: string };
+
+function preservePortfolioForm(formData: FormData) {
+  const values: Record<string, string[]> = {};
+  for (const [key, value] of formData.entries()) {
+    if (typeof value === "string") (values[key] ??= []).push(value);
+  }
+  return values;
+}
+
+function validatePortfolio(formData: FormData) {
+  const errors: Record<string, string> = {};
+  const fullName = text(formData, "full_name");
+  const email = text(formData, "email");
+  const phone = text(formData, "contact_number");
+  if (!fullName) errors.full_name = "This field is required.";
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Please enter a valid email address.";
+  if (phone && (!/^[+\d\s().-]+$/.test(phone) || phone.replace(/\D/g, "").length < 7 || phone.replace(/\D/g, "").length > 15)) errors.contact_number = "Please enter a valid phone number with 7 to 15 digits.";
+  const platforms = formData.getAll("social_platform").map((value) => String(value).trim());
+  const urls = formData.getAll("social_url").map((value) => String(value).trim());
+  urls.forEach((url, index) => {
+    if (!url && platforms[index]) errors[`social_url.${index}`] = "Add a valid URL beginning with https:// or remove this social link.";
+    if (url) {
+      try {
+        const parsed = new URL(url);
+        if (!["http:", "https:"].includes(parsed.protocol) || !parsed.hostname.includes(".")) throw new Error("invalid URL");
+      } catch {
+        errors[`social_url.${index}`] = "Please enter a valid URL beginning with https://, such as https://example.com.";
+      }
+    }
+    if (url && !platforms[index]) errors[`social_platform.${index}`] = "Enter a platform name or remove this social link.";
+  });
+  return errors;
+}
+
 function slugify(value: string) {
   return value.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
@@ -134,7 +169,7 @@ export async function setNewPassword(formData: FormData) {
   redirect("/login?message=Password+updated.+You+can+sign+in+now.");
 }
 
-export async function savePortfolio(formData: FormData) {
+export async function savePortfolio(_previousState: PortfolioFormState, formData: FormData): Promise<PortfolioFormState> {
   const supabase = await createClient();
   const { data: claimsData, error: claimsError } = await supabase.auth.getClaims();
   const userId = claimsData?.claims?.sub;
@@ -143,21 +178,31 @@ export async function savePortfolio(formData: FormData) {
   const fullName = text(formData, "full_name");
   const email = text(formData, "email");
   const template = text(formData, "template_key");
+  const savedPortfolioId = text(formData, "saved_portfolio_id");
   const about = text(formData, "about_me");
-  if (!fullName || !email || !email.includes("@") || !["modern", "creative", "minimal"].includes(template)) redirect("/dashboard/new?error=Check+your+name,+email,+and+template.");
+  const validationErrors = validatePortfolio(formData);
+  if (Object.keys(validationErrors).length) return { errors: validationErrors, values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
+  if (!fullName || !email || !["modern", "creative", "minimal"].includes(template)) return { message: "Please correct the highlighted fields and choose one of the three designs.", values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
+
+  if (savedPortfolioId) {
+    const { data: saved, error: savedReadError } = await supabase.from("portfolios").select("id,slug").eq("id", savedPortfolioId).eq("user_id", userId).is("deleted_at", null).maybeSingle();
+    if (savedReadError || !saved) return { message: "Your saved draft could not be reopened. Your entered information is still on this form; please contact support before trying again.", values: preservePortfolioForm(formData), savedPortfolioId };
+    const retryData = new FormData();
+    for (const [key, value] of formData.entries()) retryData.append(key, value);
+    retryData.set("id", saved.id);
+    retryData.set("slug", saved.slug);
+    return updatePortfolio(_previousState, retryData);
+  }
 
   const profilePhotoPath = text(formData, "profile_photo_path") || null;
-  if (profilePhotoPath && !profilePhotoPath.startsWith(`${userId}/`)) redirect("/dashboard/new?error=An+uploaded+image+did+not+belong+to+your+account.");
+  if (profilePhotoPath && !profilePhotoPath.startsWith(`${userId}/`)) return { errors: { profile_photo_path: "This image upload does not belong to your account. Please upload it again." }, values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
   const projects = portfolioProjects(formData, userId);
-  if (!projects) redirect("/dashboard/new?error=An+uploaded+image+did+not+belong+to+your+account.");
+  if (!projects) return { errors: { project_image_paths: "A project image upload does not belong to your account. Please upload it again." }, values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
 
   const baseSlug = slugify(fullName) || "portfolio";
   const slug = `${baseSlug}-${crypto.randomUUID().slice(0, 8)}`;
   const details = portfolioDetails(formData);
   const { education, experience, socialLinks } = details;
-  if (socialLinks.some(({ url }) => { try { const parsed = new URL(url); return !["http:", "https:"].includes(parsed.protocol); } catch { return true; } })) {
-    redirect("/dashboard/new?error=Social+links+must+use+valid+http+or+https+URLs.");
-  }
   const { data: savedPortfolio, error } = await supabase.from("portfolios").insert({
     user_id: userId,
     slug,
@@ -172,46 +217,47 @@ export async function savePortfolio(formData: FormData) {
     skills: text(formData, "skills").split(",").map((skill) => skill.trim()).filter(Boolean).slice(0, 20),
     projects,
   }).select("id").single();
-  if (error) redirect(`/dashboard/new?error=${encodeURIComponent(error.message)}`);
+  if (error) return { message: `Your entries are still on the form. The portfolio could not be saved: ${error.message}`, values: preservePortfolioForm(formData) };
   const portfolioId = savedPortfolio?.id;
-  if (!portfolioId) redirect("/dashboard/new?error=The+portfolio+could+not+be+saved.");
+  if (!portfolioId) return { message: "Your entries are still on the form, but the portfolio could not be saved. Please try again.", values: preservePortfolioForm(formData) };
   const detailError = await savePortfolioDetails(supabase, portfolioId, details);
   if (detailError) {
-    await supabase.from("portfolios").delete().eq("id", portfolioId).eq("user_id", userId);
-    redirect(`/dashboard/new?error=${encodeURIComponent(`Portfolio details could not be saved: ${detailError.message}`)}`);
+    return { message: `Your portfolio has been created. Some optional details need attention: ${detailError.message} Correct or remove those entries, then save again.`, values: preservePortfolioForm(formData), savedPortfolioId: portfolioId };
   }
   revalidatePath("/dashboard");
   redirect("/dashboard?message=Portfolio+saved.");
 }
 
-export async function updatePortfolio(formData: FormData) {
+export async function updatePortfolio(_previousState: PortfolioFormState, formData: FormData): Promise<PortfolioFormState> {
   const supabase = await createClient();
   const id = text(formData, "id");
+  const savedPortfolioId = text(formData, "saved_portfolio_id");
   const { data: claimsData, error: claimsError } = await supabase.auth.getClaims();
   const userId = claimsData?.claims?.sub;
   if (claimsError || !userId) redirect("/login?error=Please+sign+in+to+edit+a+portfolio.");
   const fullName = text(formData, "full_name");
   const email = text(formData, "email");
   const template = text(formData, "template_key");
-  if (!id || !fullName || !email.includes("@") || !["modern", "creative", "minimal"].includes(template)) redirect(`/dashboard/${id}/edit?error=Check+your+name,+email,+and+template.`);
-  const { data: currentPortfolio, error: readError } = await supabase.from("portfolios").select("id,profile_photo_path,projects").eq("id", id).eq("user_id", userId).maybeSingle();
-  if (readError || !currentPortfolio) redirect("/dashboard?error=Portfolio+not+found.");
+  if (!id || !["modern", "creative", "minimal"].includes(template)) return { message: "Choose one of the three designs before saving.", values: preservePortfolioForm(formData) };
+  const { data: currentPortfolio, error: readError } = await supabase.from("portfolios").select("id,profile_photo_path,projects").eq("id", id).eq("user_id", userId).is("deleted_at", null).maybeSingle();
+  if (readError || !currentPortfolio) return { message: "This portfolio could not be loaded for saving. Your entries are still on this form; please return to My Portfolios and reopen it.", values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
+  const validationErrors = validatePortfolio(formData);
+  if (Object.keys(validationErrors).length) return { errors: validationErrors, values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
   const profilePhotoPath = text(formData, "profile_photo_path") || null;
-  if (profilePhotoPath && !profilePhotoPath.startsWith(`${userId}/`)) redirect(`/dashboard/${id}/edit?error=An+uploaded+image+did+not+belong+to+your+account.`);
+  if (profilePhotoPath && !profilePhotoPath.startsWith(`${userId}/`)) return { errors: { profile_photo_path: "This image upload does not belong to your account. Please upload it again." }, values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
   const projects = portfolioProjects(formData, userId);
-  if (!projects) redirect(`/dashboard/${id}/edit?error=An+uploaded+image+did+not+belong+to+your+account.`);
+  if (!projects) return { errors: { project_image_paths: "A project image upload does not belong to your account. Please upload it again." }, values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
   const details = portfolioDetails(formData);
-  if (details.socialLinks.some(({ url }) => { try { return !["http:", "https:"].includes(new URL(url).protocol); } catch { return true; } })) redirect(`/dashboard/${id}/edit?error=Social+links+must+use+valid+http+or+https+URLs.`);
   const { error } = await supabase.from("portfolios").update({
     full_name: fullName, role: text(formData, "role"), email, about_me: text(formData, "about_me"),
     contact_number: text(formData, "contact_number").slice(0, 60) || null,
     address: text(formData, "address").slice(0, 240) || null,
     template_key: template, profile_photo_path: profilePhotoPath,
     skills: text(formData, "skills").split(",").map((skill) => skill.trim()).filter(Boolean).slice(0, 20), projects,
-  }).eq("id", id).eq("user_id", userId);
-  if (error) redirect(`/dashboard/${id}/edit?error=${encodeURIComponent(error.message)}`);
+  }).eq("id", id).eq("user_id", userId).is("deleted_at", null);
+  if (error) return { message: `Your entries are still on the form. Changes could not be saved: ${error.message}`, values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
   const detailError = await savePortfolioDetails(supabase, id, details);
-  if (detailError) redirect(`/dashboard/${id}/edit?error=${encodeURIComponent(`Portfolio details could not be saved: ${detailError.message}`)}`);
+  if (detailError) return { message: `Your portfolio changes were saved. Some optional details need attention: ${detailError.message} Correct or remove those entries, then save again.`, values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
   revalidatePath("/dashboard");
   revalidatePath(`/p/${text(formData, "slug")}`);
   redirect("/dashboard?message=Portfolio+updated.");
@@ -223,16 +269,42 @@ export async function deletePortfolio(formData: FormData) {
   const { data: claimsData } = await supabase.auth.getClaims();
   const userId = claimsData?.claims?.sub;
   if (!userId) redirect("/login");
-  const { data: portfolio, error: readError } = await supabase.from("portfolios").select("id,slug,profile_photo_path,projects").eq("id", id).eq("user_id", userId).maybeSingle();
+  const { data: portfolio, error: readError } = await supabase.from("portfolios").select("id,slug,deleted_at").eq("id", id).eq("user_id", userId).is("deleted_at", null).maybeSingle();
   if (readError || !portfolio) redirect("/dashboard?error=Portfolio+not+found.");
-  const { error } = await supabase.from("portfolios").delete().eq("id", id).eq("user_id", userId);
+  const { error } = await supabase.from("portfolios").update({ deleted_at: new Date().toISOString(), is_published: false }).eq("id", id).eq("user_id", userId).is("deleted_at", null);
   if (error) redirect(`/dashboard?error=${encodeURIComponent(error.message)}`);
+  revalidatePath("/dashboard");
+  revalidatePath(`/p/${portfolio.slug}`);
+  redirect("/dashboard?view=recovery&message=Portfolio+moved+to+Recovery.+Your+details+and+images+are+preserved.");
+}
+
+export async function restorePortfolio(formData: FormData) {
+  const supabase = await createClient();
+  const id = text(formData, "id");
+  const { data: claimsData } = await supabase.auth.getClaims();
+  const userId = claimsData?.claims?.sub;
+  if (!userId) redirect("/login");
+  const { error } = await supabase.from("portfolios").update({ deleted_at: null, is_published: false }).eq("id", id).eq("user_id", userId).not("deleted_at", "is", null);
+  if (error) redirect(`/dashboard?view=recovery&error=${encodeURIComponent(error.message)}`);
+  revalidatePath("/dashboard");
+  redirect("/dashboard?message=Portfolio+restored+as+private.+Review+it+before+publishing.");
+}
+
+export async function permanentlyDeletePortfolio(formData: FormData) {
+  const supabase = await createClient();
+  const id = text(formData, "id");
+  const { data: claimsData } = await supabase.auth.getClaims();
+  const userId = claimsData?.claims?.sub;
+  if (!userId) redirect("/login");
+  const { data: portfolio, error: readError } = await supabase.from("portfolios").select("id,profile_photo_path,projects").eq("id", id).eq("user_id", userId).not("deleted_at", "is", null).maybeSingle();
+  if (readError || !portfolio) redirect("/dashboard?view=recovery&error=Portfolio+not+found.");
+  const { error } = await supabase.from("portfolios").delete().eq("id", id).eq("user_id", userId).not("deleted_at", "is", null);
+  if (error) redirect(`/dashboard?view=recovery&error=${encodeURIComponent(error.message)}`);
   const imagePaths = [portfolio.profile_photo_path, ...(Array.isArray(portfolio.projects) ? portfolio.projects.map((project: { image_path?: string | null }) => project.image_path) : [])]
     .filter((path): path is string => typeof path === "string" && path.startsWith(`${userId}/`));
   if (imagePaths.length) await supabase.storage.from(process.env.NEXT_PUBLIC_SUPABASE_MEDIA_BUCKET || "portfolio-media").remove([...new Set(imagePaths)]);
   revalidatePath("/dashboard");
-  revalidatePath(`/p/${portfolio.slug}`);
-  redirect("/dashboard?message=Portfolio+deleted.");
+  redirect("/dashboard?view=recovery&message=Portfolio+permanently+deleted.");
 }
 
 export async function togglePublished(formData: FormData) {
@@ -242,7 +314,7 @@ export async function togglePublished(formData: FormData) {
   const { data: claimsData } = await supabase.auth.getClaims();
   const userId = claimsData?.claims?.sub;
   if (!userId) redirect("/login");
-  const { error } = await supabase.from("portfolios").update({ is_published: !published }).eq("id", id).eq("user_id", userId);
+  const { error } = await supabase.from("portfolios").update({ is_published: !published }).eq("id", id).eq("user_id", userId).is("deleted_at", null);
   if (error) redirect(`/dashboard?error=${encodeURIComponent(error.message)}`);
   revalidatePath("/dashboard");
   redirect("/dashboard?message=Portfolio+visibility+updated.");
@@ -256,7 +328,7 @@ export async function choosePortfolioTemplate(formData: FormData) {
   const { data: claimsData } = await supabase.auth.getClaims();
   const userId = claimsData?.claims?.sub;
   if (!userId) redirect("/login");
-  const { error } = await supabase.from("portfolios").update({ template_key: template }).eq("id", id).eq("user_id", userId);
+  const { error } = await supabase.from("portfolios").update({ template_key: template }).eq("id", id).eq("user_id", userId).is("deleted_at", null);
   if (error) redirect(`/dashboard/${id}/templates?error=${encodeURIComponent(error.message)}`);
   revalidatePath("/dashboard");
   redirect(`/dashboard?message=${encodeURIComponent("Design saved. Your portfolio now uses the selected template.")}`);

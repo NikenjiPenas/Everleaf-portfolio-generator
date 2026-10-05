@@ -12,7 +12,7 @@ type Project = { title: string; description?: string; image_path?: string | null
 export default async function PublicPortfolioPage({ params }: Props) {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data: portfolio } = await supabase.from("portfolios").select("*, portfolio_education(*), portfolio_experiences(*), portfolio_social_links(*)").eq("slug", slug).eq("is_published", true).maybeSingle();
+  const { data: portfolio } = await supabase.from("portfolios").select("*, portfolio_education(*), portfolio_experiences(*), portfolio_social_links(*)").eq("slug", slug).eq("is_published", true).is("deleted_at", null).maybeSingle();
   if (!portfolio) notFound();
   const skills = Array.isArray(portfolio.skills) ? portfolio.skills as string[] : [];
   const projects = Array.isArray(portfolio.projects) ? portfolio.projects as Project[] : [];
