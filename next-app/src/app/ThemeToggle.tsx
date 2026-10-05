@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
-type Props = { placement?: "global" | "header" };
+type Props = { placement?: "global" | "header" | "menu" };
 
 export default function ThemeToggle({ placement = "global" }: Props) {
   const [theme, setTheme] = useState<Theme>("dark");

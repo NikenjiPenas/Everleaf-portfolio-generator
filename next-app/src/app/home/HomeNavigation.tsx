@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import ThemeToggle from "../ThemeToggle";
 
 const sections = [
   ["home", "Home"],
   ["features", "Features"],
   ["templates", "Templates"],
   ["about", "About"],
-  ["contact", "Contact"],
 ] as const;
 
 export default function HomeNavigation() {
@@ -28,6 +29,9 @@ export default function HomeNavigation() {
     <button className="home-menu-toggle" type="button" aria-expanded={open} aria-controls="home-section-navigation" onClick={() => setOpen((value) => !value)}>{open ? "× Close" : "☰ Menu"}</button>
     <nav id="home-section-navigation" aria-label="Main navigation">
       {sections.map(([id, label]) => <a key={id} href={`#${id}`} aria-current={active === id ? "location" : undefined} onClick={() => setOpen(false)}>{label}</a>)}
+      <Link className="home-portfolio-link" href="/dashboard" onClick={() => setOpen(false)}>My Portfolio</Link>
+      <Link className="home-contact-link" href="/contact" onClick={() => setOpen(false)}>Contact</Link>
+      <ThemeToggle placement="menu" />
     </nav>
   </div>;
 }
