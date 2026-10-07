@@ -2,7 +2,15 @@
 
 EverLeaf helps people create and share a personal portfolio in a nature-inspired design. Visitors can create an account, add their profile and work, choose a template, upload images, and publish a public portfolio page.
 
-**Live website:** [everleaf-portfolio-generator.vercel.app](https://everleaf-portfolio-generator.vercel.app/)
+## Live Website
+
+[Open the EverLeaf Portfolio Generator](https://everleaf-portfolio-generator.vercel.app/)
+
+## Website Preview
+
+[![Screenshot of the live EverLeaf homepage](docs/screenshots/homepage.png)](https://everleaf-portfolio-generator.vercel.app/)
+
+The screenshot above is from the live website. Select it to open EverLeaf.
 
 ## What you can do
 
@@ -18,16 +26,16 @@ The deployed Next.js application is in [`next-app/`](next-app/). The Laravel app
 
 ## Screenshots
 
-The project rubric calls for screenshots of the home page, portfolio form, management page, and all three templates. Those screenshots are **not checked into the repository yet**. Add reviewed screenshots under `docs/screenshots/` and link them here before final submission. Use a sample portfolio and avoid including private account details.
+The live homepage screenshot is included above. The remaining requested views can be added under `docs/screenshots/` before final submission. Use a sample portfolio and avoid including private account details.
 
-| Page | Suggested file |
-| --- | --- |
-| Home page | `docs/screenshots/home.png` |
-| Portfolio form | `docs/screenshots/portfolio-form.png` |
-| Portfolio management | `docs/screenshots/manage-portfolios.png` |
-| Simple template | `docs/screenshots/template-simple.png` |
-| Modern template | `docs/screenshots/template-modern.png` |
-| Creative template | `docs/screenshots/template-creative.png` |
+| Page | File | Status |
+| --- | --- | --- |
+| Home page | `docs/screenshots/homepage.png` | Included |
+| Portfolio form | `docs/screenshots/portfolio-form.png` | To capture |
+| Portfolio management | `docs/screenshots/manage-portfolios.png` | To capture |
+| Simple template | `docs/screenshots/template-simple.png` | To capture |
+| Modern template | `docs/screenshots/template-modern.png` | To capture |
+| Creative template | `docs/screenshots/template-creative.png` | To capture |
 
 ## Technology
 
@@ -102,6 +110,10 @@ In Supabase **Authentication → URL Configuration**, set the production Site UR
 - The app uses the Supabase publishable key in the browser. Keep service-role keys and other secrets private, and configure them only in trusted server environments if a future feature requires them.
 - Existing Laravel users and portfolio records are not automatically transferred to the Next.js/Supabase application.
 
+## Authentication Email Delivery
+
+Supabase's built-in email service is limited to **2 auth emails per hour** and is best-effort. This affects confirmation and password-recovery email delivery; application code cannot raise that provider limit. For public sign-ups, configure a custom SMTP provider in Supabase under **Authentication → Email → SMTP Settings**. Supabase documents custom SMTP setup and its auth email limits in the [rate limits guide](https://supabase.com/docs/guides/auth/rate-limits).
+
 ## Main pages
 
 | Path | Purpose |
@@ -132,7 +144,7 @@ Dockerfile, render.yaml    Earlier Laravel/Render deployment configuration
 
 ## Current scope and follow-up
 
-The deployed Next.js version supports account access and recovery, portfolio creation, image uploads, public/private visibility, and public portfolio pages. The form currently creates a portfolio; editing, permanent deletion, and deleted-portfolio recovery are not part of this deployed version yet. Screenshots listed above also remain to be captured and added.
+The deployed Next.js version supports account access and recovery, portfolio creation and editing, image uploads, public/private visibility, public portfolio pages, and recently deleted portfolio recovery. The home page screenshot is included above; the remaining screenshots listed above can be captured with sample data before final submission.
 
 ## Security reminders
 
