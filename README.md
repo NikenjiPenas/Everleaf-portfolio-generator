@@ -28,11 +28,11 @@ The deployed Next.js application is in [`next-app/`](next-app/). The Laravel app
 
 The screenshots below show the actual EverLeaf Portfolio Generator. Use sample portfolio information and avoid exposing private account details.
 
-| Page | Screenshot | Status |
+| Page | Screenshots | Status |
 | --- | --- | --- |
-| Home page | [View Screenshot](docs/screenshots/homepage.png) | Included |
-| Portfolio form | Not captured yet | To capture |
-| Portfolio management | Not captured yet | To capture |
+| Home page | [Full page](docs/screenshots/homepage-full.jpg) · [Desktop](docs/screenshots/homepage-desktop.png) | Included |
+| Portfolio form | [Top](docs/screenshots/portfolio-form-top.jpg) · [Lower section](docs/screenshots/portfolio-form-lower.jpg) | Included |
+| Portfolio management | One screenshot received; public-safe review pending. A second screenshot is still needed. | Pending |
 | Simple template | Not captured yet | To capture |
 | Modern template | Not captured yet | To capture |
 | Creative template | Not captured yet | To capture |
