@@ -33,7 +33,7 @@ The screenshots below show the actual EverLeaf Portfolio Generator. Use sample p
 | Home page | [Full page](docs/screenshots/homepage-full.jpg) · [Desktop](docs/screenshots/homepage-desktop.png) | Included |
 | Portfolio form | [Top](docs/screenshots/portfolio-form-top.jpg) · [Lower section](docs/screenshots/portfolio-form-lower.jpg) | Included |
 | Portfolio management | [Desktop view](docs/screenshots/portfolio-management-desktop.png) · [Second view](docs/screenshots/portfolio-management-second-view.png) | Included |
-| Simple template | [View screenshot](docs/screenshots/template-simple.png) | Included |
+| Simple template | [View screenshot](docs/screenshots/template-simple.jpg) | Included |
 | Modern template | [View screenshot](docs/screenshots/template-modern.jpg) | Included |
 | Creative template | [View screenshot](docs/screenshots/template-creative.jpg) | Included |
 
