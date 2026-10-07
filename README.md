@@ -26,16 +26,16 @@ The deployed Next.js application is in [`next-app/`](next-app/). The Laravel app
 
 ## Screenshots
 
-The live homepage screenshot is included above. The remaining requested views can be added under `docs/screenshots/` before final submission. Use a sample portfolio and avoid including private account details.
+The screenshots below show the actual EverLeaf Portfolio Generator. Use sample portfolio information and avoid exposing private account details.
 
-| Page | File | Status |
+| Page | Screenshot | Status |
 | --- | --- | --- |
-| Home page | `docs/screenshots/homepage.png` | Included |
-| Portfolio form | `docs/screenshots/portfolio-form.png` | To capture |
-| Portfolio management | `docs/screenshots/manage-portfolios.png` | To capture |
-| Simple template | `docs/screenshots/template-simple.png` | To capture |
-| Modern template | `docs/screenshots/template-modern.png` | To capture |
-| Creative template | `docs/screenshots/template-creative.png` | To capture |
+| Home page | [View Screenshot](docs/screenshots/homepage.png) | Included |
+| Portfolio form | Not captured yet | To capture |
+| Portfolio management | Not captured yet | To capture |
+| Simple template | Not captured yet | To capture |
+| Modern template | Not captured yet | To capture |
+| Creative template | Not captured yet | To capture |
 
 ## Technology
 
