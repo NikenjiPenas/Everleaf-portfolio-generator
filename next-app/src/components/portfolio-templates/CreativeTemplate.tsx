@@ -1,5 +1,6 @@
 import type { PortfolioData, PortfolioProject } from "./types";
 import { asEducation, asExperience, asProjects, asSkills, asSocialLinks } from "./types";
+import PortfolioSectionNavigation from "./PortfolioSectionNavigation";
 
 export default function CreativeTemplate({ portfolio, photo, toolbar }: { portfolio: PortfolioData; photo?: string | null; toolbar?: React.ReactNode }) {
   const skills = asSkills(portfolio.skills);
@@ -8,11 +9,20 @@ export default function CreativeTemplate({ portfolio, photo, toolbar }: { portfo
   const experience = asExperience(portfolio.portfolio_experiences);
   const links = asSocialLinks(portfolio.portfolio_social_links);
   const hasContact = Boolean(portfolio.email || portfolio.contact_number || portfolio.address || links.length);
+  const navigation = [
+    { id: "home", label: "Home" },
+    ...(portfolio.about_me ? [{ id: "about", label: "About" }] : []),
+    ...(education.length ? [{ id: "education", label: "Education" }] : []),
+    ...(experience.length ? [{ id: "experience", label: "Experience" }] : []),
+    ...(skills.length ? [{ id: "skills", label: "Skills" }] : []),
+    ...(projects.length ? [{ id: "projects", label: "Projects" }] : []),
+    ...(hasContact ? [{ id: "contact", label: "Contact" }] : []),
+  ];
 
   return <div className="el-template el-creative">
     {toolbar}
     <main className="el-creative-paper">
-      <nav className="el-creative-nav" aria-label="Portfolio sections"><a href="#home">Home</a>{portfolio.about_me && <a href="#about">About</a>}{education.length > 0 && <a href="#education">Education</a>}{experience.length > 0 && <a href="#experience">Experience</a>}{skills.length > 0 && <a href="#skills">Skills</a>}{projects.length > 0 && <a href="#projects">Projects</a>}{hasContact && <a href="#contact">Contact</a>}</nav>
+      <PortfolioSectionNavigation className="el-creative-nav" items={navigation} />
       <div className="el-creative-hero" id="home">
         <section className="el-creative-profile">{photo ? <img src={photo} alt={`Profile photo of ${portfolio.full_name}`} /> : <span className="el-creative-initials" aria-hidden="true">{portfolio.full_name.slice(0, 1)}</span>}<div><p>Portfolio · Creative style</p><h1>{portfolio.full_name}</h1><span>{portfolio.role || "Creative professional"}</span></div>{portfolio.about_me && <blockquote>{portfolio.about_me}</blockquote>}</section>
         {portfolio.about_me && <section className="el-creative-about" id="about"><h2>About Me</h2><p>{portfolio.about_me}</p>{photo && <div className="el-creative-photo"><img src={photo} alt="" /></div>}</section>}

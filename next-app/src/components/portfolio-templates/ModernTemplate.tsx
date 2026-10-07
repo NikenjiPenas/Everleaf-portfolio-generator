@@ -1,5 +1,6 @@
 import type { PortfolioData, PortfolioProject } from "./types";
 import { asEducation, asExperience, asProjects, asSkills, asSocialLinks } from "./types";
+import PortfolioSectionNavigation from "./PortfolioSectionNavigation";
 
 export default function ModernTemplate({ portfolio, photo, toolbar }: { portfolio: PortfolioData; photo?: string | null; toolbar?: React.ReactNode }) {
   const skills = asSkills(portfolio.skills);
@@ -8,6 +9,15 @@ export default function ModernTemplate({ portfolio, photo, toolbar }: { portfoli
   const experience = asExperience(portfolio.portfolio_experiences);
   const links = asSocialLinks(portfolio.portfolio_social_links);
   const hasContact = Boolean(portfolio.email || portfolio.contact_number || portfolio.address || links.length);
+  const navigation = [
+    { id: "home", label: "⌂　Home" },
+    ...(portfolio.about_me ? [{ id: "about", label: "◉　About" }] : []),
+    ...(education.length ? [{ id: "education", label: "⌂　Education" }] : []),
+    ...(experience.length ? [{ id: "experience", label: "↗　Experience" }] : []),
+    ...(skills.length ? [{ id: "skills", label: "✳　Skills" }] : []),
+    ...(projects.length ? [{ id: "projects", label: "▧　Projects" }] : []),
+    ...(hasContact ? [{ id: "contact", label: "✉　Contact" }] : []),
+  ];
 
   return <div className="el-template el-modern">
     {toolbar}
@@ -15,7 +25,7 @@ export default function ModernTemplate({ portfolio, photo, toolbar }: { portfoli
       <aside className="el-modern-sidebar">
         {photo ? <img className="el-modern-avatar" src={photo} alt={`Profile photo of ${portfolio.full_name}`} /> : <div className="el-modern-avatar el-modern-initials" aria-hidden="true">{portfolio.full_name.slice(0, 1)}</div>}
         <strong>{portfolio.full_name}</strong><small>{portfolio.role || "Creative professional"}</small>
-        <nav aria-label="Portfolio sections"><a href="#home">⌂　Home</a>{portfolio.about_me && <a href="#about">◉　About</a>}{education.length > 0 && <a href="#education">⌂　Education</a>}{experience.length > 0 && <a href="#experience">↗　Experience</a>}{skills.length > 0 && <a href="#skills">✳　Skills</a>}{projects.length > 0 && <a href="#projects">▧　Projects</a>}{hasContact && <a href="#contact">✉　Contact</a>}</nav>
+        <PortfolioSectionNavigation className="el-modern-section-nav" items={navigation} />
         {hasContact && <div className="el-modern-connect"><b>Let’s Connect</b><p>Feel free to reach out.</p>{portfolio.email && <a href={`mailto:${portfolio.email}`}>✉ Email</a>}{portfolio.contact_number && <a href={`tel:${portfolio.contact_number}`}>☎ Call</a>}{links.map((link, index) => <a key={`${link.url}-${index}`} href={link.url} target="_blank" rel="noreferrer">↗ {link.platform}</a>)}</div>}
       </aside>
       <main className="el-modern-main">

@@ -357,6 +357,51 @@ body:has(.site-header) section:target { animation:destination-highlight 1.1s eas
   .home-navigation nav .theme-switch-menu button { padding-inline:9px; }
 }
 
+/* One responsive homepage navigation; the theme switch is available only in its compact menu. */
+.site-header .home-navigation { flex:1 1 auto;min-width:0; }
+.home-navigation nav { flex-wrap:nowrap;justify-content:center;gap:clamp(10px,1.15vw,18px); }
+.home-navigation nav a { flex:none;white-space:nowrap;font-size:13px; }
+.home-navigation nav .home-contact-link { display:inline-flex; }
+.home-navigation nav .theme-switch-menu { display:none; }
+.site-header .header-actions { flex:none;gap:10px; }
+.home-menu-toggle { display:none; }
+@media(max-width:1050px) {
+  .site-header { gap:14px;padding-inline:18px; }
+  .site-header .home-navigation { position:relative;order:0;width:auto;flex:0 0 auto;margin-left:auto; }
+  .home-menu-toggle { display:inline-flex;min-height:40px;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #b9d17a70;border-radius:9px;background:#10251a;color:#eaf0d9;font:700 13px Arial,sans-serif;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s; }
+  .home-menu-toggle:hover,.home-menu-toggle:focus-visible { border-color:#d7eba1;box-shadow:0 0 15px #b9d8784d; }
+  .home-navigation nav { position:absolute;top:calc(100% + 10px);right:0;z-index:35;display:none;min-width:220px;align-items:stretch;gap:2px;padding:8px;border:1px solid #b9d17a78;border-radius:13px;background:#081810f5;box-shadow:0 16px 35px #0008,0 0 18px #b6dc7040; }
+  .home-navigation.is-open nav { display:grid; }
+  .home-navigation nav a { min-height:42px;align-items:center;padding:10px 12px;border-radius:7px; }
+  .home-navigation nav a:after { right:auto;bottom:5px;left:12px;width:34px; }
+  .home-navigation nav .home-contact-link { display:flex; }
+  .home-navigation nav .theme-switch-menu { display:inline-flex;width:max-content;margin:5px 3px 2px;padding:4px; }
+  .home-navigation nav .theme-switch-menu button { min-height:38px; }
+  :root[data-theme="light"] .home-menu-toggle { border-color:#7e965e;background:#e4ead8;color:#2e4530; }
+  :root[data-theme="light"] .home-navigation nav { border-color:#829968;background:#eef1e5; }
+  :root[data-theme="light"] .home-navigation nav a { color:#2c422f; }
+  :root[data-theme="light"] .home-navigation nav .theme-switch-menu { border-color:#66804f99;background:#f2f3e7ed; }
+  :root[data-theme="light"] .home-navigation nav .theme-switch-menu button { color:#334a36; }
+}
+@media(max-width:600px) {
+  .site-header .home-navigation { margin-left:auto; }
+  .home-navigation nav { right:0; }
+  .home-navigation nav .home-portfolio-link,.home-navigation nav .home-contact-link { min-height:44px; }
+  .site-header .header-actions { flex:1 0 100%;justify-content:flex-end;order:2; }
+}
+@media(max-width:360px) {
+  .site-header { padding-inline:12px; }
+  .home-navigation nav { right:0; }
+  .site-header .header-actions .button { padding:7px 9px;font-size:11px; }
+}
+
+/* Add a quiet EverLeaf edge light to the existing panels users act on. */
+.portfolio-item,.portfolio-form,.contact-details,.el-choice { box-shadow:0 12px 34px #0003,0 0 14px #b7d98218; }
+.template-card { box-shadow:0 15px 40px #0002,0 0 14px #b7d98216; }
+.portfolio-item:hover,.portfolio-form:focus-within,.contact-details:focus-within,.el-choice:hover { border-color:#c9df9178;box-shadow:0 16px 40px #0004,0 0 18px #b7d98226; }
+.auth-card button:disabled { cursor:wait;opacity:.76;transform:none;box-shadow:none; }
+:root[data-theme="light"] .portfolio-item,:root[data-theme="light"] .portfolio-form,:root[data-theme="light"] .contact-details,:root[data-theme="light"] .el-choice,:root[data-theme="light"] .template-card { box-shadow:0 12px 34px #24382018,0 0 13px #8eae5a20; }
+
 /* A quiet leaf border frames only the new-portfolio editor; form controls stay above it. */
 .portfolio-form-framed { position:relative;isolation:isolate;overflow:hidden;border-color:#b8d2818a;box-shadow:0 20px 55px #0005,0 0 22px #b7d9851b; }
 .portfolio-form-framed:before { position:absolute;z-index:0;inset:0;border-radius:inherit;background:url("/images/login-foliage.svg") center/100% 100% no-repeat;content:"";opacity:.14;pointer-events:none; }

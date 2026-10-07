@@ -132,10 +132,17 @@ export async function signUp(formData: FormData) {
   redirect(`/login?message=Check+your+email+to+confirm+your+account.&template=${template}`);
 }
 
-export async function signIn(formData: FormData) {
+export type SignInState = { error?: string; email: string };
+
+export async function signIn(_previousState: SignInState, formData: FormData): Promise<SignInState> {
   const supabase = await createClient();
-  const { error } = await supabase.auth.signInWithPassword({ email: text(formData, "email"), password: String(formData.get("password") ?? "") });
-  if (error) redirect(`/login?error=${encodeURIComponent(error.message)}`);
+  const email = text(formData, "email");
+  const password = String(formData.get("password") ?? "");
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !password) {
+    return { error: "Enter a valid email address and password.", email };
+  }
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) return { error: error.message, email };
   const requestedTemplate = safeTemplate(text(formData, "template"));
   const template = ["modern", "creative", "minimal"].includes(requestedTemplate) ? requestedTemplate : null;
   redirect(template ? `/dashboard/new?template=${template}` : "/dashboard");

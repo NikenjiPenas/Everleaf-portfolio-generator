@@ -31,7 +31,7 @@ export default function HomeNavigation() {
       {sections.map(([id, label]) => <a key={id} href={`#${id}`} aria-current={active === id ? "location" : undefined} onClick={() => setOpen(false)}>{label}</a>)}
       <Link className="home-portfolio-link" href="/dashboard" onClick={() => setOpen(false)}>My Portfolio</Link>
       <Link className="home-contact-link" href="/contact" onClick={() => setOpen(false)}>Contact</Link>
-      <ThemeToggle placement="menu" />
+      <ThemeToggle />
     </nav>
   </div>;
 }

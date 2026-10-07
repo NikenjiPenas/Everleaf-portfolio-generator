@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
-type Props = { placement?: "global" | "header" | "menu" };
 
-export default function ThemeToggle({ placement = "global" }: Props) {
+export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
@@ -30,7 +29,7 @@ export default function ThemeToggle({ placement = "global" }: Props) {
   }
 
   return (
-    <div className={`theme-switch theme-switch-${placement}`} role="group" aria-label="Choose color theme">
+    <div className="theme-switch theme-switch-menu" role="group" aria-label="Choose color theme">
       <button type="button" aria-pressed={theme === "light"} onClick={() => choose("light")}>☼ <span>Light</span></button>
       <button type="button" aria-pressed={theme === "dark"} onClick={() => choose("dark")}>☾ <span>Dark</span></button>
     </div>

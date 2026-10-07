@@ -4,7 +4,6 @@ import { createClient } from "@/lib/supabase/server";
 import { signOut, togglePublished } from "@/app/actions";
 import DeletePortfolioButton from "./DeletePortfolioButton";
 import RecoveryActions from "./RecoveryActions";
-import ThemeToggle from "../ThemeToggle";
 import { portfolioMediaUrl } from "@/lib/portfolio-media";
 
 export const dynamic = "force-dynamic";
@@ -49,7 +48,6 @@ export default async function DashboardPage({ searchParams }: Props) {
         <header className="dashboard-topbar">
           <div className="dashboard-topbar-user"><span className="dashboard-user-avatar" aria-hidden="true">{displayName.slice(0, 1).toUpperCase()}</span><span>{displayName}</span></div>
           <form action={signOut}><button className="button button-quiet" type="submit">Sign out</button></form>
-          <ThemeToggle placement="header" />
         </header>
 
         <main className="dashboard-wrap">
