@@ -1,21 +1,6 @@
-<div align="center">
-  <a href="https://everleaf-portfolio-generator.vercel.app/home">
-    <img src="docs/screenshots/homepage-desktop.png" alt="EverLeaf's forest-themed portfolio generator homepage" width="100%" />
-  </a>
-  <h1>EverLeaf — Online Portfolio Template Generator</h1>
-  <p>EverLeaf is a nature-inspired portfolio builder. Users can save their profile and work, choose one of three portfolio designs, preview the result, and publish a public portfolio page when ready.</p>
-  <p><a href="https://everleaf-portfolio-generator.vercel.app/home"><strong>Visit the live website ↗</strong></a> &nbsp;·&nbsp; <a href="#three-portfolio-templates">Explore the templates</a></p>
-  <p>
-    <img alt="Next.js 16.3.8" src="https://img.shields.io/badge/Next.js-16.3.8-173B2A?style=flat-square&amp;logo=nextdotjs&amp;logoColor=EDF0DC" />
-    <img alt="React 19.2.8" src="https://img.shields.io/badge/React-19.2.8-244936?style=flat-square&amp;logo=react&amp;logoColor=C9DF91" />
-    <img alt="TypeScript 5.9.3" src="https://img.shields.io/badge/TypeScript-5.9.3-31583B?style=flat-square&amp;logo=typescript&amp;logoColor=EDF0DC" />
-    <img alt="Tailwind CSS 4.3.3" src="https://img.shields.io/badge/Tailwind_CSS-4.3.3-426B46?style=flat-square&amp;logo=tailwindcss&amp;logoColor=EDF0DC" />
-    <img alt="Supabase" src="https://img.shields.io/badge/Supabase-Auth%20%7C%20PostgreSQL%20%7C%20Storage-55784A?style=flat-square&amp;logo=supabase&amp;logoColor=EDF0DC" />
-    <img alt="Vercel" src="https://img.shields.io/badge/Hosted%20on-Vercel-173B2A?style=flat-square&amp;logo=vercel&amp;logoColor=EDF0DC" />
-  </p>
-</div>
+# EverLeaf — Online Portfolio Template Generator
 
----
+EverLeaf is a nature-inspired portfolio builder. Users can save their profile and work, choose one of three portfolio designs, preview the result, and publish a public portfolio page when ready.
 
 ## Project goals
 
@@ -26,74 +11,35 @@
 
 ## Features in the source
 
-### Accounts
-
 - Email sign-up/sign-in, sign-out, email confirmation callback, and password recovery/reset flows.
-
-### Portfolio management
-
 - Portfolio create, retrieve, edit, publish/private, soft-delete, restore, and permanent-delete flows.
-- Portfolio preview, template selection, and public `/p/{slug}` pages.
-
-### Templates, media, and appearance
-
-- Three designs: **Simple** (`minimal` key), **Modern**, and **Creative**.
 - Profile and project image uploads through Supabase Storage.
+- Three designs: **Simple** (`minimal` key), **Modern**, and **Creative**.
+- Portfolio preview, template selection, and public `/p/{slug}` pages.
 - Responsive styling and an EverLeaf light/dark theme.
 
-These features are present in the source. This README does not independently verify every flow against the hosted services; see the [testing report](documentation/EverLeaf-Testing-Report.md).
+These features are present in the source. This documentation audit does not independently verify every flow against the hosted services; see the [testing report](documentation/EverLeaf-Testing-Report.md).
 
-## Three portfolio templates
+## Templates
 
-Each preview below links to its existing screenshot in the repository.
+| Display name | Stored key | Design |
+| --- | --- | --- |
+| Simple | `minimal` | Editorial, restrained layout |
+| Modern | `modern` | Dark sidebar and modular cards |
+| Creative | `creative` | Framed, expressive grid |
 
-### Simple
+## Screenshots
 
-<a href="docs/screenshots/template-simple.jpg"><img src="docs/screenshots/template-simple.jpg" alt="Simple portfolio template preview" width="600" /></a>
+These links open the existing project screenshots stored in the repository. They document the interface and are not a fresh verification of the current live deployment.
 
-**Stored key:** `minimal`<br />
-An editorial, restrained layout that gives the work room to speak. [Open the screenshot](docs/screenshots/template-simple.jpg).
-
-### Modern
-
-<a href="docs/screenshots/template-modern.jpg"><img src="docs/screenshots/template-modern.jpg" alt="Modern portfolio template preview" width="600" /></a>
-
-**Stored key:** `modern`<br />
-A dark sidebar and modular cards. [Open the screenshot](docs/screenshots/template-modern.jpg).
-
-### Creative
-
-<a href="docs/screenshots/template-creative.jpg"><img src="docs/screenshots/template-creative.jpg" alt="Creative portfolio template preview" width="600" /></a>
-
-**Stored key:** `creative`<br />
-A framed, expressive grid. [Open the screenshot](docs/screenshots/template-creative.jpg).
-
-## System screenshots
-
-These links open the existing project screenshots. They document the interface and are not a fresh verification of the current live deployment.
-
-### Home page
-
-[![EverLeaf home page on desktop](docs/screenshots/homepage-desktop.png)](docs/screenshots/homepage-desktop.png)
-
-- [Full-page screenshot](docs/screenshots/homepage-full.jpg)
-- [Desktop screenshot](docs/screenshots/homepage-desktop.png)
-
-### Portfolio form
-
-[![Portfolio form top section](docs/screenshots/portfolio-form-top.jpg)](docs/screenshots/portfolio-form-top.jpg)
-
-- [Top section](docs/screenshots/portfolio-form-top.jpg)
-- [Lower section](docs/screenshots/portfolio-form-lower.jpg)
-
-### Portfolio management
-
-[![Portfolio management desktop view](docs/screenshots/portfolio-management-desktop.png)](docs/screenshots/portfolio-management-desktop.png)
-
-- [Desktop view](docs/screenshots/portfolio-management-desktop.png)
-- [Second view](docs/screenshots/portfolio-management-second-view.png)
-
-The Simple, Modern, and Creative template screenshots are shown in the template gallery above.
+| Page | Screenshot links |
+| --- | --- |
+| Home page | [Full page](docs/screenshots/homepage-full.jpg) · [Desktop](docs/screenshots/homepage-desktop.png) |
+| Portfolio form | [Top](docs/screenshots/portfolio-form-top.jpg) · [Lower section](docs/screenshots/portfolio-form-lower.jpg) |
+| Portfolio management | [Desktop](docs/screenshots/portfolio-management-desktop.png) · [Second view](docs/screenshots/portfolio-management-second-view.png) |
+| Simple template | [View screenshot](docs/screenshots/template-simple.jpg) |
+| Modern template | [View screenshot](docs/screenshots/template-modern.jpg) |
+| Creative template | [View screenshot](docs/screenshots/template-creative.jpg) |
 
 ## Technology
 
@@ -133,7 +79,7 @@ The Simple, Modern, and Creative template screenshots are shown in the template 
 
 See the [verified technology inventory](documentation/EverLeaf-Technology-Stack.md) for versions and evidence.
 
-## Project links
+## Links
 
 - Live website (URL provided; live availability was not checked during this documentation update): [EverLeaf](https://everleaf-portfolio-generator.vercel.app/home)
 - GitHub branch: [NikenjiPenas/Everleaf-portfolio-generator — nextjs-vercel](https://github.com/NikenjiPenas/Everleaf-portfolio-generator/tree/nextjs-vercel)
@@ -182,7 +128,7 @@ npm run build   # Production build
 npm run start   # Serve a completed production build
 ```
 
-See the [testing report](documentation/EverLeaf-Testing-Report.md) for results from the documentation audit. No dedicated automated test or lint script is defined in `next-app/package.json`.
+See the [testing report](documentation/EverLeaf-Testing-Report.md) for results from this documentation update. No dedicated automated test or lint script is defined in `next-app/package.json`.
 
 ## Database and media summary
 
@@ -215,10 +161,3 @@ online-portfolio-generator/
 ```
 
 The root Laravel source is retained as an earlier implementation; it is not identified as the active Vercel application by the current Next.js project structure.
-
----
-
-<div align="center">
-  <img src="public/images/forest-hero.svg" alt="Illustrated woodland scene in EverLeaf's forest palette" width="420" />
-  <p><strong>EverLeaf</strong><br />Create · Build · Share</p>
-</div>
