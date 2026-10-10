@@ -28,6 +28,19 @@ These features are present in the source. This documentation audit does not inde
 | Modern | `modern` | Dark sidebar and modular cards |
 | Creative | `creative` | Framed, expressive grid |
 
+## Screenshots
+
+These links open the existing project screenshots stored in the repository. They document the interface and are not a fresh verification of the current live deployment.
+
+| Page | Screenshot links |
+| --- | --- |
+| Home page | [Full page](docs/screenshots/homepage-full.jpg) · [Desktop](docs/screenshots/homepage-desktop.png) |
+| Portfolio form | [Top](docs/screenshots/portfolio-form-top.jpg) · [Lower section](docs/screenshots/portfolio-form-lower.jpg) |
+| Portfolio management | [Desktop](docs/screenshots/portfolio-management-desktop.png) · [Second view](docs/screenshots/portfolio-management-second-view.png) |
+| Simple template | [View screenshot](docs/screenshots/template-simple.jpg) |
+| Modern template | [View screenshot](docs/screenshots/template-modern.jpg) |
+| Creative template | [View screenshot](docs/screenshots/template-creative.jpg) |
+
 ## Technology
 
 - **Active web app:** Next.js App Router, React, TypeScript, CSS, and Tailwind CSS.
