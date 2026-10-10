@@ -1,157 +1,122 @@
-# EverLeaf Portfolio Generator
+# EverLeaf — Online Portfolio Template Generator
 
-EverLeaf helps people create and share a personal portfolio in a nature-inspired design. Visitors can create an account, add their profile and work, choose a template, upload images, and publish a public portfolio page.
+EverLeaf is a nature-inspired portfolio builder. Users can save their profile and work, choose one of three portfolio designs, preview the result, and publish a public portfolio page when ready.
 
-## Live Website
+## Project goals
 
-[Open the EverLeaf Portfolio Generator](https://everleaf-portfolio-generator.vercel.app/)
+- Collect and manage portfolio information in one place.
+- Store portfolios online so owners can return to edit them.
+- Generate portfolios using three distinct templates.
+- Let owners preview and publish shareable pages while keeping unpublished portfolios private.
 
-## Website Preview
+## Features in the source
 
-[![Screenshot of the live EverLeaf homepage](docs/screenshots/homepage.png)](https://everleaf-portfolio-generator.vercel.app/)
+- Email sign-up/sign-in, sign-out, email confirmation callback, and password recovery/reset flows.
+- Portfolio create, retrieve, edit, publish/private, soft-delete, restore, and permanent-delete flows.
+- Profile and project image uploads through Supabase Storage.
+- Three designs: **Simple** (`minimal` key), **Modern**, and **Creative**.
+- Portfolio preview, template selection, and public `/p/{slug}` pages.
+- Responsive styling and an EverLeaf light/dark theme.
 
-The screenshot above is from the live website. Select it to open EverLeaf.
+These features are present in the source. This documentation audit does not independently verify every flow against the hosted services; see the [testing report](documentation/EverLeaf-Testing-Report.md).
 
-## What you can do
+## Templates
 
-- Register, sign in, sign out, and request a password reset.
-- Create a portfolio with a name, professional role, email, biography, skills, project names, and images.
-- Upload profile and project images from your device to Supabase Storage.
-- Choose one of three designs: **Simple**, **Modern**, or **Creative**.
-- Keep a portfolio private or publish it at a shareable `/p/{slug}` address.
-- Switch between EverLeaf's light and dark themes.
-- View the public portfolio on desktop and mobile layouts.
-
-The deployed Next.js application is in [`next-app/`](next-app/). The Laravel application at the repository root is retained as the earlier implementation; Vercel currently builds the Next.js application.
-
-## Screenshots
-
-The screenshots below show the actual EverLeaf Portfolio Generator. Use sample portfolio information and avoid exposing private account details.
-
-| Page | Screenshots | Status |
+| Display name | Stored key | Design |
 | --- | --- | --- |
-| Home page | [Full page](docs/screenshots/homepage-full.jpg) · [Desktop](docs/screenshots/homepage-desktop.png) | Included |
-| Portfolio form | [Top](docs/screenshots/portfolio-form-top.jpg) · [Lower section](docs/screenshots/portfolio-form-lower.jpg) | Included |
-| Portfolio management | [Desktop view](docs/screenshots/portfolio-management-desktop.png) · [Second view](docs/screenshots/portfolio-management-second-view.png) | Included |
-| Simple template | [View screenshot](docs/screenshots/template-simple.jpg) | Included |
-| Modern template | [View screenshot](docs/screenshots/template-modern.jpg) | Included |
-| Creative template | [View screenshot](docs/screenshots/template-creative.jpg) | Included |
+| Simple | `minimal` | Editorial, restrained layout |
+| Modern | `modern` | Dark sidebar and modular cards |
+| Creative | `creative` | Framed, expressive grid |
 
 ## Technology
 
-- Next.js 16, React 19, and TypeScript
-- Supabase Auth for accounts and sessions
-- Supabase PostgreSQL for portfolio data, protected with row-level security (RLS)
-- Supabase Storage for profile and project images
-- Vercel for hosting and automatic deployments from the `nextjs-vercel` branch
-- Laravel 12 source retained at the repository root as the earlier implementation
+- **Active web app:** Next.js App Router, React, TypeScript, CSS, and Tailwind CSS.
+- **Backend services:** Supabase Auth, PostgreSQL, and Storage, accessed from Next.js through Supabase client libraries.
+- **Source hosting:** Git and GitHub.
+- **Application hosting:** Vercel is the provided deployment platform; current dashboard configuration was not independently verified in this audit.
+- **Earlier implementation:** Laravel/PHP files remain at the repository root and are separate from the active Next.js app in [`next-app/`](next-app/).
+
+See the [verified technology inventory](documentation/EverLeaf-Technology-Stack.md) for versions and evidence.
+
+## Links
+
+- Live website (URL provided; live availability was not checked during this documentation update): [EverLeaf](https://everleaf-portfolio-generator.vercel.app/home)
+- GitHub branch: [NikenjiPenas/Everleaf-portfolio-generator — nextjs-vercel](https://github.com/NikenjiPenas/Everleaf-portfolio-generator/tree/nextjs-vercel)
+- Project documentation: [EverLeaf Project Documentation](documentation/EverLeaf-Project-Documentation.md)
+- Technology stack: [EverLeaf Technology Stack](documentation/EverLeaf-Technology-Stack.md)
+- Testing report: [EverLeaf Testing Report](documentation/EverLeaf-Testing-Report.md)
+- Screenshots: [documentation/screenshots](documentation/screenshots/README.md) · [Screenshot checklist](documentation/SCREENSHOT_CHECKLIST.md)
+- Existing editable and PDF documents are retained in `documentation/`.
+
+## Prerequisites
+
+- Node.js compatible with the Next.js version in `next-app/package.json` (Next.js 16 requires a supported modern Node release).
+- npm.
+- A Supabase project with the required Auth, PostgreSQL schema, and Storage configuration.
 
 ## Run locally
 
-### Requirements
-
-- Node.js compatible with Next.js 16
-- npm
-- A Supabase project
-
-### 1. Install dependencies
-
-```bash
+```powershell
 cd next-app
 npm ci
+Copy-Item env.example .env.local
 ```
 
-### 2. Configure environment variables
-
-Copy `next-app/env.example` to `next-app/.env.local`, then fill in the Supabase project URL and **publishable** key. For local work, keep the site URL set to `http://localhost:3000`.
+Set the following variables in `next-app/.env.local` with your own project values; do not commit this file:
 
 ```dotenv
-NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_SUPABASE_PUBLISHABLE_KEY
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-supabase-publishable-key
 NEXT_PUBLIC_SUPABASE_MEDIA_BUCKET=portfolio-media
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-Do not put a Supabase service-role key in a `NEXT_PUBLIC_` variable or commit `.env.local`.
+The Supabase URL and publishable key are required by the clients. The media bucket setting defaults to `portfolio-media`; match it to the Storage configuration. Set `NEXT_PUBLIC_SITE_URL` to the correct origin for local and production authentication callbacks.
 
-### 3. Set up Supabase
+Apply the SQL files in [`next-app/supabase/migrations/`](next-app/supabase/migrations/) to the intended Supabase project in filename order after reviewing them. The repository proves that migration files exist; it does not prove they have been applied remotely. Configure the Supabase Auth site URL and allowed callback URL (`/auth/callback`) for each environment.
 
-In the Supabase SQL Editor, run [`next-app/supabase/migrations/202610040001_portfolios.sql`](next-app/supabase/migrations/202610040001_portfolios.sql) once. It creates the portfolios table, owner/public access policies, and the `portfolio-media` storage bucket and policies.
-
-In **Authentication → URL Configuration**, set the local Site URL to `http://localhost:3000` and add `http://localhost:3000/auth/callback` to the allowed redirect URLs. Email confirmation must be enabled/configured if you want new accounts to verify their email.
-
-### 4. Start the app
-
-```bash
+```powershell
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Run `npm run check` for the TypeScript check and `npm run build` to create a production build.
+Open `http://localhost:3000`. The available scripts are:
 
-## Deploy on Vercel
-
-The production project is already deployed at [everleaf-portfolio-generator.vercel.app](https://everleaf-portfolio-generator.vercel.app/). Vercel uses the repository's `nextjs-vercel` branch and the `next-app` directory as the Next.js project root. A push to that branch starts a new deployment.
-
-For a new Vercel project, import this GitHub repository and set **Root Directory** to `next-app`. Add these environment variables to Vercel for **Production**, and for Preview/Development if those environments should use Supabase too:
-
-| Variable | Production value |
-| --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase publishable key |
-| `NEXT_PUBLIC_SUPABASE_MEDIA_BUCKET` | `portfolio-media` |
-| `NEXT_PUBLIC_SITE_URL` | `https://everleaf-portfolio-generator.vercel.app` |
-
-In Supabase **Authentication → URL Configuration**, set the production Site URL to `https://everleaf-portfolio-generator.vercel.app` and add `https://everleaf-portfolio-generator.vercel.app/auth/callback` to the allowed redirect URLs. Redeploy in Vercel after changing environment variables.
-
-## Data, images, and privacy
-
-- The SQL migration enables RLS. Signed-in users can manage only portfolios they own; anonymous visitors can read only published portfolios.
-- Portfolio image uploads go directly from the visitor's browser to the `portfolio-media` Supabase bucket. The migration makes the bucket public so images can appear on published portfolio pages. Anyone with an image URL can view that image; do not upload private or sensitive images.
-- The app uses the Supabase publishable key in the browser. Keep service-role keys and other secrets private, and configure them only in trusted server environments if a future feature requires them.
-- Existing Laravel users and portfolio records are not automatically transferred to the Next.js/Supabase application.
-
-## Authentication Email Delivery
-
-Supabase's built-in email service is limited to **2 auth emails per hour** and is best-effort. This affects confirmation and password-recovery email delivery; application code cannot raise that provider limit. For public sign-ups, configure a custom SMTP provider in Supabase under **Authentication → Email → SMTP Settings**. Supabase documents custom SMTP setup and its auth email limits in the [rate limits guide](https://supabase.com/docs/guides/auth/rate-limits).
-
-## Main pages
-
-| Path | Purpose |
-| --- | --- |
-| `/` | Welcome screen and Start Your Journey entry point |
-| `/home` | EverLeaf home page, features, template choices, About, and Contact |
-| `/signup` | Create an account |
-| `/login` | Sign in |
-| `/forgot-password` | Request a password reset email |
-| `/reset-password` | Set a new password from the reset link |
-| `/dashboard` | View portfolios, publish or make them private, and sign out |
-| `/dashboard/new` | Create a portfolio and upload its images |
-| `/p/{slug}` | Public page for a published portfolio |
-| `/goodbye` | Sign-out thank-you page |
-
-## Project layout
-
-```text
-next-app/
-  src/app/                 Next.js pages and server actions
-  src/lib/supabase/        Supabase browser/server clients
-  supabase/migrations/     Database and storage setup
-  public/                  Static assets
-  env.example              Required environment variable names
-app/, resources/, routes/  Earlier Laravel implementation
-Dockerfile, render.yaml    Earlier Laravel/Render deployment configuration
+```powershell
+npm run check   # TypeScript check
+npm run build   # Production build
+npm run start   # Serve a completed production build
 ```
 
-## Current scope and follow-up
+See the [testing report](documentation/EverLeaf-Testing-Report.md) for results from this documentation update. No dedicated automated test or lint script is defined in `next-app/package.json`.
 
-The deployed Next.js version supports account access and recovery, portfolio creation and editing, image uploads, public/private visibility, public portfolio pages, and recently deleted portfolio recovery. The home page screenshot is included above; the remaining screenshots listed above can be captured with sample data before final submission.
+## Database and media summary
 
-## Security reminders
+The checked-in SQL migrations define `portfolios`, `portfolio_education`, `portfolio_experiences`, and `portfolio_social_links`. Skills and projects are JSONB values on `portfolios`; uploaded image files are stored in Supabase Storage. The migrations define owner-focused Row Level Security and visitor reads for active published portfolios. The exact deployed schema, policies, bucket state, and migration status must be verified in Supabase before claiming the remote project matches these files.
 
-- Never commit `.env`, `.env.local`, database passwords, API tokens, application secrets, or Supabase service-role keys.
-- Keep Supabase RLS enabled and review any policy changes before deployment.
-- Use sample content in screenshots and public demos; get permission before sharing another person's image or personal information.
+## Deployment notes
 
-## License
+The active application folder is `next-app/`; use it as Vercel's Root Directory if the project is configured as a monorepo. Add the environment variable names above to the appropriate Vercel environments. The checked-in source does not prove the current Vercel dashboard settings or automatic deployment behavior. Vercel hosts the application; GitHub stores its source code.
 
-No separate license has been declared for this project. Do not assume the project itself is open source solely because its GitHub repository is public.
+## Security
+
+- Never commit `.env`, `.env.local`, passwords, access tokens, or service-role keys.
+- Do not put a service-role key in a browser-visible `NEXT_PUBLIC_*` variable.
+- Supabase Row Level Security is defined in the migrations; remote policy state is unverified here.
+- Use safe sample data in screenshots.
+
+## Repository layout
+
+```text
+online-portfolio-generator/
+├── next-app/                  # Active Next.js application
+│   ├── src/app/                # App Router pages and actions
+│   ├── src/components/         # Reusable and template UI
+│   ├── src/lib/                # Supabase and application helpers
+│   └── supabase/migrations/    # SQL schema and policy migrations
+├── resources/views/            # Earlier Laravel/Blade implementation
+├── public/                     # Earlier Laravel public assets
+├── documentation/             # Project reports and screenshots
+└── docs/screenshots/           # Additional screenshot source captures
+```
+
+The root Laravel source is retained as an earlier implementation; it is not identified as the active Vercel application by the current Next.js project structure.
