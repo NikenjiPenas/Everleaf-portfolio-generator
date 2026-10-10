@@ -45,39 +45,42 @@ These links open the existing project screenshots stored in the repository. They
 
 ### Frontend
 
-- **Active:** Next.js 16.3.8, React/React DOM 19.2.8, TypeScript 5.9.3, Tailwind CSS 4.3.3, custom CSS, and PostCSS with `@tailwindcss/postcss` 4.3.3.
-- **Legacy tooling:** Vite 7.3.6 and the Laravel Vite plugin build the earlier root Laravel application's assets; Vite is not the Next.js build tool.
+- **Active:** Next.js 16.3.8, React/React DOM 19.2.8, TypeScript 5.9.3, and Tailwind CSS 4.3.3.
+- **Languages and styling:** HTML, CSS, JavaScript, and custom EverLeaf styles.
+- **Build support:** PostCSS with @tailwindcss/postcss 4.3.3.
+- **Legacy tooling:** Vite 7.3.6 and the Laravel Vite plugin build the earlier root Laravel application's assets; they do not build the Next.js application.
 
 ### Backend
 
-- **Active:** Next.js 16.3.8 server features and Server Actions with Supabase Auth, `@supabase/ssr` 0.12.7, and `@supabase/supabase-js` 2.117.2.
-- **Legacy implementation:** Laravel 12.69.2 and PHP 8.2+ remain at the repository root. They are separate from the active Next.js app in [`next-app/`](next-app/).
+- **Active:** Next.js Server Actions with Supabase Auth and Supabase Storage. The Next.js package is 16.3.8; the Supabase client packages provide the application integration.
+- **Legacy:** Laravel 12.69.2 and PHP ^8.2 remain at the repository root. They are separate from the active Next.js app in [next-app/](next-app/).
 
 ### Database
 
-- **Active:** Supabase-hosted PostgreSQL, accessed by the Next.js app through Supabase. The PostgreSQL server version and whether every checked-in migration is applied remotely have not been independently verified.
-- **Legacy local configuration:** SQLite is the default in the Laravel example configuration; it is not the database for the active Next.js app.
-- **Legacy option:** Laravel also defines a MySQL connection, but the active Next.js app does not use it.
+- **Active:** Supabase-hosted PostgreSQL stores data for the Next.js application. The remote PostgreSQL server version and migration status have not been independently verified.
+- **Legacy Laravel configuration:** MySQL is an available connection, but the checked-in Laravel example defaults to SQLite (DB_CONNECTION=sqlite). The project reports using MySQL locally with XAMPP; that local setup is not confirmed by the repository configuration.
 
 ### Storage
 
-- **Active:** Supabase Storage integration uses the `portfolio-media` bucket for profile and project images. The repository defines bucket policies; current remote bucket settings were not independently inspected.
+- **Active:** Supabase Storage integration uses the portfolio-media bucket for profile and project images. The repository defines bucket policies; current remote bucket settings were not independently inspected.
 - **Legacy optional capability:** The Laravel implementation includes an S3-compatible storage adapter and configuration placeholders. AWS S3 is not the active Next.js storage service.
 
 ### Development Tools
 
-- Node.js 24.21.0 and npm 11.19.0 were observed in the local audit environment. The Next.js package does not pin those exact runtime versions.
+- Node.js and npm are used for the Next.js application. The project does not pin exact Node.js or npm versions; Next.js 16.3.8 requires Node.js 20.9.0 or newer.
+- Composer manages dependencies for the legacy Laravel/PHP application.
+- Visual Studio Code is the project-reported editor.
 - Git and GitHub provide version control and source-code hosting.
-- Composer and Docker support the earlier Laravel implementation; the root Dockerfile builds PHP/Laravel and Vite assets, not the Next.js app.
-- XAMPP is not verified in the active application or repository configuration.
+- XAMPP is project-reported local-development tooling for MySQL/Laravel; its installation or use is not established by checked-in configuration.
+- Docker supports the earlier root Laravel application; the root Dockerfile does not build the Next.js app.
 
 ### Deployment and Hosting
 
 - **Application hosting:** Vercel is the hosting platform associated with the published Next.js site. The current Vercel dashboard configuration was not independently inspected.
 - **Source hosting:** GitHub stores the project code; it does not host the running application.
-- **Legacy/alternative configuration:** The root `render.yaml` describes a Docker-based Laravel service on the legacy `master` branch. It is not the active Next.js deployment configuration.
+- **Legacy/alternative configuration:** The root render.yaml describes a Docker-based Laravel service on the legacy master branch. It is not the active Next.js deployment configuration.
 
-See the [verified technology inventory](documentation/EverLeaf-Technology-Stack.md) for versions and evidence.
+See the [verified technology inventory](documentation/EverLeaf-Technology-Stack.md) for repository evidence and implementation details.
 
 ## Links
 

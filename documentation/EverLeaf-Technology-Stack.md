@@ -6,14 +6,14 @@ This inventory describes evidence in the repository, not an assumption based on 
 
 | Category | Tool or technology | Verified version | Actual purpose | Evidence | Status |
 | --- | --- | --- | --- | --- | --- |
-| Editor | Visual Studio Code | Not verified | User's development editor. | User-provided project context and workspace file. | Developer tool; not part of deployed app. |
+| Editor | Visual Studio Code | Not versioned | Project-reported editor. | User-provided project context and workspace file. | Development tool; not part of deployed app. |
 | Version control | Git | Not verified | Tracks source and documentation history. | `.git` metadata; branch `nextjs-vercel`; configured remote. | Used for development. |
 | Source hosting | GitHub | Not verified | Hosts the source repository. | Configured `origin` points to `NikenjiPenas/Everleaf-portfolio-generator`. | Source hosting; not application hosting. |
-| Runtime | Node.js | 24.21.0 in this audit environment | Runs npm and the Next.js build/runtime. | Local runtime check; app lockfile declares no exact Node engine. | Development/build runtime; production runtime is Vercel-managed. |
-| Package manager | npm | 11.19.0 in this audit environment | Installs JavaScript packages and runs scripts. | Local runtime check and `package-lock.json`. | Used for development/build. |
+| Runtime | Node.js | No exact app-pinned version; Next.js requires >=20.9.0 | Runs npm and the Next.js build/runtime. | next-app/package.json does not pin Node; installed Next.js package declares >=20.9.0. | Development/build runtime; production runtime is Vercel-managed. |
+| Package manager | npm | No exact app-pinned version | Installs JavaScript packages and runs scripts. | next-app/package-lock.json is an npm lockfile; no npm version is pinned. | Used for development/build. |
 | Laravel package manager | Composer | Not verified | Would install root Laravel/PHP dependencies. | Root `composer.json`/`composer.lock`; Composer CLI was unavailable in this environment. | Legacy implementation tool. |
 | Browser developer tools | Not verified | Not verified | No project configuration proves a specific browser tool was used. | No repository evidence. | Unverified. |
-| XAMPP | Not verified | Not verified | No evidence establishes it as part of the current Next.js setup. | No active Next.js configuration reference. | Do not list as an active production technology. |
+| XAMPP | Project-reported; version not verified | Not verified in repository configuration | Local-development tooling reported for MySQL/Laravel; not used by the active Next.js application. | User-approved tools list; Laravel config offers MySQL, while .env.example defaults to SQLite. | Local/legacy context only; not production infrastructure. |
 | GitHub Copilot | Not verified | Not verified | No repository evidence establishes use. | None. | Unverified. |
 
 VS Code, Git, GitHub, Node.js, and npm are tools around the project; they are distinct from technologies delivered to website visitors.
@@ -68,6 +68,7 @@ There is no separately configured Express.js API server. Application actions run
 | Service/technology | Version | Actual purpose | Evidence | Status |
 | --- | --- | --- | --- | --- |
 | PostgreSQL | Remote server version not verified | Relational database behind the Supabase project. | SQL migrations and Supabase client usage. | Active intended database; remote version/configuration unverified. |
+| MySQL | Server version not verified | Optional database connection in the legacy Laravel application; the project reports local use with XAMPP. | config/database.php declares a MySQL driver; root .env.example defaults to SQLite. | Legacy/local-development context; not used by the active Next.js app. |
 | Supabase | Hosted platform version not applicable | Managed Auth, PostgreSQL Data API, and Storage services. | Client configuration, env names, migrations. | Active integration in source; remote settings not inspected. |
 | Supabase Auth | Hosted version not verified | Email account, sign-in/session, callback and recovery flows. | Auth pages/actions and Supabase helpers. | Present in source; hosted email/redirect setup unverified. |
 | Supabase Storage | Hosted version not verified | Profile/project image object storage. | Upload helper and SQL Storage policies. | Present in source; remote bucket configuration unverified. |
@@ -130,7 +131,7 @@ Names are taken from `next-app/env.example`; secret values are deliberately omit
 | Axios | 1.20.0 in root lock | HTTP client dependency in root Laravel app. | Legacy dependency; not a direct Next app dependency. |
 | Concurrently | 9.2.4 in root lock | Runs multiple root development processes. | Legacy/root tooling. |
 | Laravel Flysystem S3 adapter | Composer requirement present | S3-compatible filesystem support in the legacy implementation. | Legacy dependency; not evidence of active Next.js storage. |
-| XAMPP | Not verified | No confirmed evidence it is required by current deployment. | Do not include as active production stack. |
+| XAMPP | Version/use not verified in repository | Reported local-development tool for the legacy Laravel/MySQL setup. | Not referenced in application configuration; active Next.js app uses Supabase. | Project-reported local tooling, not production stack. |
 
 ## Other external services
 
