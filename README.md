@@ -43,11 +43,39 @@ These links open the existing project screenshots stored in the repository. They
 
 ## Technology
 
-- **Active web app:** Next.js App Router, React, TypeScript, CSS, and Tailwind CSS.
-- **Backend services:** Supabase Auth, PostgreSQL, and Storage, accessed from Next.js through Supabase client libraries.
-- **Source hosting:** Git and GitHub.
-- **Application hosting:** Vercel is the provided deployment platform; current dashboard configuration was not independently verified in this audit.
-- **Earlier implementation:** Laravel/PHP files remain at the repository root and are separate from the active Next.js app in [`next-app/`](next-app/).
+### Frontend
+
+- **Active:** Next.js 16.3.8, React/React DOM 19.2.8, TypeScript 5.9.3, Tailwind CSS 4.3.3, custom CSS, and PostCSS with `@tailwindcss/postcss` 4.3.3.
+- **Legacy tooling:** Vite 7.3.6 and the Laravel Vite plugin build the earlier root Laravel application's assets; Vite is not the Next.js build tool.
+
+### Backend
+
+- **Active:** Next.js 16.3.8 server features and Server Actions with Supabase Auth, `@supabase/ssr` 0.12.7, and `@supabase/supabase-js` 2.117.2.
+- **Legacy implementation:** Laravel 12.69.2 and PHP 8.2+ remain at the repository root. They are separate from the active Next.js app in [`next-app/`](next-app/).
+
+### Database
+
+- **Active:** Supabase-hosted PostgreSQL, accessed by the Next.js app through Supabase. The PostgreSQL server version and whether every checked-in migration is applied remotely have not been independently verified.
+- **Legacy local configuration:** SQLite is the default in the Laravel example configuration; it is not the database for the active Next.js app.
+- **Legacy option:** Laravel also defines a MySQL connection, but the active Next.js app does not use it.
+
+### Storage
+
+- **Active:** Supabase Storage integration uses the `portfolio-media` bucket for profile and project images. The repository defines bucket policies; current remote bucket settings were not independently inspected.
+- **Legacy optional capability:** The Laravel implementation includes an S3-compatible storage adapter and configuration placeholders. AWS S3 is not the active Next.js storage service.
+
+### Development Tools
+
+- Node.js 24.21.0 and npm 11.19.0 were observed in the local audit environment. The Next.js package does not pin those exact runtime versions.
+- Git and GitHub provide version control and source-code hosting.
+- Composer and Docker support the earlier Laravel implementation; the root Dockerfile builds PHP/Laravel and Vite assets, not the Next.js app.
+- XAMPP is not verified in the active application or repository configuration.
+
+### Deployment and Hosting
+
+- **Application hosting:** Vercel is the hosting platform associated with the published Next.js site. The current Vercel dashboard configuration was not independently inspected.
+- **Source hosting:** GitHub stores the project code; it does not host the running application.
+- **Legacy/alternative configuration:** The root `render.yaml` describes a Docker-based Laravel service on the legacy `master` branch. It is not the active Next.js deployment configuration.
 
 See the [verified technology inventory](documentation/EverLeaf-Technology-Stack.md) for versions and evidence.
 
@@ -55,7 +83,7 @@ See the [verified technology inventory](documentation/EverLeaf-Technology-Stack.
 
 - Live website (URL provided; live availability was not checked during this documentation update): [EverLeaf](https://everleaf-portfolio-generator.vercel.app/home)
 - GitHub branch: [NikenjiPenas/Everleaf-portfolio-generator — nextjs-vercel](https://github.com/NikenjiPenas/Everleaf-portfolio-generator/tree/nextjs-vercel)
-- Project documentation: [EverLeaf Project Documentation](documentation/EverLeaf-Project-Documentation.md)
+- Project documentation: [Word document](documentation/EverLeaf-Project-Documentation.docx) · [PDF](documentation/EverLeaf-Project-Documentation.pdf) · [Markdown](documentation/EverLeaf-Project-Documentation.md)
 - Technology stack: [EverLeaf Technology Stack](documentation/EverLeaf-Technology-Stack.md)
 - Testing report: [EverLeaf Testing Report](documentation/EverLeaf-Testing-Report.md)
 - Screenshots: [documentation/screenshots](documentation/screenshots/README.md) · [Screenshot checklist](documentation/SCREENSHOT_CHECKLIST.md)
