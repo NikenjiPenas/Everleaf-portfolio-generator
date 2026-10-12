@@ -103,17 +103,32 @@ async function savePortfolioDetails(supabase: Awaited<ReturnType<typeof createCl
   ] as const;
   for (const group of groups) {
     const { data: current, error: readError } = await supabase.from(group.table).select("id").eq("portfolio_id", portfolioId);
-    if (readError) return readError;
-    const submittedIds = group.rows.flatMap((row) => row.id ? [row.id] : []);
-    const removedIds = (current ?? []).map((row: { id: string }) => row.id).filter((id: string) => !submittedIds.includes(id));
-    const values = group.rows.map(({ id: _id, ...row }) => ({ ...( _id ? { id: _id } : {}), ...row, portfolio_id: portfolioId }));
+    if (readError) {
+      console.error("[EverLeaf] Unable to load portfolio detail IDs.", { table: group.table, error: readError.message });
+      return { message: "Saved portfolio details could not be checked. Your form entries are still available; please try saving again." };
+    }
+    const currentIds = new Set((current ?? []).map((row: { id: string }) => row.id));
+    const submittedExistingIds = group.rows.flatMap((row) => row.id ? [row.id] : []);
+    if (new Set(submittedExistingIds).size !== submittedExistingIds.length || submittedExistingIds.some((id) => !currentIds.has(id))) {
+      return { message: "A saved detail entry could not be verified for this portfolio. Reload the form and try again." };
+    }
+    const submittedIdSet = new Set(submittedExistingIds);
+    const removedIds = [...currentIds].filter((id) => !submittedIdSet.has(id));
+    // Supplying the UUID explicitly also supports hosted tables whose UUID default was never applied.
+    const values = group.rows.map(({ id, ...row }) => ({ id: id || crypto.randomUUID(), ...row, portfolio_id: portfolioId }));
     if (values.length) {
       const { error } = await supabase.from(group.table).upsert(values, { onConflict: "id" });
-      if (error) return error;
+      if (error) {
+        console.error("[EverLeaf] Portfolio detail save failed.", { table: group.table, error: error.message });
+        return { message: "One or more saved details could not be stored. Your form entries are still available; please check the entries and retry." };
+      }
     }
     if (removedIds.length) {
       const { error } = await supabase.from(group.table).delete().in("id", removedIds).eq("portfolio_id", portfolioId);
-      if (error) return error;
+      if (error) {
+        console.error("[EverLeaf] Portfolio detail removal failed.", { table: group.table, error: error.message });
+        return { message: "A removed detail entry could not be updated. Your form entries are still available; please retry." };
+      }
     }
   }
   return null;
@@ -224,7 +239,10 @@ export async function savePortfolio(_previousState: PortfolioFormState, formData
     skills: text(formData, "skills").split(",").map((skill) => skill.trim()).filter(Boolean).slice(0, 20),
     projects,
   }).select("id").single();
-  if (error) return { message: `Your entries are still on the form. The portfolio could not be saved: ${error.message}`, values: preservePortfolioForm(formData) };
+  if (error) {
+    console.error("[EverLeaf] Portfolio creation failed.", { error: error.message });
+    return { message: "Your entries are still on the form. The portfolio could not be saved; please try again.", values: preservePortfolioForm(formData) };
+  }
   const portfolioId = savedPortfolio?.id;
   if (!portfolioId) return { message: "Your entries are still on the form, but the portfolio could not be saved. Please try again.", values: preservePortfolioForm(formData) };
   const detailError = await savePortfolioDetails(supabase, portfolioId, details);
@@ -262,7 +280,10 @@ export async function updatePortfolio(_previousState: PortfolioFormState, formDa
     template_key: template, profile_photo_path: profilePhotoPath,
     skills: text(formData, "skills").split(",").map((skill) => skill.trim()).filter(Boolean).slice(0, 20), projects,
   }).eq("id", id).eq("user_id", userId).is("deleted_at", null);
-  if (error) return { message: `Your entries are still on the form. Changes could not be saved: ${error.message}`, values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
+  if (error) {
+    console.error("[EverLeaf] Portfolio update failed.", { error: error.message });
+    return { message: "Your entries are still on the form. Changes could not be saved; please try again.", values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
+  }
   const detailError = await savePortfolioDetails(supabase, id, details);
   if (detailError) return { message: `Your portfolio changes were saved. Some optional details need attention: ${detailError.message} Correct or remove those entries, then save again.`, values: preservePortfolioForm(formData), ...(savedPortfolioId ? { savedPortfolioId } : {}) };
   revalidatePath("/dashboard");
