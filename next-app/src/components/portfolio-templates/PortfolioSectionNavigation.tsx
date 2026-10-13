@@ -17,12 +17,17 @@ export default function PortfolioSectionNavigation({ items, className, label = "
 
     const scrollPadding = Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
     const targetMargin = Math.max(...sections.map((section) => Number.parseFloat(getComputedStyle(section).scrollMarginTop) || 0));
-    const markerOffset = scrollPadding + targetMargin;
+    const markerOffset = scrollPadding + targetMargin + 24;
     const updateActive = () => {
       let current = items[0]?.id ?? "home";
+      let currentTop = Number.NEGATIVE_INFINITY;
       const marker = window.scrollY + markerOffset;
       for (const section of sections) {
-        if (section.offsetTop <= marker) current = section.id;
+        const documentTop = section.getBoundingClientRect().top + window.scrollY;
+        if (documentTop <= marker && documentTop >= currentTop) {
+          current = section.id;
+          currentTop = documentTop;
+        }
       }
       setActive(current);
     };

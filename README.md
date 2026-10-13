@@ -18,7 +18,7 @@ EverLeaf is a nature-inspired portfolio builder. Users can save their profile an
 - Portfolio preview, template selection, and public `/p/{slug}` pages.
 - Responsive styling and an EverLeaf light/dark theme.
 
-These features are present in the source. This update verifies the live homepage and template preview pages listed in the production screenshots below; account and portfolio workflows still require an authenticated test account.
+These features are present in the source. The homepage and template previews were checked in production; account, portfolio CRUD, and storage workflows still require an authenticated test account for end-to-end verification.
 
 ## Templates
 
@@ -30,17 +30,7 @@ These features are present in the source. This update verifies the live homepage
 
 ## Screenshots
 
-These screenshots were captured from the live Vercel deployment on October 13, 2026, at a 1440 px desktop viewport. The homepage section images are crops from one real production-page capture; the three template images show their individual live preview pages.
-
-| Page | Production screenshot |
-| --- | --- |
-| Homepage — Home | [Open screenshot](documentation/screenshots/homepage-home-production.png) |
-| Homepage — Features | [Open screenshot](documentation/screenshots/homepage-features-production.png) |
-| Homepage — Templates | [Open screenshot](documentation/screenshots/homepage-templates-production.png) |
-| Homepage — About | [Open screenshot](documentation/screenshots/homepage-about-production.png) |
-| Simple template | [Open screenshot](documentation/screenshots/template-simple-production.png) |
-| Modern template | [Open screenshot](documentation/screenshots/template-modern-production.png) |
-| Creative template | [Open screenshot](documentation/screenshots/template-creative-production.png) |
+Current system and template captures are indexed in [documentation/screenshots](documentation/screenshots/README.md). They are documentation assets and are not part of the application runtime.
 
 ## Technology
 
@@ -88,8 +78,7 @@ See the [verified technology inventory](documentation/EverLeaf-Technology-Stack.
 - Live website (checked online during this documentation update): [EverLeaf](https://everleaf-portfolio-generator.vercel.app/home)
 - GitHub branch: [NikenjiPenas/Everleaf-portfolio-generator — nextjs-vercel](https://github.com/NikenjiPenas/Everleaf-portfolio-generator/tree/nextjs-vercel)
 - Project documentation: [Word document](documentation/EverLeaf-Project-Documentation.docx) · [PDF](documentation/EverLeaf-Project-Documentation.pdf) · [Markdown](documentation/EverLeaf-Project-Documentation.md)
-- Technology stack: [EverLeaf Technology Stack](documentation/EverLeaf-Technology-Stack.md)
-- Screenshots: [documentation/screenshots](documentation/screenshots/README.md) · [Screenshot checklist](documentation/SCREENSHOT_CHECKLIST.md)
+- Screenshots: [documentation/screenshots](documentation/screenshots/README.md)
 - Existing editable and PDF documents are retained in `documentation/`.
 
 ## Prerequisites
