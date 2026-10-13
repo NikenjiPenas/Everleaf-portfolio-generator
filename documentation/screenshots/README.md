@@ -14,4 +14,4 @@ This folder contains project documentation captures. The screenshots currently c
 | [`template-modern-production.png`](template-modern-production.png) | Modern template preview. |
 | [`template-creative-production.png`](template-creative-production.png) | Creative template preview. |
 
-Refresh the captures after the production deployment. Use safe sample data, review each image, and omit secrets or private portfolio details.
+Capture replacements from the verified production deployment before presenting these as current. Use safe sample data, review each image, and omit secrets or private portfolio details.

@@ -38,7 +38,7 @@ Education, experience, and social-link rows belong to a portfolio. The checked-i
 
 ## 7. Screenshots of the System
 
-The following repository screenshots show the site before the responsive navigation and layout fixes documented in this update. Refresh them from the deployed site before using them as evidence of the latest version.
+The following repository screenshots show the site before the responsive navigation and layout fixes documented in this update. They are historical references and should be replaced with fresh captures before presenting the latest version.
 
 - [Homepage](screenshots/homepage-home-production.png)
 - [Portfolio information form](screenshots/03-portfolio-information-form.png) (historical capture)
@@ -46,7 +46,7 @@ The following repository screenshots show the site before the responsive navigat
 
 ## 8. Screenshots of the Three Templates
 
-These are historical production captures from before the current template fixes. Replace them with reviewed captures after the updated deployment is available.
+These are historical production captures from before the current template fixes. Replace them with reviewed captures from the updated deployment before presenting them as the latest designs.
 
 - [Simple template](screenshots/template-simple-production.png)
 - [Modern template](screenshots/template-modern-production.png)
