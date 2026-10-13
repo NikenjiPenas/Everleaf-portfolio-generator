@@ -18,7 +18,7 @@ EverLeaf is a nature-inspired portfolio builder. Users can save their profile an
 - Portfolio preview, template selection, and public `/p/{slug}` pages.
 - Responsive styling and an EverLeaf light/dark theme.
 
-These features are present in the source. This documentation audit does not independently verify every flow against the hosted services; see the [testing report](documentation/EverLeaf-Testing-Report.md).
+These features are present in the source. This update verifies the live homepage and template preview pages listed in the production screenshots below; account and portfolio workflows still require an authenticated test account.
 
 ## Templates
 
@@ -30,16 +30,17 @@ These features are present in the source. This documentation audit does not inde
 
 ## Screenshots
 
-These links open the existing project screenshots stored in the repository. They document the interface and are not a fresh verification of the current live deployment.
+These screenshots were captured from the live Vercel deployment on October 13, 2026, at a 1440 px desktop viewport. The homepage section images are crops from one real production-page capture; the three template images show their individual live preview pages.
 
-| Page | Screenshot links |
+| Page | Production screenshot |
 | --- | --- |
-| Home page | [Full page](docs/screenshots/homepage-full.jpg) · [Desktop](docs/screenshots/homepage-desktop.png) |
-| Portfolio form | [Top](docs/screenshots/portfolio-form-top.jpg) · [Lower section](docs/screenshots/portfolio-form-lower.jpg) |
-| Portfolio management | [Desktop](docs/screenshots/portfolio-management-desktop.png) · [Second view](docs/screenshots/portfolio-management-second-view.png) |
-| Simple template | [View screenshot](docs/screenshots/template-simple.jpg) |
-| Modern template | [View screenshot](docs/screenshots/template-modern.jpg) |
-| Creative template | [View screenshot](docs/screenshots/template-creative.jpg) |
+| Homepage — Home | [Open screenshot](documentation/screenshots/homepage-home-production.png) |
+| Homepage — Features | [Open screenshot](documentation/screenshots/homepage-features-production.png) |
+| Homepage — Templates | [Open screenshot](documentation/screenshots/homepage-templates-production.png) |
+| Homepage — About | [Open screenshot](documentation/screenshots/homepage-about-production.png) |
+| Simple template | [Open screenshot](documentation/screenshots/template-simple-production.png) |
+| Modern template | [Open screenshot](documentation/screenshots/template-modern-production.png) |
+| Creative template | [Open screenshot](documentation/screenshots/template-creative-production.png) |
 
 ## Technology
 
@@ -88,7 +89,6 @@ See the [verified technology inventory](documentation/EverLeaf-Technology-Stack.
 - GitHub branch: [NikenjiPenas/Everleaf-portfolio-generator — nextjs-vercel](https://github.com/NikenjiPenas/Everleaf-portfolio-generator/tree/nextjs-vercel)
 - Project documentation: [Word document](documentation/EverLeaf-Project-Documentation.docx) · [PDF](documentation/EverLeaf-Project-Documentation.pdf) · [Markdown](documentation/EverLeaf-Project-Documentation.md)
 - Technology stack: [EverLeaf Technology Stack](documentation/EverLeaf-Technology-Stack.md)
-- Testing report: [EverLeaf Testing Report](documentation/EverLeaf-Testing-Report.md)
 - Screenshots: [documentation/screenshots](documentation/screenshots/README.md) · [Screenshot checklist](documentation/SCREENSHOT_CHECKLIST.md)
 - Existing editable and PDF documents are retained in `documentation/`.
 
@@ -131,7 +131,7 @@ npm run build   # Production build
 npm run start   # Serve a completed production build
 ```
 
-See the [testing report](documentation/EverLeaf-Testing-Report.md) for results from this documentation update. No dedicated automated test or lint script is defined in `next-app/package.json`.
+No dedicated automated test or lint script is defined in `next-app/package.json`; the available TypeScript check and production build are documented above.
 
 ## Database and media summary
 

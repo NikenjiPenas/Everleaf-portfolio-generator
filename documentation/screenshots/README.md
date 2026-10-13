@@ -1,6 +1,18 @@
 # EverLeaf screenshots
 
-This folder contains existing screenshots used for project documentation. The files listed as available were already present in the repository; they were not newly captured during the technology audit. See [`../SCREENSHOT_CHECKLIST.md`](../SCREENSHOT_CHECKLIST.md) for their provenance and items that still need a manual capture.
+This folder contains project documentation screenshots, including a verified set captured from the live Vercel website on October 13, 2026. The production screenshots use a 1440 px desktop viewport and safe sample portfolio data. The four homepage section images are direct crops from one real production-page capture; no content was added or altered. See [`../SCREENSHOT_CHECKLIST.md`](../SCREENSHOT_CHECKLIST.md) for the earlier capture inventory and remaining manual-capture items.
+
+## Current production captures
+
+| File | Description |
+| --- | --- |
+| [`homepage-home-production.png`](homepage-home-production.png) | Live homepage hero and navigation. |
+| [`homepage-features-production.png`](homepage-features-production.png) | Live homepage “How It Works” section. |
+| [`homepage-templates-production.png`](homepage-templates-production.png) | Live homepage with all three template cards and their Preview and Use This Template links. |
+| [`homepage-about-production.png`](homepage-about-production.png) | Live homepage About callout. |
+| [`template-simple-production.png`](template-simple-production.png) | Live Simple template preview. |
+| [`template-modern-production.png`](template-modern-production.png) | Live Modern template preview. |
+| [`template-creative-production.png`](template-creative-production.png) | Live Creative template preview. |
 
 ## Available captures
 
@@ -17,7 +29,7 @@ This folder contains existing screenshots used for project documentation. The fi
 | [`08-portfolio-preview.png`](08-portfolio-preview.png) | Portfolio preview with its controls. |
 | [`09-manage-portfolio.png`](09-manage-portfolio.png) | Portfolio management page. |
 
-These images are documentation captures, not proof of the current live deployment. Review each image and remove or redact personal data before sharing externally.
+These earlier images are documentation captures from their original capture time and do not independently verify the current live deployment. Review each image and remove or redact personal data before sharing externally.
 
 ## Capturing additional screenshots
 
