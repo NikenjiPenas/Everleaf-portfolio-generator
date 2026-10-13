@@ -85,7 +85,7 @@ See the [verified technology inventory](documentation/EverLeaf-Technology-Stack.
 
 ## Links
 
-- Live website (URL provided; live availability was not checked during this documentation update): [EverLeaf](https://everleaf-portfolio-generator.vercel.app/home)
+- Live website (checked online during this documentation update): [EverLeaf](https://everleaf-portfolio-generator.vercel.app/home)
 - GitHub branch: [NikenjiPenas/Everleaf-portfolio-generator — nextjs-vercel](https://github.com/NikenjiPenas/Everleaf-portfolio-generator/tree/nextjs-vercel)
 - Project documentation: [Word document](documentation/EverLeaf-Project-Documentation.docx) · [PDF](documentation/EverLeaf-Project-Documentation.pdf) · [Markdown](documentation/EverLeaf-Project-Documentation.md)
 - Technology stack: [EverLeaf Technology Stack](documentation/EverLeaf-Technology-Stack.md)
