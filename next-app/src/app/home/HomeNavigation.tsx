@@ -17,12 +17,25 @@ export default function HomeNavigation() {
 
   useEffect(() => {
     const targets = sections.map(([id]) => document.getElementById(id)).filter((item): item is HTMLElement => Boolean(item));
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible?.target.id) setActive(visible.target.id);
-    }, { rootMargin: "-22% 0px -58% 0px", threshold: [0, 0.2, 0.5, 0.8] });
-    targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
+    const updateActive = () => {
+      const header = document.querySelector<HTMLElement>(".site-header");
+      const marker = window.scrollY + (header?.getBoundingClientRect().height ?? 74) + 16;
+      let current: (typeof sections)[number][0] = sections[0][0];
+      for (const [id] of sections) {
+        const target = targets.find((item) => item.id === id);
+        if (target && target.offsetTop <= marker) current = id;
+      }
+      setActive(current);
+    };
+    updateActive();
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
+    window.addEventListener("hashchange", updateActive);
+    return () => {
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("resize", updateActive);
+      window.removeEventListener("hashchange", updateActive);
+    };
   }, []);
 
   return <div className={`home-navigation${open ? " is-open" : ""}`}>

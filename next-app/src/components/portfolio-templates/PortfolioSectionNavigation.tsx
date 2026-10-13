@@ -15,14 +15,30 @@ export default function PortfolioSectionNavigation({ items, className, label = "
     const sections = items.map(({ id }) => document.getElementById(id)).filter((section): section is HTMLElement => Boolean(section));
     if (!sections.length) return;
 
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible?.target.id) setActive(visible.target.id);
-    }, { rootMargin: "-18% 0px -62% 0px", threshold: [0, 0.15, 0.35, 0.65] });
+    const scrollPadding = Number.parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const targetMargin = Math.max(...sections.map((section) => Number.parseFloat(getComputedStyle(section).scrollMarginTop) || 0));
+    const markerOffset = scrollPadding + targetMargin;
+    const updateActive = () => {
+      let current = items[0]?.id ?? "home";
+      const marker = window.scrollY + markerOffset;
+      for (const section of sections) {
+        if (section.offsetTop <= marker) current = section.id;
+      }
+      setActive(current);
+    };
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, [items]);
+    const hash = window.location.hash.slice(1);
+    if (items.some((item) => item.id === hash)) setActive(hash);
+    updateActive();
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
+    window.addEventListener("hashchange", updateActive);
+    return () => {
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("resize", updateActive);
+      window.removeEventListener("hashchange", updateActive);
+    };
+  }, [items, className]);
 
   return <nav className={className} aria-label={label}>
     {items.map(({ id, label: linkLabel }) => <a key={id} href={`#${id}`} aria-current={active === id ? "location" : undefined} onClick={() => setActive(id)}>{linkLabel}</a>)}
