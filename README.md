@@ -30,7 +30,23 @@ These features are present in the source. The homepage and template previews wer
 
 ## Screenshots
 
-Current system and template captures are indexed in [documentation/screenshots](documentation/screenshots/README.md). They are documentation assets and are not part of the application runtime.
+Current public-site and template screenshots were captured on October 14, 2026, from the deployed site using fictional Alex Morgan sample content. Blank portfolio-form screenshots were supplied by the project owner. The Contact page and private portfolio-management screenshot are omitted because they expose direct contact and personal portfolio details. All screenshot files are documentation assets and are not part of the application runtime.
+
+| Page | Screenshot |
+| --- | --- |
+| Homepage hero | [Open screenshot](documentation/screenshots/current-homepage-hero.png) |
+| Features | [Open screenshot](documentation/screenshots/current-features.png) |
+| Template gallery | [Open screenshot](documentation/screenshots/current-template-gallery.png) |
+| About | [Open screenshot](documentation/screenshots/current-about.png) |
+| Create account | [Open screenshot](documentation/screenshots/current-create-account.png) |
+| Sign in | [Open screenshot](documentation/screenshots/current-sign-in.png) |
+| Portfolio form (upper fields) | [Open screenshot](documentation/screenshots/03-portfolio-information-form.png) |
+| Portfolio form (lower fields) | [Open screenshot](documentation/screenshots/03-portfolio-information-form-lower.png) |
+| Simple template | [Open screenshot](documentation/screenshots/current-simple.png) |
+| Modern template | [Open screenshot](documentation/screenshots/current-modern.png) |
+| Creative template | [Open screenshot](documentation/screenshots/current-creative.png) |
+
+See the [screenshot index](documentation/screenshots/README.md) for capture notes and the complete list.
 
 ## Technology
 

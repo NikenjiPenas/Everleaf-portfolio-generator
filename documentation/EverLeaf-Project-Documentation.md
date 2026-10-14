@@ -38,19 +38,26 @@ Education, experience, and social-link rows belong to a portfolio. The checked-i
 
 ## 7. Screenshots of the System
 
-The following repository screenshots show the site before the responsive navigation and layout fixes documented in this update. They are historical references and should be replaced with fresh captures before presenting the latest version.
+These screenshots were captured from the published website on October 14, 2026. The public template and marketing previews use fictional Alex Morgan sample data. The two portfolio-form images were supplied by the project owner and show the blank form. The Contact page and authenticated management screenshot are omitted because they expose direct contact or real portfolio profile details.
 
-- [Homepage](screenshots/homepage-home-production.png)
-
-The repository does not yet contain committed screenshots of the portfolio form or management page. Add reviewed, safe-data screenshots to complete this section.
+| Page | Screenshot |
+| --- | --- |
+| Homepage hero | [Current homepage hero](screenshots/current-homepage-hero.png) |
+| Features section | [Current features](screenshots/current-features.png) |
+| Template gallery | [Current template gallery](screenshots/current-template-gallery.png) |
+| About section | [Current About section](screenshots/current-about.png) |
+| Create account | [Current create-account page](screenshots/current-create-account.png) |
+| Sign in | [Current sign-in page](screenshots/current-sign-in.png) |
+| Portfolio form, upper fields | [Form screenshot](screenshots/03-portfolio-information-form.png) |
+| Portfolio form, lower fields | [Form screenshot](screenshots/03-portfolio-information-form-lower.png) |
 
 ## 8. Screenshots of the Three Templates
 
-These are historical production captures from before the current template fixes. Replace them with reviewed captures from the updated deployment before presenting them as the latest designs.
+These were captured from the current published public template previews on October 14, 2026. Each preview displays fictional Alex Morgan sample content.
 
-- [Simple template](screenshots/template-simple-production.png)
-- [Modern template](screenshots/template-modern-production.png)
-- [Creative template](screenshots/template-creative-production.png)
+- [Simple template](screenshots/current-simple.png)
+- [Modern template](screenshots/current-modern.png)
+- [Creative template](screenshots/current-creative.png)
 
 ## 9. Published Website URL
 

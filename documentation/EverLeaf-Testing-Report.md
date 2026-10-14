@@ -17,6 +17,7 @@
 | Homepage template links | **PASS** | Homepage loaded and the three template cards and their navigation links were present. |
 | Production UI before changes | **PASS** | Read-only production inspection reproduced narrow-toolbar wrapping and Creative active-section mismatch at 750 px. |
 | Production UI after changes | **PASS** | Vercel reports production deployment for commit `1fc5313` as Ready. Simple, Modern, and Creative preview routes loaded; Simple Education and Creative Contact navigation reached the correct sections with the sticky toolbar visible and destination content below the navigation. |
+| Current production screenshot routes | **PASS** | On October 14, 2026, the homepage, contact, sign-in, create-account, and all three public template-demo routes returned the EverLeaf page. The three template previews displayed fictional Alex Morgan sample data. The Contact page was inspected but its screenshot was omitted because it displays direct contact details. |
 | Auth, account recovery, and session behavior | **NOT VERIFIED** | Source was inspected; no account credentials or email delivery test was available. |
 | Live PostgreSQL CRUD and RLS | **NOT VERIFIED** | No production database writes or destructive operations were performed. The project owner has previously reported testing CRUD. |
 | Supabase Storage uploads and policies | **NOT VERIFIED** | Source and migration definitions were inspected; live upload/policy behavior was not exercised. |
@@ -24,8 +25,8 @@
 | Browser console and failed network requests | **NOT VERIFIED** | The browser inspection did not collect a reliable console/network report. |
 | Mobile touch and reduced-motion behavior | **NOT VERIFIED** | Responsive layout was inspected locally, but touch devices and assistive-technology behavior were not tested. |
 | Automated lint, unit, and e2e tests | **NOT APPLICABLE** | No corresponding Next.js lint/test scripts are configured in `next-app/package.json`. |
-| Post-fix documentation screenshots | **NOT VERIFIED** | Existing tracked captures predate these fixes. They remain labeled historical and need fresh captures from the verified deployment. |
-| Word/PDF rendering | **NOT VERIFIED** | No `.docx` or PDF was changed in this update. The available Word renderer was unavailable in this environment, so visual layout verification could not be performed. |
+| Current documentation screenshots | **PASS** | Fresh production screenshots were captured and visually reviewed for the homepage, template demos, sign-in, and create-account pages. User-provided blank portfolio-form images were reused. Contact and management screenshots were omitted to avoid publishing direct contact and actual portfolio personal data. |
+| Word/PDF rendering | **BLOCKED** | A new `.docx` draft was generated, but the required `render_docx.py` visual QA could not run because LibreOffice `soffice.exe` is not installed or available on PATH. The draft has not been copied to the Desktop or committed pending visual verification. |
 
 ## Production checks to repeat after deployment
 

@@ -1,8 +1,24 @@
 # EverLeaf screenshots
 
-This folder contains project documentation captures. The screenshots currently committed here were captured from the production deployment on October 13, 2026, before the responsive toolbar, template grid, and active-section fixes in this update. They remain as a baseline record and should not be presented as evidence of the newly deployed fixes until recaptured.
+This folder contains project documentation captures. Current public-site and template images were captured on October 14, 2026, from the published EverLeaf site. Public previews show the fictional Alex Morgan sample portfolio. The portfolio-form images were supplied by the project owner and show an unfilled form. Contact and portfolio-management screenshots are omitted because they expose direct contact or real portfolio profile details.
 
-## Existing production captures
+## Current production screenshots
+
+| File | Description |
+| --- | --- |
+| [`current-homepage-hero.png`](current-homepage-hero.png) | Cropped homepage hero; crop avoids the sample name shown inside the page's portfolio mockup. |
+| [`current-features.png`](current-features.png) | Homepage features section. |
+| [`current-template-gallery.png`](current-template-gallery.png) | Homepage template gallery. |
+| [`current-about.png`](current-about.png) | Homepage About section. |
+| [`current-create-account.png`](current-create-account.png) | Create-account page. |
+| [`current-sign-in.png`](current-sign-in.png) | Sign-in page. |
+| [`current-simple.png`](current-simple.png) | Simple public template preview. |
+| [`current-modern.png`](current-modern.png) | Modern public template preview. |
+| [`current-creative.png`](current-creative.png) | Creative public template preview. |
+| [`03-portfolio-information-form.png`](03-portfolio-information-form.png) | User-provided blank portfolio form, upper fields. |
+| [`03-portfolio-information-form-lower.png`](03-portfolio-information-form-lower.png) | User-provided blank portfolio form, lower fields. |
+
+## Earlier production captures
 
 | File | Description |
 | --- | --- |
@@ -14,4 +30,4 @@ This folder contains project documentation captures. The screenshots currently c
 | [`template-modern-production.png`](template-modern-production.png) | Modern template preview. |
 | [`template-creative-production.png`](template-creative-production.png) | Creative template preview. |
 
-Capture replacements from the verified production deployment before presenting these as current. Use safe sample data, review each image, and omit secrets or private portfolio details.
+The earlier images remain as historical references. Use the `current-*` files above when referring to the latest checked public production appearance.
