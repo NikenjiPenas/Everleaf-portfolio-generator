@@ -34,7 +34,7 @@ Current public-site and template screenshots were captured on October 14, 2026, 
 
 | Page | Screenshot |
 | --- | --- |
-| Homepage hero | [Open screenshot](documentation/screenshots/current-homepage-hero.png) |
+| Homepage | [Open full-page screenshot](documentation/screenshots/current-homepage-full.png) |
 | Features | [Open screenshot](documentation/screenshots/current-features.png) |
 | Template gallery | [Open screenshot](documentation/screenshots/current-template-gallery.png) |
 | About | [Open screenshot](documentation/screenshots/current-about.png) |

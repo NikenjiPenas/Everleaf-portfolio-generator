@@ -42,7 +42,7 @@ These screenshots were captured from the published website on October 14, 2026. 
 
 | Page | Screenshot |
 | --- | --- |
-| Homepage hero | [Current homepage hero](screenshots/current-homepage-hero.png) |
+| Homepage | [Full-page current homepage](screenshots/current-homepage-full.png) |
 | Features section | [Current features](screenshots/current-features.png) |
 | Template gallery | [Current template gallery](screenshots/current-template-gallery.png) |
 | About section | [Current About section](screenshots/current-about.png) |

@@ -6,7 +6,7 @@ This folder contains project documentation captures. Current public-site and tem
 
 | File | Description |
 | --- | --- |
-| [`current-homepage-hero.png`](current-homepage-hero.png) | Cropped homepage hero; crop avoids the sample name shown inside the page's portfolio mockup. |
+| [`current-homepage-full.png`](current-homepage-full.png) | Full-page capture of the current public homepage, from the navigation through the footer. |
 | [`current-features.png`](current-features.png) | Homepage features section. |
 | [`current-template-gallery.png`](current-template-gallery.png) | Homepage template gallery. |
 | [`current-about.png`](current-about.png) | Homepage About section. |
