@@ -93,7 +93,7 @@ See the [verified technology inventory](documentation/EverLeaf-Technology-Stack.
 
 - Live website (checked online during this documentation update): [EverLeaf](https://everleaf-portfolio-generator.vercel.app/home)
 - GitHub branch: [NikenjiPenas/Everleaf-portfolio-generator — nextjs-vercel](https://github.com/NikenjiPenas/Everleaf-portfolio-generator/tree/nextjs-vercel)
-- Project documentation: [Word document](documentation/EverLeaf-Project-Documentation.docx) · [PDF](documentation/EverLeaf-Project-Documentation.pdf) · [Markdown](documentation/EverLeaf-Project-Documentation.md)
+- Project documentation: [Group 7 Word document](documentation/EverLeaf-Project-Documentation-Group-7.docx)
 - Screenshots: [documentation/screenshots](documentation/screenshots/README.md)
 - Existing editable and PDF documents are retained in `documentation/`.
 
